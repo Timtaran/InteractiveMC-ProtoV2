@@ -4,20 +4,20 @@
   "package": "net.timtaran.interactivemc.physics.mixin.impl",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.body.MixinChunkMap_ChunkTracking",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.command.MixinArgumentTypeInfos",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.misc.ExplosionMixin_TriggerExplosion",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.persistence.MixinChunkMap_Persistence",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.persistence.MixinEntityStorage_Persistence",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.terrain.ServerLevelMixin_BlockStateChangeTerrain"
+    "body.MixinChunkMap_ChunkTracking",
+    "command.MixinArgumentTypeInfos",
+    "misc.ExplosionMixin_TriggerExplosion",
+    "persistence.MixinChunkMap_Persistence",
+    "persistence.MixinEntityStorage_Persistence",
+    "terrain.ServerLevelMixin_BlockStateChangeTerrain"
   ],
   "client": [
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.culling.LevelRendererAccessor",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.debug.EntityRenderDispatcherAccessor",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.debug.MixinDebugScreenOverlay",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.misc.MixinMinecraft",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.physicsgun.MouseHandlerMixin_PhysicsGunHandling",
-    "net.timtaran.interactivemc.physics.vxnative.mixin.impl.physicsgun.PlayerRendererMixin_PhysicsGunArmPose"
+    "culling.LevelRendererAccessor",
+    "debug.EntityRenderDispatcherAccessor",
+    "debug.MixinDebugScreenOverlay",
+    "misc.MixinMinecraft",
+    "physicsgun.MouseHandlerMixin_PhysicsGunHandling",
+    "physicsgun.PlayerRendererMixin_PhysicsGunArmPose"
   ],
   "injectors": {
     "defaultRequire": 1

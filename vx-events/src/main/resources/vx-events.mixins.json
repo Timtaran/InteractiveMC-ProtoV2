@@ -4,20 +4,20 @@
   "package": "net.timtaran.interactivemc.physics.event.mixin.impl.event",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "level.MixinMinecraftServer_VxLevelEvent",
-    "level.MixinServerLevel_VxLevelEvent",
-    "server.MixinMinecraftServer_VxServerLifecycleEvent"
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.level.MixinMinecraftServer_VxLevelEvent",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.level.MixinServerLevel_VxLevelEvent",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.server.MixinMinecraftServer_VxServerLifecycleEvent"
   ],
   "client": [
-    "debug.MixinDebugScreenOverlay_VxF3ScreenAdditionEvent",
-    "input.MixinKeyboardHandler_VxKeyEvent",
-    "input.MixinMouseHandler_VxMouseEvent",
-    "level.client.MixinMinecraft_VxClientLevelEvent",
-    "network.ClientCommonPacketListenerImplAccessor",
-    "network.MixinClientLevel_VxClientPlayerNetworkEvent",
-    "network.MixinClientPacketListener_VxClientPlayerNetworkEvent",
-    "render.MixinGui_VxRenderEvent",
-    "render.MixinLevelRenderer_VxRenderEvent"
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.debug.MixinDebugScreenOverlay_VxF3ScreenAdditionEvent",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.input.MixinKeyboardHandler_VxKeyEvent",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.input.MixinMouseHandler_VxMouseEvent",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.level.client.MixinMinecraft_VxClientLevelEvent",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.network.ClientCommonPacketListenerImplAccessor",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.network.MixinClientLevel_VxClientPlayerNetworkEvent",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.network.MixinClientPacketListener_VxClientPlayerNetworkEvent",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.render.MixinGui_VxRenderEvent",
+    "net.timtaran.interactivemc.physics.vxnative.event.mixin.impl.event.render.MixinLevelRenderer_VxRenderEvent"
   ],
   "injectors": {
     "defaultRequire": 1

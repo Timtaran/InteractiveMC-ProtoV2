@@ -1,6 +1,5 @@
 plugins {
     id 'com.gradleup.shadow'
-    id "com.hypherionmc.modutils.modpublisher"
 }
 
 architectury {
@@ -117,33 +116,6 @@ remapJar {
     inputFile.set shadowJar.archiveFile
 }
 
-publisher {
-    apiKeys {
-        modrinth rootProject.modrinth_token
-        curseforge rootProject.curseforge_token
-    }
-    setDebug(false)
-    setCurseID("1367260")
-    setModrinthID("velthoric")
-    setVersionType("beta")
-    setChangelog(rootProject.resolveChangelog())
-    setProjectVersion(rootProject.mod_version)
-    setDisplayName("Velthoric ${rootProject.mod_version} for Fabric ${rootProject.minecraft_version}")
-    setGameVersions(rootProject.minecraft_version)
-    setLoaders("fabric", "quilt")
-    setArtifact(remapJar)
-
-    modrinthDepends {
-        required "architectury-api"
-        required "fabric-api"
-    }
-
-    curseDepends {
-        required "architectury-api"
-        required "fabric-api"
-    }
-}
-
 // Configures the sourcesJar task to include source code from the common module
 // ensuring that the resulting sources jar contains the full codebase.
 tasks.named("sourcesJar") {
@@ -165,4 +137,14 @@ publishing {
             }
         }
     }
+}
+
+/**
+ * Configure Velthoric Publishing for Fabric.
+ */
+velthoricPublishing {
+    loader = "fabric"
+    displayName = "Fabric"
+    artifact = tasks.named("remapJar")
+    dryRun = false
 }

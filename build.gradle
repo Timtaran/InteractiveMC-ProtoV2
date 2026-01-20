@@ -1,10 +1,10 @@
 import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
-    id 'dev.architectury.loom' version '1.10-SNAPSHOT' apply false
+    id 'dev.architectury.loom' version '1.13-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'com.gradleup.shadow' version '8.3.6' apply false
-    id "com.hypherionmc.modutils.modpublisher" version "2.1.8" apply false
+    id 'net.timtaran.interactivemc.physics.publishing'
 }
 
 architectury {
@@ -16,45 +16,13 @@ allprojects {
     version = rootProject.mod_version
 }
 
-def credentialsFile = file('credentials.properties')
-if (credentialsFile.exists()) {
-    def properties = new Properties()
-    credentialsFile.withInputStream { properties.load(it) }
-    ext.modrinth_token = properties.getProperty('modrinth_token')
-    ext.curseforge_token = properties.getProperty('curseforge_token')
-    ext.cloudsmith_user = properties.getProperty('cloudsmith_user')
-    ext.cloudsmith_key = properties.getProperty('cloudsmith_key')
-} else {
-    ext.modrinth_token = null
-    ext.curseforge_token = null
-    ext.cloudsmith_user = null
-    ext.cloudsmith_key = null
-}
-
-def resolveChangelog() {
-    // 1. Try to find the changelog for the exact current version
-    def currentVersionFile = rootProject.file("changelog/${rootProject.mod_version}.md")
-    if (currentVersionFile.exists()) {
-        return currentVersionFile.text
-    }
-
-    // 2. If it's a snapshot, try to find the changelog for the corresponding release version
-    if (rootProject.mod_version.endsWith("-SNAPSHOT")) {
-        def releaseVersion = rootProject.mod_version.replace("-SNAPSHOT", "")
-        def releaseVersionFile = rootProject.file("changelog/${releaseVersion}.md")
-        if (releaseVersionFile.exists()) {
-            return releaseVersionFile.text
-        }
-    }
-
-    // 3. If no file is found, provide a default message
-    return "No changelog provided for this version."
-}
-
 subprojects {
     apply plugin: 'dev.architectury.loom'
     apply plugin: 'architectury-plugin'
     apply plugin: 'maven-publish'
+
+    // Apply the publishing plugin to subprojects to expose the 'velthoricPublishing' extension
+    apply plugin: 'net.timtaran.interactivemc.physics.publishing'
 
     def archiveMap = [
             "fabric"    : "velthoric-fabric",
@@ -90,6 +58,10 @@ subprojects {
 
     loom {
         silentMojangMappingsLicense()
+
+        mixin {
+            useLegacyMixinAp = true
+        }
 
         def refmaps = [
                 'vx-events': 'vx-events-refmap.json',
@@ -128,7 +100,7 @@ subprojects {
         runtimeOnly "com.illposed.osc:javaosc-core:0.9"
 
         // Native libraries classifier variable
-        def nativeClassifier = "ReleaseSp" // classifier used for all native platforms
+        def nativeClassifier = "ReleaseDp" // classifier used for all native platforms
 
         // List of native platforms
         def nativePlatforms = [
@@ -159,19 +131,6 @@ subprojects {
 
     tasks.withType(GenerateModuleMetadata).configureEach {
         enabled = false
-    }
-
-    publishing {
-        repositories {
-            maven {
-                name = "Cloudsmith"
-                url = "https://maven.cloudsmith.io/imx-dev/velthoric/"
-                credentials {
-                    username = rootProject.ext.cloudsmith_user
-                    password = rootProject.ext.cloudsmith_key
-                }
-            }
-        }
     }
 }
 

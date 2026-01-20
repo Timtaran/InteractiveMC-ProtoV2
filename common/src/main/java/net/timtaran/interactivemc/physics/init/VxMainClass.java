@@ -24,7 +24,7 @@ import org.apache.logging.log4j.Logger;
  * @author xI-Mx-Ix
  */
 public class VxMainClass {
-    public static final String MODID = "velthoric";
+    public static final String MODID = "interactivemc";
     public static final Logger LOGGER = LogManager.getLogger("Velthoric");
 
     /**
@@ -51,6 +51,7 @@ public class VxMainClass {
     @Environment(EnvType.CLIENT)
     public static void onClientInit() {
         // Load client-specific settings (Rendering, Controls)
+        System.out.println("Clientload");
         VxModConfig.loadClient();
 
         VxRegisteredBodies.registerClientFactories();

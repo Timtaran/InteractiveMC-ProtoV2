@@ -21,10 +21,10 @@ public class KeyMappings {
      * Default key: TAB.
      */
     public static final KeyMapping OPEN_TOOL_CONFIG = new KeyMapping(
-            "key.velthoric.tool_config",
+            "key.interactivemc.tool_config",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_TAB,
-            "category.velthoric"
+            "category.interactivemc"
     );
 
     /**

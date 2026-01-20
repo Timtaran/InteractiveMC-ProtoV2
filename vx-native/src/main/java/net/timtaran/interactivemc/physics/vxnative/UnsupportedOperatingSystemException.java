@@ -1,12 +1,8 @@
-package net.timtaran.interactivemc.physics.vxnative;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:vx-native/src/main/java/net/timtaran/interactivemc/physics/UnsupportedOperatingSystemException.java
-package net.timtaran.interactivemc.physics;
-========
-package net.xmx.vxnative;
->>>>>>>> upstream/master:vx-native/src/main/java/net/xmx/vxnative/UnsupportedOperatingSystemException.java
+package net.timtaran.interactivemc.physics.vxnative;
 
 /**
  * An exception thrown when an operation is attempted on an unsupported operating system or architecture.

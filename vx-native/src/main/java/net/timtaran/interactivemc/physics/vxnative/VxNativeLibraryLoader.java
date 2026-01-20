@@ -1,12 +1,8 @@
-package net.timtaran.interactivemc.physics.vxnative;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:vx-native/src/main/java/net/timtaran/interactivemc/physics/VxNativeLibraryLoader.java
-package net.timtaran.interactivemc.physics;
-========
-package net.xmx.vxnative;
->>>>>>>> upstream/master:vx-native/src/main/java/net/xmx/vxnative/VxNativeLibraryLoader.java
+package net.timtaran.interactivemc.physics.vxnative;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

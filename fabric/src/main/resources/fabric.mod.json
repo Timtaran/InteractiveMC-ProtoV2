@@ -12,7 +12,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.timtaran.interactivemc.physics.vxnative.fabric.VxFabric",
+      "net.timtaran.interactivemc.physics.fabric.VxFabric",
       "net.timtaran.interactivemc.fabric.InteractiveMCFabric"
     ]
   },

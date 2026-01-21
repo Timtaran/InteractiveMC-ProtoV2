@@ -13,6 +13,7 @@ dependencies {
 
     runtimeOnly "com.electronwill.night-config:toml:3.6.6"
     runtimeOnly "com.electronwill.night-config:core:3.6.6"
+    runtimeOnly "com.illposed.osc:javaosc-core:0.9"
 
     implementation project(path: ":vx-native", configuration: "namedElements")
     implementation project(path: ":vx-events", configuration: "namedElements")

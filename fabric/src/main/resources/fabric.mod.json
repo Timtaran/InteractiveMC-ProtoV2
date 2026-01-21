@@ -17,6 +17,7 @@
     ]
   },
   "mixins": [
+    "interactivemc.mixins.json",
     "velthoric.mixins.json",
     "vx-events.mixins.json"
   ],

@@ -6,7 +6,9 @@
   "item.interactivemc.chain_creator": "Chain Creator",
   "item.interactivemc.ragdoll_launcher": "Ragdoll Launcher",
   "key.interactivemc.tool_config": "Open Tool Config",
-  "key.interactivemc.grab": "Grab",
   "category.interactivemc": "InteractiveMC",
-  "category.interactivemc.vrbindigs": "InteractiveMC — VR Bindings"
+  "category.interactivemc.vrbindings": "InteractiveMC — VR Bindings",
+  "key.interactivemc.otrigger": "Off-Hand Trigger",
+  "key.interactivemc.mgrab": "Main-Hand Grab",
+  "key.interactivemc.ograb": "Off-Hand Grab"
 }

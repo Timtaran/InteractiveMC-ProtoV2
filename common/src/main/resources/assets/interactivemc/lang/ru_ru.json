@@ -1,4 +1,6 @@
 {
-  "key.interactivemc.grab": "Хват",
-  "category.interactivemc.vrbindigs": "InteractiveMC — VR-бинды"
+  "category.interactivemc.vrbindings": "InteractiveMC — VR-бинды",
+  "key.interactivemc.otrigger": "Второй триггер",
+  "key.interactivemc.mgrab": "Хват основной рукой",
+  "key.interactivemc.ograb": "Хват второй рукой"
 }

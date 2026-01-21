@@ -264,6 +264,8 @@ public class VxBodyManager {
         Vec3 linearVelocity = new Vec3(dataStore.velX[index], dataStore.velY[index], dataStore.velZ[index]);
         Vec3 angularVelocity = new Vec3(dataStore.angVelX[index], dataStore.angVelY[index], dataStore.angVelZ[index]);
 
+        networkDispatcher.onBodyAdded(body);
+
         // Bridge to Native Jolt
         if (body instanceof VxRigidBody rigidBody) {
             VxJoltBridge.INSTANCE.createAndAddJoltRigidBody(rigidBody, this, linearVelocity, angularVelocity, activation, EMotionType.Dynamic);

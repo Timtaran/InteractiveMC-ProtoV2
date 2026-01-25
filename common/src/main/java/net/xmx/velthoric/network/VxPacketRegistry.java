@@ -16,6 +16,8 @@ import net.xmx.velthoric.physics.body.network.internal.packet.S2CUpdateVerticesB
 import net.xmx.velthoric.physics.body.network.synchronization.packet.C2SSynchronizedDataBatchPacket;
 import net.xmx.velthoric.physics.body.network.synchronization.packet.S2CSynchronizedDataBatchPacket;
 import net.xmx.velthoric.bridge.mounting.input.C2SMountInputPacket;
+import net.xmx.velthoric.physics.lifecycle.packet.C2SRoundTripTimePacket;
+import net.xmx.velthoric.physics.lifecycle.packet.S2CRoundTripTimePacket;
 import net.xmx.velthoric.physics.vehicle.part.packet.C2SPartInteractPacket;
 
 /**
@@ -46,6 +48,15 @@ public class VxPacketRegistry {
     public static void registerPackets() {
         // --- Client to Server Packets (C2S) ---
         // These packets are sent by the client and handled on the server.
+
+        VxPacketHandler.registerPacket(
+                C2SRoundTripTimePacket.class,
+                "round_trip_time_c2s",
+                C2SRoundTripTimePacket::encode,
+                C2SRoundTripTimePacket::decode,
+                C2SRoundTripTimePacket::handle,
+                NetworkManager.Side.C2S
+        );
 
         VxPacketHandler.registerPacket(
                 C2SPartInteractPacket.class,
@@ -103,6 +114,15 @@ public class VxPacketRegistry {
 
         // --- Server to Client Packets (S2C) ---
         // These packets are sent by the server and handled on the client.
+
+        VxPacketHandler.registerPacket(
+                S2CRoundTripTimePacket.class,
+                "round_trip_time_s2c",
+                S2CRoundTripTimePacket::encode,
+                S2CRoundTripTimePacket::decode,
+                S2CRoundTripTimePacket::handle,
+                NetworkManager.Side.S2C
+        );
 
         VxPacketHandler.registerPacket(
                 S2CSynchronizedDataBatchPacket.class,

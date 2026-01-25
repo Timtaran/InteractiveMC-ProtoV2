@@ -78,6 +78,8 @@ public final class VxPhysicsWorld implements Runnable, Executor {
     private float timeAccumulator = 0.0f;
     private long lastTimeNanos = 0L;
 
+    private long physicsTickCount = 0;
+
     private VxPhysicsWorld(ServerLevel level) {
         this.level = level;
         this.dimensionKey = level.dimension();
@@ -203,6 +205,7 @@ public final class VxPhysicsWorld implements Runnable, Executor {
 
 
     public void onPhysicsTick() {
+        physicsTickCount++;
         this.bodyManager.onPhysicsTick(this);
         this.buoyancyManager.applyBuoyancyForces(FIXED_TIME_STEP);
     }
@@ -335,6 +338,10 @@ public final class VxPhysicsWorld implements Runnable, Executor {
 
     public boolean isRunning() {
         return this.isRunning && this.physicsThreadExecutor != null && this.physicsThreadExecutor.isAlive();
+    }
+
+    public long getPhysicsTickCount() {
+        return this.physicsTickCount;
     }
 
     @Nullable

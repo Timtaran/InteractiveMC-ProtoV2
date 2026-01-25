@@ -52,7 +52,7 @@ public class VxClientLifecycleHandler {
      * @param client The Minecraft instance.
      */
     private static void onClientTick(net.minecraft.client.Minecraft client) {
-        VxClientPhysicsWorld.getInstance().tick(client.isPaused());
+        VxClientPhysicsWorld.getInstance().tick(client);
     }
 
     /**

@@ -43,14 +43,6 @@ public enum VxMountingRenderUtils {
     public Optional<VxTransform> getInterpolatedTransform(VxMountingEntity proxy, float partialTicks, VxTransform transformOut) {
         return proxy.getPhysicsId().flatMap(id ->
                 getValidBodyIndex(id).map(index -> {
-                    VxClientBodyManager manager = VxClientPhysicsWorld.getInstance().getBodyManager();
-                    manager.getInterpolator().interpolateFrame(
-                            manager.getStore(),
-                            index,
-                            partialTicks,
-                            this.tempPosition,
-                            this.tempRotation
-                    );
                     transformOut.set(this.tempPosition, this.tempRotation);
                     return transformOut;
                 })
@@ -70,16 +62,7 @@ public enum VxMountingRenderUtils {
             return;
         }
 
-        proxy.getPhysicsId().flatMap(this::getValidBodyIndex).ifPresent(index -> {
-            VxClientBodyManager manager = VxClientPhysicsWorld.getInstance().getBodyManager();
-            manager.getInterpolator().interpolateRotation(
-                    manager.getStore(),
-                    index,
-                    partialTicks,
-                    this.tempRotation
-            );
-            action.accept(this.tempRotation);
-        });
+        proxy.getPhysicsId().flatMap(this::getValidBodyIndex).ifPresent(index -> action.accept(this.tempRotation));
     }
 
     /**
@@ -90,11 +73,7 @@ public enum VxMountingRenderUtils {
      * @return An Optional containing the interpolated rotation quaternion.
      */
     public Optional<Quat> getInterpolatedRotation(VxMountingEntity proxy, float partialTicks) {
-        return proxy.getPhysicsId().flatMap(this::getValidBodyIndex).map(index -> {
-            VxClientBodyManager manager = VxClientPhysicsWorld.getInstance().getBodyManager();
-            manager.getInterpolator().interpolateRotation(manager.getStore(), index, partialTicks, this.tempRotation);
-            return this.tempRotation;
-        });
+        return proxy.getPhysicsId().flatMap(this::getValidBodyIndex).map(index -> this.tempRotation);
     }
 
     /**

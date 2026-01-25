@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.xmx.velthoric.init.VxMainClass;
 import net.xmx.velthoric.physics.terrain.cache.VxTerrainShapeCache;
 import net.xmx.velthoric.physics.terrain.generation.VxTerrainGenerator;
@@ -35,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public final class VxTerrainSystem implements Runnable {
 
     private final VxPhysicsWorld physicsWorld;
-    private final ServerLevel level;
+    private final Level level;
     private final MinecraftServer server;
     private final VxTerrainJobSystem jobSystem;
     private final Thread workerThread;
@@ -50,7 +51,7 @@ public final class VxTerrainSystem implements Runnable {
     private final Set<VxSectionPos> chunksToRebuild = ConcurrentHashMap.newKeySet();
     private static final ThreadLocal<VxUpdateContext> updateContext = ThreadLocal.withInitial(VxUpdateContext::new);
 
-    public VxTerrainSystem(VxPhysicsWorld physicsWorld, ServerLevel level) {
+    public VxTerrainSystem(VxPhysicsWorld physicsWorld, Level level) {
         this.physicsWorld = physicsWorld;
         this.level = level;
         this.server = level.getServer();
@@ -123,7 +124,7 @@ public final class VxTerrainSystem implements Runnable {
      */
     @Override
     public void run() {
-        while (isInitialized.get() && !Thread.currentThread().isInterrupted() && server.isRunning()) {
+        while (isInitialized.get() && !Thread.currentThread().isInterrupted() && isServerRunning()) {
             try {
                 if (physicsWorld.isRunning()) {
                     terrainTracker.update();
@@ -134,11 +135,18 @@ public final class VxTerrainSystem implements Runnable {
                 Thread.currentThread().interrupt();
                 break;
             } catch (Exception e) {
-                if (server.isRunning() && isInitialized.get()) {
+                if (isServerRunning() && isInitialized.get()) {
                     VxMainClass.LOGGER.error("Error in TerrainSystem worker thread", e);
                 }
             }
         }
+    }
+
+    public boolean isServerRunning() {
+        if (this.level instanceof ServerLevel)
+            return server.isRunning();
+        else
+            return this.level.isClientSide;
     }
 
     /**
@@ -240,7 +248,7 @@ public final class VxTerrainSystem implements Runnable {
      *
      * @return The ServerLevel instance.
      */
-    public ServerLevel getLevel() {
+    public Level getLevel() {
         return level;
     }
 }

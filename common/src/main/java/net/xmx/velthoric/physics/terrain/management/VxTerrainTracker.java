@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.xmx.velthoric.config.VxModConfig;
 import net.xmx.velthoric.init.VxMainClass;
 import net.xmx.velthoric.physics.body.manager.VxServerBodyDataStore;
@@ -37,7 +38,7 @@ public final class VxTerrainTracker {
     private final VxPhysicsWorld physicsWorld;
     private final VxTerrainManager terrainManager;
     private final VxChunkDataStore chunkDataStore;
-    private final ServerLevel level;
+    private final Level level;
     private final VxServerBodyDataStore bodyDataStore;
 
     private Set<VxSectionPos> previouslyRequiredChunks = new HashSet<>();
@@ -107,7 +108,7 @@ public final class VxTerrainTracker {
      * @param chunkDataStore The data store for chunk state information.
      * @param level          The server level in which the tracking occurs.
      */
-    public VxTerrainTracker(VxPhysicsWorld physicsWorld, VxTerrainManager terrainManager, VxChunkDataStore chunkDataStore, ServerLevel level) {
+    public VxTerrainTracker(VxPhysicsWorld physicsWorld, VxTerrainManager terrainManager, VxChunkDataStore chunkDataStore, Level level) {
         this.physicsWorld = physicsWorld;
         this.terrainManager = terrainManager;
         this.chunkDataStore = chunkDataStore;

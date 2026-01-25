@@ -5,6 +5,7 @@
 package net.xmx.velthoric.physics.body.persistence;
 
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.xmx.velthoric.network.VxByteBuf;
 import net.xmx.velthoric.physics.body.type.VxBody;
 import net.xmx.velthoric.physics.persistence.VxChunkBasedStorage;
@@ -16,7 +17,7 @@ import net.xmx.velthoric.physics.persistence.VxChunkBasedStorage;
  */
 public class VxBodyStorage extends VxChunkBasedStorage<VxBody, VxSerializedBodyData> {
 
-    public VxBodyStorage(ServerLevel level) {
+    public VxBodyStorage(Level level) {
         super(level, "bodies", "vxb");
     }
 

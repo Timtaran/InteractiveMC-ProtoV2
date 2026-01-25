@@ -10,11 +10,13 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.xmx.velthoric.network.VxByteBuf;
 import net.xmx.velthoric.network.VxPacketUtils;
+import net.xmx.velthoric.physics.body.client.VxClientBodyDataStore;
 import net.xmx.velthoric.physics.body.client.VxClientBodyManager;
 import net.xmx.velthoric.physics.body.network.internal.VxSpawnData;
 import net.xmx.velthoric.physics.world.VxClientPhysicsWorld;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -102,6 +104,13 @@ public class S2CSpawnBodyBatchPacket {
                 VxByteBuf dataBuf = new VxByteBuf(Unpooled.wrappedBuffer(data.data));
                 try {
                     manager.spawnBody(data.id, data.networkId, data.typeIdentifier, dataBuf, data.timestamp);
+
+                    VxClientBodyDataStore store = manager.getStore();
+                    if (store != null) {
+                        System.out.println(Arrays.toString(store.posX));
+                        System.out.println(Arrays.toString(store.posY));
+                        System.out.println(Arrays.toString(store.posZ));
+                    }
                 } finally {
                     // Ensure the buffer is released to prevent memory leaks.
                     if (dataBuf.refCnt() > 0) {

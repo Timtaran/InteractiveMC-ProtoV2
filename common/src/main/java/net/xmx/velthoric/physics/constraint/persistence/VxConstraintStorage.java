@@ -5,6 +5,7 @@
 package net.xmx.velthoric.physics.constraint.persistence;
 
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.xmx.velthoric.network.VxByteBuf;
 import net.xmx.velthoric.physics.constraint.VxConstraint;
 import net.xmx.velthoric.physics.persistence.VxChunkBasedStorage;
@@ -18,7 +19,7 @@ import java.util.UUID;
  */
 public class VxConstraintStorage extends VxChunkBasedStorage<VxConstraint, VxConstraint> {
 
-    public VxConstraintStorage(ServerLevel level) {
+    public VxConstraintStorage(Level level) {
         super(level, "constraints", "vxc");
     }
 

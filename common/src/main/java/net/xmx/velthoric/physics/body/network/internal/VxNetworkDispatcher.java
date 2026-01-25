@@ -8,10 +8,12 @@ import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.ints.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.server.level.ChunkMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.xmx.velthoric.config.VxModConfig;
 import net.xmx.velthoric.init.VxMainClass;
 import net.xmx.velthoric.network.VxByteBuf;
@@ -43,7 +45,7 @@ import java.util.concurrent.Executors;
  */
 public class VxNetworkDispatcher {
 
-    private final ServerLevel level;
+    private final Level level;
     private final VxBodyManager manager;
     private final VxServerBodyDataStore dataStore;
 
@@ -104,7 +106,7 @@ public class VxNetworkDispatcher {
      * @param level   The server level.
      * @param manager The body manager.
      */
-    public VxNetworkDispatcher(ServerLevel level, VxBodyManager manager) {
+    public VxNetworkDispatcher(Level level, VxBodyManager manager) {
         this.level = level;
         this.manager = manager;
         this.dataStore = manager.getDataStore();
@@ -436,15 +438,20 @@ public class VxNetworkDispatcher {
      * @param body The physics body that was added.
      */
     public void onBodyAdded(VxBody body) {
-        int index = body.getDataStoreIndex();
-        if (index == -1) return;
-        ChunkPos bodyChunk = manager.getBodyChunkPos(index);
+        if (this.level instanceof ServerLevel serverLevel) {
+            int index = body.getDataStoreIndex();
+            if (index == -1) return;
+            ChunkPos bodyChunk = manager.getBodyChunkPos(index);
 
-        // Iterate over all players to find who should see this body.
-        for (ServerPlayer player : this.level.players()) {
-            if (VxChunkUtil.isPlayerWatchingChunk(player, bodyChunk)) {
-                trackBodyForPlayer(player, body);
+            // Iterate over all players to find who should see this body.
+            for (ServerPlayer player : serverLevel.players()) {
+                if (VxChunkUtil.isPlayerWatchingChunk(player, bodyChunk)) {
+                    trackBodyForPlayer(player, body);
+                }
             }
+        } else if (this.level instanceof ClientLevel clientLevel) {
+            // todo implement
+            return;
         }
     }
 
@@ -474,22 +481,28 @@ public class VxNetworkDispatcher {
      * @param to   The chunk the body moved to.
      */
     public void onBodyMoved(VxBody body, ChunkPos from, ChunkPos to) {
-        if (from.equals(to)) return;
+        if (this.level instanceof ServerLevel serverLevel) {
+            if (from.equals(to)) return;
 
-        int networkId = body.getNetworkId();
+            int networkId = body.getNetworkId();
 
-        // Iterate all players to handle tracking updates based on their view distance.
-        for (ServerPlayer player : this.level.players()) {
-            boolean seesTo = VxChunkUtil.isPlayerWatchingChunk(player, to);
-            boolean seesFrom = VxChunkUtil.isPlayerWatchingChunk(player, from);
+            // Iterate all players to handle tracking updates based on their view distance.
+            for (ServerPlayer player : serverLevel.players()) {
+                boolean seesTo = VxChunkUtil.isPlayerWatchingChunk(player, to);
+                boolean seesFrom = VxChunkUtil.isPlayerWatchingChunk(player, from);
 
-            if (seesTo && !seesFrom) {
-                // Player entered range: Start tracking.
-                trackBodyForPlayer(player, body);
-            } else if (!seesTo && seesFrom) {
-                // Player left range: Stop tracking.
-                untrackBodyForPlayer(player, networkId);
+                if (seesTo && !seesFrom) {
+                    // Player entered range: Start tracking.
+                    trackBodyForPlayer(player, body);
+                } else if (!seesTo && seesFrom) {
+                    // Player left range: Stop tracking.
+                    untrackBodyForPlayer(player, networkId);
+                }
             }
+        }
+        else if (this.level instanceof ClientLevel clientLevel) {
+            // todo implement
+            return;
         }
     }
 
@@ -653,51 +666,56 @@ public class VxNetworkDispatcher {
         if (pendingSpawns.isEmpty()) return;
 
         synchronized (pendingSpawns) {
-            Iterator<Map.Entry<ServerPlayer, ObjectArrayList<VxBody>>> it = pendingSpawns.entrySet().iterator();
-            ChunkMap chunkMap = this.level.getChunkSource().chunkMap;
+            if (this.level instanceof ServerLevel serverLevel) {
+                Iterator<Map.Entry<ServerPlayer, ObjectArrayList<VxBody>>> it = pendingSpawns.entrySet().iterator();
+                ChunkMap chunkMap = serverLevel.getChunkSource().chunkMap;
 
-            while (it.hasNext()) {
-                Map.Entry<ServerPlayer, ObjectArrayList<VxBody>> entry = it.next();
-                ServerPlayer player = entry.getKey();
-                ObjectArrayList<VxBody> allBodies = entry.getValue();
+                while (it.hasNext()) {
+                    Map.Entry<ServerPlayer, ObjectArrayList<VxBody>> entry = it.next();
+                    ServerPlayer player = entry.getKey();
+                    ObjectArrayList<VxBody> allBodies = entry.getValue();
 
-                if (allBodies.isEmpty()) {
-                    it.remove();
-                    continue;
-                }
+                    if (allBodies.isEmpty()) {
+                        it.remove();
+                        continue;
+                    }
 
-                ObjectArrayList<VxSpawnData> toSend = new ObjectArrayList<>();
-                ObjectArrayList<VxBody> toKeep = new ObjectArrayList<>();
+                    ObjectArrayList<VxSpawnData> toSend = new ObjectArrayList<>();
+                    ObjectArrayList<VxBody> toKeep = new ObjectArrayList<>();
 
-                for (VxBody body : allBodies) {
-                    // Check if the body is still valid/active
-                    if (body.getDataStoreIndex() == -1) continue;
+                    for (VxBody body : allBodies) {
+                        // Check if the body is still valid/active
+                        if (body.getDataStoreIndex() == -1) continue;
 
-                    ChunkPos chunkPos = manager.getBodyChunkPos(body.getDataStoreIndex());
+                        ChunkPos chunkPos = manager.getBodyChunkPos(body.getDataStoreIndex());
 
-                    // Check if the player actually has the chunk loaded and SENT.
-                    // chunkMap.getPlayers(pos, false) returns the list of players who have the chunk
-                    // AND for whom the chunk is NOT pending send (not in the bandwidth throttling queue).
-                    if (chunkMap.getPlayers(chunkPos, false).contains(player)) {
-                        // Chunk is ready, create spawn data with current timestamp and position
-                        toSend.add(new VxSpawnData(body, System.nanoTime()));
+                        // Check if the player actually has the chunk loaded and SENT.
+                        // chunkMap.getPlayers(pos, false) returns the list of players who have the chunk
+                        // AND for whom the chunk is NOT pending send (not in the bandwidth throttling queue).
+                        if (chunkMap.getPlayers(chunkPos, false).contains(player)) {
+                            // Chunk is ready, create spawn data with current timestamp and position
+                            toSend.add(new VxSpawnData(body, System.nanoTime()));
+                        } else {
+                            // Chunk is not ready on client yet, defer this spawn to the next tick
+                            toKeep.add(body);
+                        }
+                    }
+
+                    // Send the batch of bodies for chunks that are ready
+                    if (!toSend.isEmpty()) {
+                        sendSpawnBatch(player, toSend);
+                    }
+
+                    // Update the map: remove entry if empty, otherwise keep deferred spawns
+                    if (toKeep.isEmpty()) {
+                        it.remove();
                     } else {
-                        // Chunk is not ready on client yet, defer this spawn to the next tick
-                        toKeep.add(body);
+                        entry.setValue(toKeep);
                     }
                 }
-
-                // Send the batch of bodies for chunks that are ready
-                if (!toSend.isEmpty()) {
-                    sendSpawnBatch(player, toSend);
-                }
-
-                // Update the map: remove entry if empty, otherwise keep deferred spawns
-                if (toKeep.isEmpty()) {
-                    it.remove();
-                } else {
-                    entry.setValue(toKeep);
-                }
+            } else if (this.level instanceof ClientLevel clientLevel) {
+                // todo implement
+                return;
             }
         }
     }

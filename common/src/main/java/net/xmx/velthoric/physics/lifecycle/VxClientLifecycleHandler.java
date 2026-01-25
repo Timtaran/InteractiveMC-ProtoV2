@@ -5,9 +5,12 @@
 package net.xmx.velthoric.physics.lifecycle;
 
 import dev.architectury.event.events.client.ClientTickEvent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.xmx.velthoric.event.api.VxClientLevelEvent;
 import net.xmx.velthoric.event.api.VxClientPlayerNetworkEvent;
 import net.xmx.velthoric.physics.world.VxClientPhysicsWorld;
+import net.xmx.velthoric.physics.world.VxPhysicsWorld;
 
 /**
  * Handles the client-side physics lifecycle events.
@@ -33,7 +36,11 @@ public class VxClientLifecycleHandler {
      * @param event The level load event.
      */
     private static void onLevelLoad(VxClientLevelEvent.Load event) {
-        VxClientPhysicsWorld.getInstance().onLevelLoad(event.getLevel());
+        Level level = event.getLevel();
+        if (level.isClientSide()) {
+            VxPhysicsWorld.getOrCreate(level);
+        }
+
     }
 
     /**
@@ -42,7 +49,10 @@ public class VxClientLifecycleHandler {
      * @param event The level unload event.
      */
     private static void onLevelUnload(VxClientLevelEvent.Unload event) {
-        VxClientPhysicsWorld.getInstance().onLevelUnload();
+        Level level = event.getLevel();
+        if (level.isClientSide()) {
+            VxPhysicsWorld.shutdown(level.dimension());
+        }
     }
 
     /**
@@ -52,6 +62,12 @@ public class VxClientLifecycleHandler {
      * @param client The Minecraft instance.
      */
     private static void onClientTick(net.minecraft.client.Minecraft client) {
+        if (client.level != null) {
+            VxPhysicsWorld physicsWorld = VxPhysicsWorld.get(client.level.dimension());
+            if (physicsWorld != null && physicsWorld.isRunning()) {
+                physicsWorld.onGameTick(client.level);
+            }
+        }
         VxClientPhysicsWorld.getInstance().tick(client.isPaused());
     }
 

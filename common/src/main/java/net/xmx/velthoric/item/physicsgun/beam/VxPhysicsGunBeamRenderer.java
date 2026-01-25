@@ -19,7 +19,6 @@ import net.minecraft.world.phys.Vec3;
 import net.xmx.velthoric.event.api.VxRenderEvent;
 import net.xmx.velthoric.item.physicsgun.manager.VxPhysicsGunClientManager;
 import net.xmx.velthoric.physics.body.client.VxClientBodyDataStore;
-import net.xmx.velthoric.physics.body.client.VxClientBodyInterpolator;
 import net.xmx.velthoric.physics.body.client.VxClientBodyManager;
 import net.xmx.velthoric.physics.body.type.VxBody;
 import net.xmx.velthoric.physics.body.type.VxRigidBody;
@@ -66,7 +65,6 @@ public class VxPhysicsGunBeamRenderer {
         VxPhysicsGunClientManager clientManager = VxPhysicsGunClientManager.getInstance();
         VxClientBodyManager bodyManager = VxClientPhysicsWorld.getInstance().getBodyManager();
         VxClientBodyDataStore store = bodyManager.getStore();
-        VxClientBodyInterpolator interpolator = bodyManager.getInterpolator();
 
         Camera camera = mc.gameRenderer.getMainCamera();
         Vec3 camPos = camera.getPosition();
@@ -99,9 +97,6 @@ public class VxPhysicsGunBeamRenderer {
             VxBody body = bodyManager.getBody(objectUuid);
 
             if (index == null || !store.render_isInitialized[index] || !(body instanceof VxRigidBody)) continue;
-
-            // Interpolate physics body position for smooth rendering
-            interpolator.interpolateFrame(store, index, partialTicks, INTERPOLATED_POSITION, INTERPOLATED_ROTATION);
 
             Vec3 startPoint = getGunTipPosition(player, partialTicks);
             RVec3 centerPos = INTERPOLATED_POSITION;
@@ -143,18 +138,12 @@ public class VxPhysicsGunBeamRenderer {
             Vec3 traceStart = player.getEyePosition(partialTicks);
 
             // Raycast against physics bodies first
-            Optional<Vec3> physicsHitPoint = raycastClientPhysicsBodies(traceStart, playerLookVec, BEAM_MAX_LENGTH, store, interpolator, partialTicks);
-
             Vec3 endPoint;
-            if (physicsHitPoint.isPresent()) {
-                endPoint = physicsHitPoint.get();
-            } else {
-                // If no physics body hit, raycast against the world (blocks)
-                Vec3 traceEnd = traceStart.add(playerLookVec.scale(BEAM_MAX_LENGTH));
-                ClipContext clipContext = new ClipContext(traceStart, traceEnd, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player);
-                BlockHitResult blockHitResult = mc.level.clip(clipContext);
-                endPoint = (blockHitResult.getType() == HitResult.Type.MISS) ? traceEnd : blockHitResult.getLocation();
-            }
+            // If no physics body hit, raycast against the world (blocks)
+            Vec3 traceEnd = traceStart.add(playerLookVec.scale(BEAM_MAX_LENGTH));
+            ClipContext clipContext = new ClipContext(traceStart, traceEnd, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player);
+            BlockHitResult blockHitResult = mc.level.clip(clipContext);
+            endPoint = (blockHitResult.getType() == HitResult.Type.MISS) ? traceEnd : blockHitResult.getLocation();
 
             // Begin a new buffer for this strip
             BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.TRIANGLE_STRIP, DefaultVertexFormat.POSITION_COLOR);
@@ -174,7 +163,7 @@ public class VxPhysicsGunBeamRenderer {
     /**
      * Performs a simple raycast against client-side physics bodies.
      */
-    private static Optional<Vec3> raycastClientPhysicsBodies(Vec3 rayOrigin, Vec3 rayDirection, float maxDistance, VxClientBodyDataStore store, VxClientBodyInterpolator interpolator, float partialTicks) {
+    private static Optional<Vec3> raycastClientPhysicsBodies(Vec3 rayOrigin, Vec3 rayDirection, float maxDistance, VxClientBodyDataStore store, float partialTicks) {
         double closestHitDist = maxDistance;
         Vec3 hitPoint = null;
 
@@ -190,7 +179,6 @@ public class VxPhysicsGunBeamRenderer {
                 continue;
             }
 
-            interpolator.interpolateFrame(store, i, partialTicks, tempPos, tempRot);
             Vec3 objectCenter = new Vec3(tempPos.xx(), tempPos.yy(), tempPos.zz());
             Vec3 originToCenter = objectCenter.subtract(rayOrigin);
             double t = originToCenter.dot(rayDirection);

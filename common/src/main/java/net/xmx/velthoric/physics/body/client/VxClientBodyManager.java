@@ -51,9 +51,6 @@ public class VxClientBodyManager {
     // The data store holding all body states in a Structure of Arrays format.
     private final VxClientBodyDataStore store = new VxClientBodyDataStore();
 
-    // The interpolator responsible for calculating smooth body transforms based on history buffers.
-    private final VxClientBodyInterpolator interpolator = new VxClientBodyInterpolator();
-
     // The manager responsible for synchronizing client-authoritative data (C2S).
     private final VxClientSyncManager syncManager;
 
@@ -165,6 +162,8 @@ public class VxClientBodyManager {
             // The registry's createClientBody method already logs the specific error.
             return;
         }
+
+        System.out.println(body.getType().getClass().getSimpleName());
 
         // If the body is mountable, register its seats on the client via the MountingManager.
         if (body instanceof VxMountable mountable) {
@@ -336,9 +335,6 @@ public class VxClientBodyManager {
             // Calculate the target render time based on the synced clock.
             // Formula: GameTime + ClockOffset - InterpolationDelay
             long renderTimestamp = world.getClock().getGameTimeNanos() + this.clockOffsetNanos - this.interpolationDelayNanos;
-
-            // Perform interpolation for all bodies in the store
-            interpolator.updateInterpolationTargets(store, renderTimestamp);
         }
     }
 
@@ -349,12 +345,6 @@ public class VxClientBodyManager {
         return store;
     }
 
-    /**
-     * @return The client-side body interpolator.
-     */
-    public VxClientBodyInterpolator getInterpolator() {
-        return interpolator;
-    }
 
     /**
      * Gets a collection of all managed client-side physics body handles.

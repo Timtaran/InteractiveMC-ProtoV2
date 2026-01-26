@@ -4,7 +4,6 @@
  */
 package net.xmx.velthoric.physics.world;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.xmx.velthoric.bridge.mounting.manager.VxClientMountingManager;
 import net.xmx.velthoric.network.VxPacketHandler;
@@ -78,10 +77,10 @@ public class VxClientPhysicsWorld {
      * Called every client tick to update the physics subsystems.
      * Handles the synchronization of the clock based on the game's pause state.
      *
-     * @param client Minecraft client.
+     * @param isPaused True if the Minecraft client is currently paused.
      */
-    public void tick(Minecraft client) {
-        if (client.isPaused()) {
+    public void tick(boolean isPaused) {
+        if (isPaused) {
             this.clock.pause();
         } else {
             this.clock.resume();
@@ -89,11 +88,9 @@ public class VxClientPhysicsWorld {
             // Only tick the body manager if we have a valid level and are running
             if (this.level != null) {
                 this.bodyManager.clientTick();
-            }
 
-
-            if ((client.level != null ? client.level.getGameTime() : 1) % ROUND_TRIP_TIME_PERIOD == 0) {
-                VxPacketHandler.sendToServer(new C2SRoundTripTimePacket(0, client.level.dimension())); // todo real implementation
+                if (this.level.getGameTime() % ROUND_TRIP_TIME_PERIOD == 0)
+                    VxPacketHandler.sendToServer(new C2SRoundTripTimePacket(0, this.level.dimension())); // todo real implementation
             }
         }
     }

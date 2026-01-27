@@ -4,19 +4,26 @@
  */
 package net.xmx.velthoric.physics.body.network.internal;
 
+import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.ints.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.server.level.ChunkMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.xmx.velthoric.config.VxModConfig;
 import net.xmx.velthoric.init.VxMainClass;
 import net.xmx.velthoric.network.VxByteBuf;
+import net.xmx.velthoric.network.VxNetworkSimulator;
 import net.xmx.velthoric.network.VxPacketHandler;
 import net.xmx.velthoric.network.VxPacketUtils;
 import net.xmx.velthoric.physics.body.manager.VxBodyManager;
@@ -33,6 +40,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 /**
  * Manages network synchronization of physics bodies.
@@ -68,7 +77,7 @@ public class VxNetworkDispatcher {
      * Maps a primitive network ID to the set of players tracking that body.
      * This allows efficient broadcasting of updates to specific observers.
      */
-    private final Int2ObjectMap<Set<ServerPlayer>> bodyTrackers = Int2ObjectMaps.synchronize(new Int2ObjectOpenHashMap<>());
+    private final Int2ObjectMap<Set<Player>> bodyTrackers = Int2ObjectMaps.synchronize(new Int2ObjectOpenHashMap<>());
 
     /**
      * Stores the list of bodies that need to be spawned for a player.
@@ -77,12 +86,12 @@ public class VxNetworkDispatcher {
      * This ensures that if the body moves while the chunk is pending (waiting to be sent to the client),
      * the spawn packet we eventually send will contain the <b>current</b> position, not the old one.
      */
-    private final Map<ServerPlayer, ObjectArrayList<VxBody>> pendingSpawns = new HashMap<>();
+    private final Map<Player, ObjectArrayList<VxBody>> pendingSpawns = new HashMap<>();
 
     /**
      * Stores the list of network IDs that need to be removed for a player.
      */
-    private final Map<ServerPlayer, IntArrayList> pendingRemovals = new HashMap<>();
+    private final Map<Player, IntArrayList> pendingRemovals = new HashMap<>();
 
     private ExecutorService networkSyncExecutor;
 
@@ -202,8 +211,8 @@ public class VxNetworkDispatcher {
             return;
         }
 
-        Map<ServerPlayer, IntArrayList> transformUpdatesByPlayer = new Object2ObjectOpenHashMap<>();
-        Map<ServerPlayer, IntArrayList> vertexUpdatesByPlayer = new Object2ObjectOpenHashMap<>();
+        Map<Player, IntArrayList> transformUpdatesByPlayer = new Object2ObjectOpenHashMap<>();
+        Map<Player, IntArrayList> vertexUpdatesByPlayer = new Object2ObjectOpenHashMap<>();
         groupUpdatesByPlayer(dirtyTransformIndices, transformUpdatesByPlayer);
         groupUpdatesByPlayer(dirtyVertexIndices, vertexUpdatesByPlayer);
 
@@ -221,14 +230,14 @@ public class VxNetworkDispatcher {
      * @param dirtyIndices    A list of indices from the data store that are marked as dirty.
      * @param updatesByPlayer A map to populate, where each player is mapped to a list of dirty indices.
      */
-    private void groupUpdatesByPlayer(IntArrayList dirtyIndices, Map<ServerPlayer, IntArrayList> updatesByPlayer) {
+    private void groupUpdatesByPlayer(IntArrayList dirtyIndices, Map<Player, IntArrayList> updatesByPlayer) {
         for (int dirtyIndex : dirtyIndices) {
             int networkId = dataStore.networkId[dirtyIndex];
             if (networkId == -1) continue;
 
-            Set<ServerPlayer> trackers = bodyTrackers.get(networkId);
+            Set<Player> trackers = bodyTrackers.get(networkId);
             if (trackers != null) {
-                for (ServerPlayer player : trackers) {
+                for (Player player : trackers) {
                     updatesByPlayer.computeIfAbsent(player, k -> new IntArrayList()).add(dirtyIndex);
                 }
             }
@@ -245,7 +254,7 @@ public class VxNetworkDispatcher {
      * @param player  The player to send the update packets to.
      * @param indices The list of data store indices for the bodies to be updated.
      */
-    private void sendBodyStatePackets(ServerPlayer player, IntArrayList indices) {
+    private void sendBodyStatePackets(Player player, IntArrayList indices) {
         if (indices.isEmpty()) return;
 
         // Retrieve reusable buffers for the current thread
@@ -254,6 +263,7 @@ public class VxNetworkDispatcher {
 
         int currentBatchCount = 0;
         long batchTimestamp = 0L;
+        long batchPhysicsTick = 0L;
 
         for (int index : indices) {
             int networkId = dataStore.networkId[index];
@@ -262,6 +272,7 @@ public class VxNetworkDispatcher {
             // Initialize the batch timestamp using the first element.
             if (currentBatchCount == 0) {
                 batchTimestamp = dataStore.lastUpdateTimestamp[index];
+                batchPhysicsTick = dataStore.lastUpdatePhysicsTick[index];
             }
 
             buffers.networkIds[currentBatchCount] = networkId;
@@ -293,14 +304,14 @@ public class VxNetworkDispatcher {
 
             // If the batch is full, dispatch the packet
             if (currentBatchCount == MAX_STATES_PER_PACKET) {
-                dispatchBodyStatePacket(player, buffers, currentBatchCount, batchTimestamp);
+                dispatchBodyStatePacket(player, buffers, currentBatchCount, batchTimestamp, batchPhysicsTick);
                 currentBatchCount = 0;
             }
         }
 
         // Send any remaining bodies
         if (currentBatchCount > 0) {
-            dispatchBodyStatePacket(player, buffers, currentBatchCount, batchTimestamp);
+            dispatchBodyStatePacket(player, buffers, currentBatchCount, batchTimestamp, batchPhysicsTick);
         }
     }
 
@@ -319,13 +330,14 @@ public class VxNetworkDispatcher {
      * @param count     The number of valid entries in the buffers to process.
      * @param timestamp The simulation tick timestamp.
      */
-    private void dispatchBodyStatePacket(ServerPlayer player, BatchBuffers buffers, int count, long timestamp) {
+    private void dispatchBodyStatePacket(Player player, BatchBuffers buffers, int count, long timestamp, long physicsTick) {
         VxByteBuf buf = PACKET_SERIALIZATION_BUFFER.get();
         buf.clear(); // Reset reader/writer indices for reuse
 
         try {
             // Write Header
             buf.writeVarInt(count);
+            buf.writeLong(physicsTick);
             buf.writeLong(timestamp);
 
             // Calculate anchor point for relative precision
@@ -374,7 +386,8 @@ public class VxNetworkDispatcher {
                     uncompressedData.length,
                     compressedData
             );
-            VxPacketHandler.sendToPlayer(packet, player);
+
+            sendPacketToPlayer(packet, player, S2CUpdateBodyStateBatchPacket::handle);
 
         } catch (IOException e) {
             // Log error but avoid crashing the networking thread if compression fails
@@ -389,7 +402,7 @@ public class VxNetworkDispatcher {
      * @param player  The player to send the vertex data packets to.
      * @param indices The list of data store indices for the bodies whose vertex data has changed.
      */
-    private void sendVertexDataPackets(ServerPlayer player, IntArrayList indices) {
+    private void sendVertexDataPackets(Player player, IntArrayList indices) {
         if (indices.isEmpty()) return;
 
         BatchBuffers buffers = BATCH_BUFFERS.get();
@@ -419,13 +432,14 @@ public class VxNetworkDispatcher {
         }
     }
 
-    private void dispatchVertexPacket(ServerPlayer player, BatchBuffers buffers, int count) {
+    private void dispatchVertexPacket(Player player, BatchBuffers buffers, int count) {
         S2CUpdateVerticesBatchPacket packet = new S2CUpdateVerticesBatchPacket(
                 count,
                 Arrays.copyOf(buffers.networkIds, count),
                 Arrays.copyOf(buffers.vertexData, count)
         );
-        VxPacketHandler.sendToPlayer(packet, player);
+
+        sendPacketToPlayer(packet, player, S2CUpdateVerticesBatchPacket::handle);
     }
 
     /**
@@ -438,6 +452,7 @@ public class VxNetworkDispatcher {
      * @param body The physics body that was added.
      */
     public void onBodyAdded(VxBody body) {
+        System.out.println(this.level instanceof ServerLevel);
         if (this.level instanceof ServerLevel serverLevel) {
             int index = body.getDataStoreIndex();
             if (index == -1) return;
@@ -450,7 +465,7 @@ public class VxNetworkDispatcher {
                 }
             }
         } else if (this.level instanceof ClientLevel clientLevel) {
-            // todo implement
+            // todo implement or remove
             return;
         }
     }
@@ -462,9 +477,9 @@ public class VxNetworkDispatcher {
      * @param body The physics body that was removed.
      */
     public void onBodyRemoved(VxBody body) {
-        Set<ServerPlayer> trackers = bodyTrackers.get(body.getNetworkId());
+        Set<Player> trackers = bodyTrackers.get(body.getNetworkId());
         if (trackers != null) {
-            for (ServerPlayer player : new ArrayList<>(trackers)) {
+            for (Player player : new ArrayList<>(trackers)) {
                 untrackBodyForPlayer(player, body.getNetworkId());
             }
         }
@@ -501,8 +516,35 @@ public class VxNetworkDispatcher {
             }
         }
         else if (this.level instanceof ClientLevel clientLevel) {
-            // todo implement
+            clientOnBodyMoved(body, from, to);
             return;
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public void clientOnBodyMoved(VxBody body, ChunkPos from, ChunkPos to) {
+        if (this.level instanceof ClientLevel clientLevel) {
+            if (from.equals(to)) return;
+
+            int networkId = body.getNetworkId();
+
+            // Iterate all players to handle tracking updates based on their view distance.
+            for (AbstractClientPlayer player : clientLevel.players()) {
+                if (!(player.getUUID() == Minecraft.getInstance().getUser().getProfileId()))
+                    continue;
+
+                boolean seesTo = VxChunkUtil.isPlayerWatchingChunk(player, to);
+                boolean seesFrom = VxChunkUtil.isPlayerWatchingChunk(player, from);
+
+                if (seesTo && !seesFrom) {
+                    // Player entered range: Start tracking.
+                    trackBodyForPlayer(player, body);
+                } else if (!seesTo && seesFrom) {
+                    // Player left range: Stop tracking.
+                    untrackBodyForPlayer(player, networkId);
+                    // todo remove from client physics world
+                }
+            }
         }
     }
 
@@ -542,7 +584,7 @@ public class VxNetworkDispatcher {
      * @param player The player who will start tracking the body.
      * @param body   The body to be tracked.
      */
-    public void trackBodyForPlayer(ServerPlayer player, VxBody body) {
+    public void trackBodyForPlayer(Player player, VxBody body) {
         IntSet trackedByPlayer = playerTrackedBodies.computeIfAbsent(player.getUUID(), k -> IntSets.synchronize(new IntOpenHashSet()));
         if (trackedByPlayer.add(body.getNetworkId())) {
             // computeIfAbsent on an Int2ObjectMap is free of autoboxing.
@@ -569,10 +611,10 @@ public class VxNetworkDispatcher {
      * @param player    The player who will stop tracking the body.
      * @param networkId The network ID of the body to stop tracking.
      */
-    public void untrackBodyForPlayer(ServerPlayer player, int networkId) {
+    public void untrackBodyForPlayer(Player player, int networkId) {
         IntSet trackedByPlayer = playerTrackedBodies.get(player.getUUID());
         if (trackedByPlayer != null && trackedByPlayer.remove(networkId)) {
-            Set<ServerPlayer> trackers = bodyTrackers.get(networkId);
+            Set<Player> trackers = bodyTrackers.get(networkId);
             if (trackers != null) {
                 trackers.remove(player);
                 if (trackers.isEmpty()) {
@@ -596,7 +638,7 @@ public class VxNetworkDispatcher {
      * @param networkId The network ID of the body.
      * @return A set of players, or null if no one is tracking it.
      */
-    public Set<ServerPlayer> getTrackersForBody(int networkId) {
+    public Set<Player> getTrackersForBody(int networkId) {
         return bodyTrackers.get(networkId);
     }
 
@@ -612,7 +654,7 @@ public class VxNetworkDispatcher {
             final IntIterator iterator = trackedBodies.iterator();
             while (iterator.hasNext()) {
                 int networkId = iterator.nextInt();
-                Set<ServerPlayer> trackers = bodyTrackers.get(networkId);
+                Set<Player> trackers = bodyTrackers.get(networkId);
                 if (trackers != null) {
                     trackers.remove(player);
                     if (trackers.isEmpty()) {
@@ -637,16 +679,16 @@ public class VxNetworkDispatcher {
         if (pendingRemovals.isEmpty()) return;
 
         synchronized (pendingRemovals) {
-            Iterator<Map.Entry<ServerPlayer, IntArrayList>> iterator = pendingRemovals.entrySet().iterator();
+            Iterator<Map.Entry<Player, IntArrayList>> iterator = pendingRemovals.entrySet().iterator();
             while (iterator.hasNext()) {
-                Map.Entry<ServerPlayer, IntArrayList> entry = iterator.next();
-                ServerPlayer player = entry.getKey();
+                Map.Entry<Player, IntArrayList> entry = iterator.next();
+                Player player = entry.getKey();
                 IntArrayList removalList = entry.getValue();
 
                 if (!removalList.isEmpty()) {
                     for (int i = 0; i < removalList.size(); i += MAX_REMOVALS_PER_PACKET) {
                         int end = Math.min(i + MAX_REMOVALS_PER_PACKET, removalList.size());
-                        VxPacketHandler.sendToPlayer(new S2CRemoveBodyBatchPacket(removalList.subList(i, end)), player);
+                        sendPacketToPlayer(new S2CRemoveBodyBatchPacket(removalList.subList(i, end)), player, S2CRemoveBodyBatchPacket::handle);
                     }
                 }
                 iterator.remove();
@@ -667,12 +709,12 @@ public class VxNetworkDispatcher {
 
         synchronized (pendingSpawns) {
             if (this.level instanceof ServerLevel serverLevel) {
-                Iterator<Map.Entry<ServerPlayer, ObjectArrayList<VxBody>>> it = pendingSpawns.entrySet().iterator();
+                Iterator<Map.Entry<Player, ObjectArrayList<VxBody>>> it = pendingSpawns.entrySet().iterator();
                 ChunkMap chunkMap = serverLevel.getChunkSource().chunkMap;
 
                 while (it.hasNext()) {
-                    Map.Entry<ServerPlayer, ObjectArrayList<VxBody>> entry = it.next();
-                    ServerPlayer player = entry.getKey();
+                    Map.Entry<Player, ObjectArrayList<VxBody>> entry = it.next();
+                    Player player = entry.getKey();
                     ObjectArrayList<VxBody> allBodies = entry.getValue();
 
                     if (allBodies.isEmpty()) {
@@ -714,7 +756,8 @@ public class VxNetworkDispatcher {
                     }
                 }
             } else if (this.level instanceof ClientLevel clientLevel) {
-                // todo implement
+                // todo implement or remove
+                // upd. probably not needed because all bodies are controlled by server
                 return;
             }
         }
@@ -726,14 +769,14 @@ public class VxNetworkDispatcher {
      * @param player        The player to send the packets to.
      * @param spawnDataList The list of spawn data objects to send.
      */
-    private void sendSpawnBatch(ServerPlayer player, ObjectArrayList<VxSpawnData> spawnDataList) {
+    private void sendSpawnBatch(Player player, ObjectArrayList<VxSpawnData> spawnDataList) {
         ObjectArrayList<VxSpawnData> batch = new ObjectArrayList<>();
         int currentBatchSizeBytes = 0;
         for (VxSpawnData data : spawnDataList) {
             int dataSize = data.estimateSize();
             // Respect the maximum packet payload size to avoid network disconnection
             if (!batch.isEmpty() && currentBatchSizeBytes + dataSize > MAX_PACKET_PAYLOAD_SIZE) {
-                VxPacketHandler.sendToPlayer(new S2CSpawnBodyBatchPacket(batch), player);
+                sendPacketToPlayer(new S2CSpawnBodyBatchPacket(batch), player, S2CSpawnBodyBatchPacket::handle);
                 batch.clear();
                 currentBatchSizeBytes = 0;
             }
@@ -741,7 +784,7 @@ public class VxNetworkDispatcher {
             currentBatchSizeBytes += dataSize;
         }
         if (!batch.isEmpty()) {
-            VxPacketHandler.sendToPlayer(new S2CSpawnBodyBatchPacket(batch), player);
+            sendPacketToPlayer(new S2CSpawnBodyBatchPacket(batch), player, S2CSpawnBodyBatchPacket::handle);
         }
     }
 
@@ -779,6 +822,15 @@ public class VxNetworkDispatcher {
                 isActive = new boolean[capacity];
                 vertexData = new float[capacity][];
             }
+        }
+    }
+    
+    private <MSG> void sendPacketToPlayer(MSG message, Player player, BiConsumer<MSG, Supplier<NetworkManager.PacketContext>> handler) {
+        // todo maybe move to `VxPacketHandler`
+        if (player instanceof ServerPlayer serverPlayer)
+            VxPacketHandler.sendToPlayer(message, serverPlayer);
+        else if (level.isClientSide) {
+            VxNetworkSimulator.simulateClientReceive(message, handler);
         }
     }
 }

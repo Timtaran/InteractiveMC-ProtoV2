@@ -4,7 +4,7 @@
  */
 package net.xmx.velthoric.physics.body.util;
 
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 
 /**
@@ -45,7 +45,7 @@ public class VxChunkUtil {
      * @param chunkPos The target chunk position.
      * @return True if the chunk is within the player's view distance.
      */
-    public static boolean isPlayerWatchingChunk(ServerPlayer player, ChunkPos chunkPos) {
+    public static boolean isPlayerWatchingChunk(Player player, ChunkPos chunkPos) {
         // Use the server's global view distance as the baseline for entity/body tracking.
         // In some setups, players might have individual view distances, but this is the safe fallback.
         int viewDistance = player.level().getServer().getPlayerList().getViewDistance();

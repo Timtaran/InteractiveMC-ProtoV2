@@ -36,11 +36,11 @@ public class VxClientLifecycleHandler {
      * @param event The level load event.
      */
     private static void onLevelLoad(VxClientLevelEvent.Load event) {
+        VxClientPhysicsWorld.getInstance().onLevelLoad(event.getLevel());
         Level level = event.getLevel();
         if (level.isClientSide()) {
             VxPhysicsWorld.getOrCreate(level);
         }
-
     }
 
     /**
@@ -49,6 +49,7 @@ public class VxClientLifecycleHandler {
      * @param event The level unload event.
      */
     private static void onLevelUnload(VxClientLevelEvent.Unload event) {
+        VxClientPhysicsWorld.getInstance().onLevelUnload();
         Level level = event.getLevel();
         if (level.isClientSide()) {
             VxPhysicsWorld.shutdown(level.dimension());

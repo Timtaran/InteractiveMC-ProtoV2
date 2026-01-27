@@ -89,8 +89,11 @@ public class VxClientPhysicsWorld {
             if (this.level != null) {
                 this.bodyManager.clientTick();
 
-                if (this.level.getGameTime() % ROUND_TRIP_TIME_PERIOD == 0)
-                    VxPacketHandler.sendToServer(new C2SRoundTripTimePacket(0, this.level.dimension())); // todo real implementation
+                if (this.level.getGameTime() % ROUND_TRIP_TIME_PERIOD == 0) {
+                    VxPhysicsWorld physicsWorld = VxPhysicsWorld.get(this.level.dimension());
+                    if (physicsWorld != null)
+                        VxPacketHandler.sendToServer(new C2SRoundTripTimePacket(physicsWorld.getPhysicsTickCount(), this.level.dimension()));
+                }
             }
         }
     }

@@ -9,7 +9,6 @@ import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.readonly.*;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.core.SectionPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.xmx.velthoric.physics.body.type.VxBody;
@@ -157,6 +156,7 @@ public class VxPhysicsUpdater {
                 // Update management flags
                 dataStore.isActive[i] = isJoltBodyActive;
                 dataStore.lastUpdateTimestamp[i] = timestampNanos;
+                dataStore.lastUpdatePhysicsTick[i] = world.getPhysicsTickCount();
                 dataStore.isTransformDirty[i] = true;
 
                 final long lastKey = dataStore.chunkKey[i];

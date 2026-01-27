@@ -9,8 +9,11 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.xmx.velthoric.init.VxMainClass;
 import net.xmx.velthoric.network.VxByteBuf;
+import net.xmx.velthoric.network.VxNetworkSimulator;
 import net.xmx.velthoric.network.VxPacketHandler;
 import net.xmx.velthoric.physics.body.manager.VxServerBodyDataStore;
 import net.xmx.velthoric.physics.body.manager.VxBodyManager;
@@ -97,7 +100,7 @@ public class VxServerSyncManager {
 
         if (dirtyDataIndices.isEmpty()) return;
 
-        Map<ServerPlayer, Map<Integer, byte[]>> updatesByPlayer = new Object2ObjectOpenHashMap<>();
+        Map<Player, Map<Integer, byte[]>> updatesByPlayer = new Object2ObjectOpenHashMap<>();
         VxByteBuf buffer = THREAD_LOCAL_BYTE_BUF.get(); // Use thread-local buffer
 
         for (int dirtyIndex : dirtyDataIndices) {
@@ -115,9 +118,9 @@ public class VxServerSyncManager {
                 buffer.readBytes(data);
 
                 // Get players tracking this body
-                Set<ServerPlayer> trackers = dispatcher.getTrackersForBody(body.getNetworkId());
+                Set<Player> trackers = dispatcher.getTrackersForBody(body.getNetworkId());
                 if (trackers != null) {
-                    for (ServerPlayer player : trackers) {
+                    for (Player player : trackers) {
                         updatesByPlayer.computeIfAbsent(player, k -> new Object2ObjectArrayMap<>()).put(body.getNetworkId(), data);
                     }
                 }
@@ -126,11 +129,18 @@ public class VxServerSyncManager {
 
         // Dispatch packets on the main server executor to ensure thread safety with the networking stack
         if (!updatesByPlayer.isEmpty()) {
-            bodyManager.getPhysicsWorld().getLevel().getServer().execute(() -> updatesByPlayer.forEach((player, dataMap) -> {
-                if (!dataMap.isEmpty()) {
-                    VxPacketHandler.sendToPlayer(new S2CSynchronizedDataBatchPacket(dataMap), player);
+            Level level = bodyManager.getPhysicsWorld().getLevel();
+            if (!level.isClientSide)
+                level.getServer().execute(() -> updatesByPlayer.forEach((player, dataMap) -> {
+                if (!dataMap.isEmpty() && player instanceof ServerPlayer serverPlayer) {
+                    VxPacketHandler.sendToPlayer(new S2CSynchronizedDataBatchPacket(dataMap), serverPlayer);
                 }
             }));
+            else {
+                Map<Integer, byte[]> dataMap = updatesByPlayer.get(VxNetworkSimulator.getMinecraft().player.getUUID());
+                if (!dataMap.isEmpty())
+                    VxNetworkSimulator.simulateClientReceive(new S2CSynchronizedDataBatchPacket(dataMap), S2CSynchronizedDataBatchPacket::handle);
+            }
         }
     }
 }

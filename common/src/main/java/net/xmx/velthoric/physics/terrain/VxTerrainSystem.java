@@ -244,9 +244,9 @@ public final class VxTerrainSystem implements Runnable {
     }
 
     /**
-     * Gets the Minecraft ServerLevel this terrain system is associated with.
+     * Gets the Minecraft Level this terrain system is associated with.
      *
-     * @return The ServerLevel instance.
+     * @return The Level instance.
      */
     public Level getLevel() {
         return level;

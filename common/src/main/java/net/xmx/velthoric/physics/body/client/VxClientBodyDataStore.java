@@ -72,6 +72,11 @@ public class VxClientBodyDataStore extends VxBodyDataStore {
     public float[] @Nullable [] prev_vertexData;
 
     /**
+     * Physics tick count for body.
+     */
+    public long[] physicsTick;
+
+    /**
      * Flag indicating if the render state has been populated at least once.
      */
     public boolean[] render_isInitialized;
@@ -144,6 +149,8 @@ public class VxClientBodyDataStore extends VxBodyDataStore {
         state0_vertexData[index] = null;
         state1_vertexData[index] = null;
 
+        physicsTick[index] = 0;
+
         render_isInitialized[index] = false;
         prev_vertexData[index] = null;
 
@@ -209,6 +216,9 @@ public class VxClientBodyDataStore extends VxBodyDataStore {
         prev_rotZ = grow(prev_rotZ, newCapacity);
         prev_rotW = grow(prev_rotW, newCapacity);
         prev_vertexData = grow(prev_vertexData, newCapacity);
+
+        // Physics Tick
+        physicsTick = grow(physicsTick, newCapacity);
 
         // Metadata
         render_isInitialized = grow(render_isInitialized, newCapacity);

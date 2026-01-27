@@ -77,7 +77,6 @@ public final class VxPhysicsWorld implements Runnable, Executor {
     private volatile boolean isRunning = false;
     private float timeAccumulator = 0.0f;
     private long lastTimeNanos = 0L;
-
     private long physicsTickCount = 0;
 
     private VxPhysicsWorld(Level level) {

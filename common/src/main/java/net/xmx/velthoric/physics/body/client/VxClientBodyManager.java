@@ -239,6 +239,8 @@ public class VxClientBodyManager {
         store.state0_velX[index] = store.state0_velY[index] = store.state0_velZ[index] = 0f;
         store.state1_velX[index] = store.state1_velY[index] = store.state1_velZ[index] = 0f;
 
+        store.physicsTick[index] = 0; // todo
+
         // Initialize Last Known Position (for Frustum Culling or Logic)
         if (store.lastKnownPosition[index] == null) {
             store.lastKnownPosition[index] = new RVec3();

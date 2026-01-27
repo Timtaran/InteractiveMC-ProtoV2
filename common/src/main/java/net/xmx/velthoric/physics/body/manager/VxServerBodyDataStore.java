@@ -134,6 +134,12 @@ public class VxServerBodyDataStore extends VxBodyDataStore {
     public long[] lastUpdateTimestamp;
 
     /**
+     * The server physics tick of the last physics update for this body.
+     */
+    public long[] lastUpdatePhysicsTick;
+
+
+    /**
      * Constructs the server data store.
      */
     public VxServerBodyDataStore() {
@@ -202,6 +208,7 @@ public class VxServerBodyDataStore extends VxBodyDataStore {
         isVertexDataDirty[index] = false;
         isCustomDataDirty[index] = false;
         lastUpdateTimestamp[index] = 0L;
+        lastUpdatePhysicsTick[index] = 0L;
     }
 
     /**
@@ -234,6 +241,7 @@ public class VxServerBodyDataStore extends VxBodyDataStore {
         isVertexDataDirty = grow(isVertexDataDirty, newCapacity);
         isCustomDataDirty = grow(isCustomDataDirty, newCapacity);
         lastUpdateTimestamp = grow(lastUpdateTimestamp, newCapacity);
+        lastUpdatePhysicsTick = grow(lastUpdatePhysicsTick, newCapacity);
     }
 
     // --- Network ID Management ---

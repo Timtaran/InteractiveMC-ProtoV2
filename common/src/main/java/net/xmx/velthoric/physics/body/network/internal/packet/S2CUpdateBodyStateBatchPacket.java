@@ -33,6 +33,7 @@ public class S2CUpdateBodyStateBatchPacket {
 
     // --- Client-Side Decoded Data ---
     private int count;
+    private long physicsTick;
     private long timestamp;
     private int[] networkIds;
     private double[] posX, posY, posZ;
@@ -45,7 +46,7 @@ public class S2CUpdateBodyStateBatchPacket {
      * Creates a packet wrapping pre-serialized and compressed data.
      * This avoids allocating the large SoA arrays on the server heap.
      *
-     * @param uncompressedSize The size of the data before compression (needed for Zstd).
+     * @param uncompressedSize  The size of the data before compression (needed for Zstd).
      * @param preCompressedData The compressed payload.
      */
     public S2CUpdateBodyStateBatchPacket(int uncompressedSize, byte[] preCompressedData) {
@@ -57,10 +58,11 @@ public class S2CUpdateBodyStateBatchPacket {
      * Client-Side Constructor.
      * Used by the decoder to populate the object with usable data arrays.
      */
-    public S2CUpdateBodyStateBatchPacket(int count, long timestamp, int[] networkIds, double[] posX, double[] posY, double[] posZ, float[] rotX, float[] rotY, float[] rotZ, float[] rotW, float[] velX, float[] velY, float[] velZ, boolean[] isActive) {
+    public S2CUpdateBodyStateBatchPacket(long physicsTick, int count, long timestamp, int[] networkIds, double[] posX, double[] posY, double[] posZ, float[] rotX, float[] rotY, float[] rotZ, float[] rotW, float[] velX, float[] velY, float[] velZ, boolean[] isActive) {
         this.uncompressedSize = 0;
         this.preCompressedData = null;
         this.count = count;
+        this.physicsTick = physicsTick;
         this.timestamp = timestamp;
         this.networkIds = networkIds;
         this.posX = posX;
@@ -110,6 +112,7 @@ public class S2CUpdateBodyStateBatchPacket {
 
             // Read Header
             int count = decompressedBuf.readVarInt();
+            long physicsTick = decompressedBuf.readLong();
             long timestamp = decompressedBuf.readLong();
             double baseX = decompressedBuf.readDouble();
             double baseY = decompressedBuf.readDouble();
@@ -152,7 +155,7 @@ public class S2CUpdateBodyStateBatchPacket {
             }
             decompressedBuf.release();
 
-            return new S2CUpdateBodyStateBatchPacket(count, timestamp, networkIds, posX, posY, posZ, rotX, rotY, rotZ, rotW, velX, velY, velZ, isActive);
+            return new S2CUpdateBodyStateBatchPacket(physicsTick, count, timestamp, networkIds, posX, posY, posZ, rotX, rotY, rotZ, rotW, velX, velY, velZ, isActive);
         } catch (IOException e) {
             throw new IllegalStateException("Failed to decompress body state batch packet", e);
         }
@@ -196,6 +199,7 @@ public class S2CUpdateBodyStateBatchPacket {
                 store.state0_vertexData[index] = store.state1_vertexData[index];
 
                 // Update latest state
+                store.physicsTick[index] = msg.physicsTick;
                 store.state1_timestamp[index] = msg.timestamp;
                 store.state1_posX[index] = msg.posX[i];
                 store.state1_posY[index] = msg.posY[i];

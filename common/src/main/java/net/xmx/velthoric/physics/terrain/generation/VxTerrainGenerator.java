@@ -6,7 +6,7 @@ package net.xmx.velthoric.physics.terrain.generation;
 
 import com.github.stephengold.joltjni.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.xmx.velthoric.init.VxMainClass;
@@ -67,7 +67,7 @@ public final class VxTerrainGenerator implements AutoCloseable {
      * @return A new reference to the generated compound shape (ShapeRefC), or {@code null} if the chunk is empty or generation fails.
      * The caller is responsible for closing the returned shape reference.
      */
-    public ShapeRefC generateShape(ServerLevel level, VxChunkSnapshot snapshot) {
+    public ShapeRefC generateShape(Level level, VxChunkSnapshot snapshot) {
         int contentHash = snapshot.hashCode();
         ShapeRefC cachedShape = shapeCache.get(contentHash);
         if (cachedShape != null) {

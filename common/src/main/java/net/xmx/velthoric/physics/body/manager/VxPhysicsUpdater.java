@@ -11,6 +11,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.xmx.velthoric.physics.body.type.VxBody;
 import net.xmx.velthoric.physics.world.VxPhysicsWorld;
 
@@ -61,7 +62,7 @@ public class VxPhysicsUpdater {
      * Entry point called from the main server thread for each game tick.
      * @param level The server level.
      */
-    public void onGameTick(ServerLevel level) {
+    public void onGameTick(Level level) {
         this.manager.getAllBodies().forEach(obj -> obj.onServerTick(level));
     }
 

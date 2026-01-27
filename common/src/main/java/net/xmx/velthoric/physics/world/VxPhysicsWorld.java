@@ -57,7 +57,7 @@ public final class VxPhysicsWorld implements Runnable, Executor {
     private static final float gravityY = -9.81f;
     private static final int tempAllocatorSize = 64 * 1024 * 1024; // 64MB
 
-    private final ServerLevel level;
+    private final Level level;
     private final ResourceKey<Level> dimensionKey;
     private final VxBodyManager bodyManager;
     private final VxConstraintManager constraintManager;
@@ -80,7 +80,7 @@ public final class VxPhysicsWorld implements Runnable, Executor {
 
     private long physicsTickCount = 0;
 
-    private VxPhysicsWorld(ServerLevel level) {
+    private VxPhysicsWorld(Level level) {
         this.level = level;
         this.dimensionKey = level.dimension();
         this.bodyManager = new VxBodyManager(this);
@@ -91,7 +91,7 @@ public final class VxPhysicsWorld implements Runnable, Executor {
         this.ragdollManager = new VxRagdollManager(this);
     }
 
-    public static VxPhysicsWorld getOrCreate(ServerLevel level) {
+    public static VxPhysicsWorld getOrCreate(Level level) {
         return worlds.computeIfAbsent(level.dimension(), key -> {
             VxPhysicsWorld newWorld = new VxPhysicsWorld(level);
             newWorld.initializeAndStart();
@@ -208,9 +208,11 @@ public final class VxPhysicsWorld implements Runnable, Executor {
         physicsTickCount++;
         this.bodyManager.onPhysicsTick(this);
         this.buoyancyManager.applyBuoyancyForces(FIXED_TIME_STEP);
+        if (!(this.level instanceof ServerLevel))
+            System.out.println("physics tick");
     }
 
-    public void onGameTick(ServerLevel level) {
+    public void onGameTick(Level level) {
         this.bodyManager.onGameTick(level);
         this.mountingManager.onGameTick();
         this.buoyancyManager.updateFluidStates();
@@ -324,7 +326,7 @@ public final class VxPhysicsWorld implements Runnable, Executor {
         return this.ragdollManager;
     }
 
-    public ServerLevel getLevel() {
+    public Level getLevel() {
         return this.level;
     }
 

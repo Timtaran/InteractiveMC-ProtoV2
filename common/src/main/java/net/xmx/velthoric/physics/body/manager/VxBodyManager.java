@@ -14,6 +14,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.xmx.velthoric.init.VxMainClass;
 import net.xmx.velthoric.math.VxTransform;
 import net.xmx.velthoric.physics.body.VxJoltBridge;
@@ -148,7 +149,7 @@ public class VxBodyManager {
      *
      * @param level The Minecraft server level.
      */
-    public void onGameTick(ServerLevel level) {
+    public void onGameTick(Level level) {
         networkDispatcher.onGameTick();
         physicsUpdater.onGameTick(level);
     }

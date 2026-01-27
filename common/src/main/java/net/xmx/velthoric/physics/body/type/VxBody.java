@@ -11,7 +11,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.xmx.velthoric.math.VxTransform;
 import net.xmx.velthoric.network.VxByteBuf;
@@ -136,7 +136,7 @@ public abstract class VxBody {
      *
      * @param level The server level instance.
      */
-    public void onServerTick(ServerLevel level) {}
+    public void onServerTick(Level level) {}
 
 
     // --- Client-Side Lifecycle and Ticking ---

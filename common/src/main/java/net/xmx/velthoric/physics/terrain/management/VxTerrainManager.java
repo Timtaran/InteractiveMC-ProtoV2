@@ -8,6 +8,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.xmx.velthoric.init.VxMainClass;
 import net.xmx.velthoric.physics.VxPhysicsLayers;
@@ -37,12 +38,12 @@ public final class VxTerrainManager {
     public static final int STATE_AIR_CHUNK = 6;
 
     private final VxPhysicsWorld physicsWorld;
-    private final ServerLevel level;
+    private final Level level;
     private final VxTerrainGenerator terrainGenerator;
     private final VxChunkDataStore chunkDataStore;
     private final VxTerrainJobSystem jobSystem;
 
-    public VxTerrainManager(VxPhysicsWorld physicsWorld, ServerLevel level, VxTerrainGenerator terrainGenerator, VxChunkDataStore chunkDataStore, VxTerrainJobSystem jobSystem) {
+    public VxTerrainManager(VxPhysicsWorld physicsWorld, Level level, VxTerrainGenerator terrainGenerator, VxChunkDataStore chunkDataStore, VxTerrainJobSystem jobSystem) {
         this.physicsWorld = physicsWorld;
         this.level = level;
         this.terrainGenerator = terrainGenerator;

@@ -8,6 +8,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
@@ -37,7 +38,7 @@ import java.util.UUID;
 public final class VxBuoyancyBroadPhase {
 
     private final VxPhysicsWorld physicsWorld;
-    private final ServerLevel level;
+    private final Level level;
 
     /**
      * Maximum number of blocks to search upwards for the fluid surface

@@ -9,6 +9,7 @@ import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.Unpooled;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.LevelResource;
 import net.xmx.velthoric.init.VxMainClass;
@@ -55,11 +56,17 @@ public abstract class VxChunkBasedStorage<T, D> {
      */
     protected final ConcurrentHashMap<Long, ByteBuf> pendingWrites = new ConcurrentHashMap<>();
 
-    public VxChunkBasedStorage(ServerLevel level, String folderName, String extension) {
-        Path worldRoot = level.getServer().getWorldPath(LevelResource.ROOT);
-        Path dimensionRoot = DimensionType.getStorageFolder(level.dimension(), worldRoot);
-        this.storagePath = dimensionRoot.resolve("velthoric").resolve(folderName);
-        this.regionCache = new VxRegionFileCache(storagePath, extension);
+    public VxChunkBasedStorage(Level level, String folderName, String extension) {
+        if (level instanceof ServerLevel) {
+            Path worldRoot = level.getServer().getWorldPath(LevelResource.ROOT);
+            Path dimensionRoot = DimensionType.getStorageFolder(level.dimension(), worldRoot);
+            this.storagePath = dimensionRoot.resolve("velthoric").resolve(folderName);
+            this.regionCache = new VxRegionFileCache(storagePath, extension);
+        }
+        else {
+            this.storagePath = null;
+            this.regionCache = null;
+        }
         this.ioProcessor = new VxIOProcessor("IO-" + folderName);
     }
 

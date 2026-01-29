@@ -61,6 +61,9 @@ public abstract class VxRigidBody extends VxBody {
     @Override
     @Environment(EnvType.CLIENT)
     public void calculateRenderState(float partialTicks, VxRenderState outState, RVec3 tempPos, Quat tempRot) {
+        VxClientBodyManager manager = VxClientPhysicsWorld.getInstance().getBodyManager();
+        // Calculate the interpolated transform (position and rotation). This is generic for all rigid bodies.
+        manager.getInterpolator().interpolateFrame(manager.getStore(), this.getDataStoreIndex(), partialTicks, tempPos, tempRot);
         outState.transform.getTranslation().set(tempPos);
         outState.transform.getRotation().set(tempRot);
         // Rigid bodies do not have vertex data.

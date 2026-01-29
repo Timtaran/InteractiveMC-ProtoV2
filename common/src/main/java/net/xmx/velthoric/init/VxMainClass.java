@@ -54,7 +54,6 @@ public class VxMainClass {
     public static void onClientInit() {
         // Load client-specific settings (Rendering, Controls)
         VxModConfig.loadClient();
-
         VxRegisteredBodies.registerClientFactories();
         VxRegisteredBodies.registerClientRenderers();
         RegisterEvents.registerClient();

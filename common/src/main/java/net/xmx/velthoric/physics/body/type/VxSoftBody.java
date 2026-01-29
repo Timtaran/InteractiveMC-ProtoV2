@@ -103,8 +103,13 @@ public abstract class VxSoftBody extends VxBody {
     @Override
     @Environment(EnvType.CLIENT)
     public void calculateRenderState(float partialTicks, VxRenderState outState, RVec3 tempPos, Quat tempRot) {
+        VxClientBodyManager manager = VxClientPhysicsWorld.getInstance().getBodyManager();
         // Calculate the base interpolated transform (position and rotation).
+        manager.getInterpolator().interpolateFrame(manager.getStore(), this.getDataStoreIndex(), partialTicks, tempPos, tempRot);
         outState.transform.getTranslation().set(tempPos);
         outState.transform.getRotation().set(tempRot);
+
+        // Also calculate the interpolated vertex data for the soft body mesh. This is generic.
+        outState.vertexData = manager.getInterpolator().getInterpolatedVertexData(manager.getStore(), this.getDataStoreIndex(), partialTicks);
     }
 }

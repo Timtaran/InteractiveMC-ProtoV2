@@ -104,7 +104,7 @@ public class VxClientBodyDataStore extends VxBodyDataStore {
 
     /**
      * Adds a new body to the client store with a specific Network ID.
-     *ha
+     *
      * @param body      The body object to add.
      * @param networkId The session-specific network ID.
      * @return The assigned index.

@@ -43,6 +43,14 @@ public enum VxMountingRenderUtils {
     public Optional<VxTransform> getInterpolatedTransform(VxMountingEntity proxy, float partialTicks, VxTransform transformOut) {
         return proxy.getPhysicsId().flatMap(id ->
                 getValidBodyIndex(id).map(index -> {
+                    VxClientBodyManager manager = VxClientPhysicsWorld.getInstance().getBodyManager();
+                    manager.getInterpolator().interpolateFrame(
+                            manager.getStore(),
+                            index,
+                            partialTicks,
+                            this.tempPosition,
+                            this.tempRotation
+                    );
                     transformOut.set(this.tempPosition, this.tempRotation);
                     return transformOut;
                 })

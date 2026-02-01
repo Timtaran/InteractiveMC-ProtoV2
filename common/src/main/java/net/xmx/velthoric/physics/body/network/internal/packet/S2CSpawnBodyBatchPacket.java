@@ -4,20 +4,30 @@
  */
 package net.xmx.velthoric.physics.body.network.internal.packet;
 
+import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.enumerate.EActivation;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.phys.Vec3;
+import net.xmx.velthoric.math.VxTransform;
 import net.xmx.velthoric.network.VxByteBuf;
 import net.xmx.velthoric.network.VxPacketUtils;
 import net.xmx.velthoric.physics.body.client.VxClientBodyDataStore;
 import net.xmx.velthoric.physics.body.client.VxClientBodyManager;
 import net.xmx.velthoric.physics.body.network.internal.VxSpawnData;
+import net.xmx.velthoric.physics.body.registry.VxBodyRegistry;
+import net.xmx.velthoric.physics.body.registry.VxBodyType;
+import net.xmx.velthoric.physics.body.type.VxBody;
 import net.xmx.velthoric.physics.world.VxClientPhysicsWorld;
+import net.xmx.velthoric.physics.world.VxPhysicsWorld;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 /**
@@ -97,20 +107,33 @@ public class S2CSpawnBodyBatchPacket {
     public static void handle(S2CSpawnBodyBatchPacket msg, Supplier<NetworkManager.PacketContext> contextSupplier) {
         NetworkManager.PacketContext context = contextSupplier.get();
         context.queue(() -> {
+            System.out.println("spawning on client-side: " + context.getPlayer().level().isClientSide);
+            VxPhysicsWorld physicsWorld = VxPhysicsWorld.get(contextSupplier.get().getPlayer().level().dimension());
             VxClientBodyManager manager = VxClientPhysicsWorld.getInstance().getBodyManager();
             // Iterate through each spawn data entry and spawn the corresponding body on the client.
+
+            Vec3 pos = contextSupplier.get().getPlayer().position(); // todo replace with real object position/rotation/velocity or keep physicsTick at 0 so everything would be corrected automatically
+
+            System.out.println(physicsWorld);
             for (VxSpawnData data : msg.spawnDataList) {
                 // Wrap the raw byte data into a buffer for the manager to read.
                 VxByteBuf dataBuf = new VxByteBuf(Unpooled.wrappedBuffer(data.data));
                 try {
+                    // Look up the registered body type
                     manager.spawnBody(data.id, data.networkId, data.typeIdentifier, dataBuf, data.timestamp);
 
-                    VxClientBodyDataStore store = manager.getStore();
-                    if (store != null) {
-                        System.out.println(Arrays.toString(store.posX));
-                        System.out.println(Arrays.toString(store.posY));
-                        System.out.println(Arrays.toString(store.posZ));
-                    }
+                    VxBodyType<?> type = VxBodyRegistry.getInstance().getRegistrationData(data.typeIdentifier);
+
+                    // Prepare transform for the new body (position + identity rotation)
+                    VxTransform transform = new VxTransform(new RVec3(pos.x, pos.y, pos.z), Quat.sIdentity());
+
+                    // Create the physics body instance
+                    VxBody body = type.create(physicsWorld, UUID.randomUUID());
+
+                    // Add the constructed body to the world with activation
+                    physicsWorld.getBodyManager().addConstructedBody(body, EActivation.Activate, transform);
+
+                    System.out.println("spawned body: " + data.id);
                 } finally {
                     // Ensure the buffer is released to prevent memory leaks.
                     if (dataBuf.refCnt() > 0) {

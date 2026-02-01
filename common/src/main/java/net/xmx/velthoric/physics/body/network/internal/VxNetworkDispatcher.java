@@ -387,6 +387,8 @@ public class VxNetworkDispatcher {
                     compressedData
             );
 
+            System.out.println("Sending packet to " + player.getName().getString());
+
             sendPacketToPlayer(packet, player, S2CUpdateBodyStateBatchPacket::handle);
 
         } catch (IOException e) {
@@ -745,6 +747,7 @@ public class VxNetworkDispatcher {
 
                     // Send the batch of bodies for chunks that are ready
                     if (!toSend.isEmpty()) {
+                        System.out.println("sendSpawn. clientSide: " + level.isClientSide);
                         sendSpawnBatch(player, toSend);
                     }
 

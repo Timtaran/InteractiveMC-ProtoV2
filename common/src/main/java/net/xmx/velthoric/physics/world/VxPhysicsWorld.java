@@ -207,8 +207,6 @@ public final class VxPhysicsWorld implements Runnable, Executor {
         physicsTickCount++;
         this.bodyManager.onPhysicsTick(this);
         this.buoyancyManager.applyBuoyancyForces(FIXED_TIME_STEP);
-        if (!(this.level instanceof ServerLevel))
-            System.out.println("physics tick");
     }
 
     public void onGameTick(Level level) {

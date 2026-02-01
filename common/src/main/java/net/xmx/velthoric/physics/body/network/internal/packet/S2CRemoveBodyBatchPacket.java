@@ -9,8 +9,11 @@ import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.xmx.velthoric.network.VxPacketUtils;
+import net.xmx.velthoric.physics.body.VxRemovalReason;
 import net.xmx.velthoric.physics.body.client.VxClientBodyManager;
+import net.xmx.velthoric.physics.body.type.VxBody;
 import net.xmx.velthoric.physics.world.VxClientPhysicsWorld;
+import net.xmx.velthoric.physics.world.VxPhysicsWorld;
 
 import java.io.IOException;
 import java.util.List;
@@ -94,9 +97,22 @@ public class S2CRemoveBodyBatchPacket {
         NetworkManager.PacketContext context = contextSupplier.get();
         context.queue(() -> {
             // Executed on the client thread.
+            VxPhysicsWorld physicsWorld = VxPhysicsWorld.get(context.getPlayer().level().dimension());
+
+            System.out.println(physicsWorld);
+
             VxClientBodyManager manager = VxClientPhysicsWorld.getInstance().getBodyManager();
             for (int networkId : msg.networkIds) {
                 manager.removeBody(networkId);
+
+                if (physicsWorld != null) {
+                    for (VxBody body : physicsWorld.getBodyManager().getAllBodies()) {
+                        if (body.getNetworkId() == networkId) {
+                            System.out.println(networkId);
+                            physicsWorld.getBodyManager().removeBody(body.getPhysicsId(), VxRemovalReason.DISCARD);
+                        }
+                    }
+                }
             }
         });
     }

@@ -17,6 +17,7 @@ import net.xmx.velthoric.physics.terrain.generation.VxTerrainGenerator;
 import net.xmx.velthoric.physics.terrain.job.VxTerrainJobSystem;
 import net.xmx.velthoric.physics.terrain.storage.VxChunkDataStore;
 import net.xmx.velthoric.physics.world.VxPhysicsWorld;
+import net.xmx.velthoric.util.VxExecuteUtil;
 
 /**
  * Manages the lifecycle of terrain chunks, including loading, unloading, activation,
@@ -166,7 +167,7 @@ public final class VxTerrainManager {
             return; // Chunk is already being processed or removed.
         }
 
-        level.getServer().execute(() -> {
+        VxExecuteUtil.executeRunnable(level, () -> {
             // Check if a newer generation task has already been scheduled. If so, this one is stale.
             if (chunkDataStore.isVersionStale(index, version)) {
                 // Do not reset the state here. A newer task is now responsible for it.

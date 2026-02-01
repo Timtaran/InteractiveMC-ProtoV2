@@ -9,9 +9,8 @@ import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.timtaran.interactivemc.physics.config.VxModConfig;
 import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.natives.VxNativeJolt;
+import net.timtaran.interactivemc.physics.physics.VxPhysicsBootstrap;
 import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
 import net.timtaran.interactivemc.physics.physics.buoyancy.VxBuoyancyManager;
 import net.timtaran.interactivemc.physics.physics.constraint.manager.VxConstraintManager;
@@ -42,6 +41,20 @@ public final class VxPhysicsWorld implements Runnable, Executor {
     private static final float MAX_ACCUMULATED_TIME = 5.0f * FIXED_TIME_STEP;
     private static final int MAX_COMMANDS_PER_TICK = 4096;
     private static final Map<ResourceKey<Level>, VxPhysicsWorld> worlds = new ConcurrentHashMap<>();
+
+    // Fixed Physics Configuration Constants
+    private static final int maxBodies = 65536;
+    private static final int maxBodyPairs = 65536;
+    private static final int maxContactConstraints = 65536;
+    private static final int numPositionIterations = 10;
+    private static final int numVelocityIterations = 15;
+    private static final float speculativeContactDistance = 0.02f;
+    private static final float baumgarteFactor = 0.2f;
+    private static final float penetrationSlop = 0.001f;
+    private static final float timeBeforeSleep = 1.0f;
+    private static final float pointVelocitySleepThreshold = 0.005f;
+    private static final float gravityY = -9.81f;
+    private static final int tempAllocatorSize = 64 * 1024 * 1024; // 64MB
 
     private final ServerLevel level;
     private final ResourceKey<Level> dimensionKey;
@@ -211,28 +224,14 @@ public final class VxPhysicsWorld implements Runnable, Executor {
     }
 
     public void initializePhysicsSystem() {
-        final int maxBodies = VxModConfig.PHYSICS.maxBodies.get();
-        final int maxBodyPairs = VxModConfig.PHYSICS.maxBodyPairs.get();
-        final int maxContactConstraints = VxModConfig.PHYSICS.maxContactConstraints.get();
-
-        final int numPositionIterations = VxModConfig.PHYSICS.numPositionIterations.get();
-        final int numVelocityIterations = VxModConfig.PHYSICS.numVelocityIterations.get();
-
-        final float speculativeContactDistance = VxModConfig.PHYSICS.speculativeContactDistance.get().floatValue();
-        final float baumgarteFactor = VxModConfig.PHYSICS.baumgarteFactor.get().floatValue();
-        final float penetrationSlop = VxModConfig.PHYSICS.penetrationSlop.get().floatValue();
-        final float timeBeforeSleep = VxModConfig.PHYSICS.timeBeforeSleep.get().floatValue();
-        final float pointVelocitySleepThreshold = VxModConfig.PHYSICS.pointVelocitySleepThreshold.get().floatValue();
-        final float gravityY = VxModConfig.PHYSICS.gravityY.get().floatValue();
-
-        this.tempAllocator = new TempAllocatorImpl(VxModConfig.PHYSICS.tempAllocatorSize.get());
+        this.tempAllocator = new TempAllocatorImpl(tempAllocatorSize);
         int numThreads = Math.max(1, Runtime.getRuntime().availableProcessors() - 2);
         this.jobSystem = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, numThreads);
 
         this.physicsSystem = new PhysicsSystem();
-        BroadPhaseLayerInterface bpli = VxNativeJolt.getBroadPhaseLayerInterface();
-        ObjectVsBroadPhaseLayerFilter ovbpf = VxNativeJolt.getObjectVsBroadPhaseLayerFilter();
-        ObjectLayerPairFilter olpf = VxNativeJolt.getObjectLayerPairFilter();
+        BroadPhaseLayerInterface bpli = VxPhysicsBootstrap.getBroadPhaseLayerInterface();
+        ObjectVsBroadPhaseLayerFilter ovbpf = VxPhysicsBootstrap.getObjectVsBroadPhaseLayerFilter();
+        ObjectLayerPairFilter olpf = VxPhysicsBootstrap.getObjectLayerPairFilter();
 
         this.physicsSystem.init(maxBodies, 0, maxBodyPairs, maxContactConstraints, bpli, ovbpf, olpf);
 

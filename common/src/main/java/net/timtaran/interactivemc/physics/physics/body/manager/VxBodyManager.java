@@ -11,7 +11,6 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.timtaran.interactivemc.physics.init.VxMainClass;
@@ -31,9 +30,7 @@ import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
 
 /**
@@ -83,12 +80,6 @@ public class VxBodyManager {
      * Counter for generating new network IDs when the free pool is empty.
      */
     private int nextNetworkId = 1;
-
-    /**
-     * A queue tracking active asynchronous body storage tasks.
-     * Used to ensure all pending data insertions are completed before flushing to disk.
-     */
-    private final ConcurrentLinkedQueue<CompletableFuture<?>> pendingStorageTasks = new ConcurrentLinkedQueue<>();
 
     /**
      * Constructs a new manager for the specified physics world.
@@ -507,22 +498,6 @@ public class VxBodyManager {
             out.getTranslation().set(dataStore.posX[dataStoreIndex], dataStore.posY[dataStoreIndex], dataStore.posZ[dataStoreIndex]);
             out.getRotation().set(dataStore.rotX[dataStoreIndex], dataStore.rotY[dataStoreIndex], dataStore.rotZ[dataStoreIndex], dataStore.rotW[dataStoreIndex]);
         }
-    }
-
-    /**
-     * Calculates the ChunkPos for a body based on its current position in the DataStore.
-     *
-     * @param dataStoreIndex The index of the body.
-     * @return The chunk position containing the body's center.
-     */
-    public ChunkPos getBodyChunkPos(int dataStoreIndex) {
-        if (dataStoreIndex >= 0 && dataStoreIndex < dataStore.getCapacity()) {
-            return new ChunkPos(
-                    SectionPos.posToSectionCoord(dataStore.posX[dataStoreIndex]),
-                    SectionPos.posToSectionCoord(dataStore.posZ[dataStoreIndex])
-            );
-        }
-        return new ChunkPos(0, 0); // Fallback to 0,0 if index invalid
     }
 
     /**

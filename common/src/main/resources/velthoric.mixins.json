@@ -12,6 +12,7 @@
     "terrain.ServerLevelMixin_BlockStateChangeTerrain"
   ],
   "client": [
+    "misc.KeyMappingAccessor",
     "culling.LevelRendererAccessor",
     "debug.EntityRenderDispatcherAccessor",
     "debug.MixinDebugScreenOverlay",

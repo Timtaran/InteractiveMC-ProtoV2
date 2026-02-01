@@ -10,8 +10,9 @@ import net.timtaran.interactivemc.physics.builtin.VxRegisteredBodies;
 import net.timtaran.interactivemc.physics.config.VxModConfig;
 import net.timtaran.interactivemc.physics.init.registry.KeyMappings;
 import net.timtaran.interactivemc.physics.init.registry.ModRegistries;
-import net.timtaran.interactivemc.physics.natives.VxNativeManager;
+import net.timtaran.interactivemc.physics.natives.systems.NativeManager;
 import net.timtaran.interactivemc.physics.network.VxPacketRegistry;
+import net.timtaran.interactivemc.physics.physics.VxPhysicsBootstrap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,7 +42,8 @@ public class VxMainClass {
         VxRegisteredBodies.register();
         VxPacketRegistry.registerPackets();
         RegisterEvents.register();
-        VxNativeManager.initialize();
+        NativeManager.initialize();
+        VxPhysicsBootstrap.initialize();
     }
 
     /**

@@ -2,7 +2,7 @@
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-package net.timtaran.interactivemc.physics.vxnative;
+package net.timtaran.interactivemc.physics.natives.os;
 
 import java.util.Locale;
 

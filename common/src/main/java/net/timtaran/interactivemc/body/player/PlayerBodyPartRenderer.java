@@ -21,7 +21,12 @@ public class PlayerBodyPartRenderer extends VxRigidBodyRenderer<PlayerBodyPartRi
 
         // 1. Apply Physics Transform (Rotation from Jolt Physics)
         var transform = renderState.transform;
-        poseStack.mulPose(new Quaternionf(transform.getRotation().getX(), transform.getRotation().getY(), transform.getRotation().getZ(), transform.getRotation().getW()));
+        poseStack.mulPose(new Quaternionf(
+                transform.getRotation().getX(),
+                transform.getRotation().getY(),
+                transform.getRotation().getZ(),
+                transform.getRotation().getW()
+        ));
 
         // 2. Scale visual model to match physics bounds
         // We calculate the scale factor required to stretch the model part to fill the rigid body's dimensions.
@@ -30,15 +35,13 @@ public class PlayerBodyPartRenderer extends VxRigidBodyRenderer<PlayerBodyPartRi
         float physicsHalfZ = body.get(PlayerBodyPartRigidBody.DATA_HALF_EXTENTS).getZ();
 
         //noinspection DuplicatedCode
-        float scaleX = physicsHalfX * 2.0f / partType.getSize().getX();
-        float scaleY = physicsHalfY * 2.0f / partType.getSize().getY();
-        float scaleZ = physicsHalfZ * 2.0f / partType.getSize().getZ();
+        float scaleX = physicsHalfX * 2f;
+        float scaleY = physicsHalfY * 2f;
+        float scaleZ = physicsHalfZ * 2f;
 
+        poseStack.translate(-0.5f, -0.5f, -0.5f);
         poseStack.scale(scaleX, scaleY, scaleZ);
-
-        // 3. Coordinate System Correction
-        // Jolt/OpenGL uses Y-Up, Minecraft Models use Y-Down.
-        poseStack.scale(1.0f, -1.0f, -1.0f);
+        poseStack.translate(0.5f, 0.5f, 0.5f);
 
         // 4. Center Alignment
         // Align the specific body part so its pivot matches the rigid body's center.

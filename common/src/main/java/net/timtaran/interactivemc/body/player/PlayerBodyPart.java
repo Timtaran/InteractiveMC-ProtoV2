@@ -1,12 +1,11 @@
 /*
  * This file is part of InteractiveMC.
  * Licensed under LGPL 3.0.
- *
- * Copyright (c) 2026 timtaran
  */
 package net.timtaran.interactivemc.body.player;
 
 import com.github.stephengold.joltjni.Vec3;
+import org.vivecraft.api.data.VRBodyPart;
 
 public enum PlayerBodyPart {
     HEAD(new Vec3(0.5f, 0.5f, 0.5f)),
@@ -43,5 +42,9 @@ public enum PlayerBodyPart {
     public Vec3 getLocalPivot() {
         return new Vec3(0, 0, 0); // todo replace with real values
 
+    }
+
+    public VRBodyPart toVRBodyPart() {
+        return VRBodyPart.valueOf(name());
     }
 }

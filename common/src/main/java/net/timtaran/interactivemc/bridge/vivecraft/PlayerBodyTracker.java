@@ -1,12 +1,14 @@
 /*
  * This file is part of InteractiveMC.
  * Licensed under LGPL 3.0.
- *
- * Copyright (c) 2026 timtaran
  */
 package net.timtaran.interactivemc.bridge.vivecraft;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.player.LocalPlayer;
+import net.timtaran.interactivemc.network.sync.packet.C2SFrameVRPosePacket;
+import net.timtaran.interactivemc.physics.network.VxPacketHandler;
 import org.vivecraft.api.client.Tracker;
 import org.vivecraft.api.client.VRClientAPI;
 import org.vivecraft.api.data.VRPose;
@@ -16,8 +18,10 @@ import org.vivecraft.api.data.VRPose;
  *
  * @author timtaran
  */
+@Environment(EnvType.CLIENT)
 public class PlayerBodyTracker implements Tracker {
-    private int tickCounter = 0;
+    private static final long NETWORK_SYNC_PERIOD = 50 / 1000000;
+    private static long lastSync = 0;
 
     @Override
     public ProcessType processType() {
@@ -31,14 +35,11 @@ public class PlayerBodyTracker implements Tracker {
 
     @Override
     public void activeProcess(LocalPlayer localPlayer) {
-        VRPose renderPose = VRClientAPI.instance().getWorldRenderPose();
+        if (System.nanoTime() - lastSync > NETWORK_SYNC_PERIOD) {
+            VRPose renderPose = VRClientAPI.instance().getWorldRenderPose();
+            VxPacketHandler.sendToServer(new C2SFrameVRPosePacket(renderPose));
 
-        tickCounter++;
-
-        if (tickCounter % 120 == 0) {
-            System.out.println("ViveCraft VR Tick: " + tickCounter);
-           if (renderPose != null && renderPose.getHead() != null)
-                    System.out.println(renderPose.getHead().getRotation().toString());
+            lastSync = System.nanoTime();
         }
     }
 }

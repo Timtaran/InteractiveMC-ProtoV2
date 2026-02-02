@@ -10,8 +10,9 @@ import org.vivecraft.api.data.VRBodyPart;
 public enum PlayerBodyPart {
     HEAD(new Vec3(0.5f, 0.5f, 0.5f)),
 
-    LEFT_ARM(new Vec3(0.25f, 0.75f, 0.25f)),
-    RIGHT_ARM(new Vec3(0.25f, 0.75f, 0.25f));
+    MAIN_HAND(new Vec3(0.25f, 0.75f, 0.25f)),
+    OFF_HAND(new Vec3(0.25f, 0.75f, 0.25f));
+    // todo add elbow
 
     private final Vec3 size;
 

@@ -7,6 +7,7 @@ package net.timtaran.interactivemc.data;
 
 import org.vivecraft.api.data.VRPose;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -19,5 +20,5 @@ public class PlayerDataStore {
     /**
      * The VR poses of the players by UUID.
      */
-    public static Map<UUID, VRPose> vrPoses;
+    public static Map<UUID, VRPose> vrPoses = new HashMap<>();
 }

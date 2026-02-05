@@ -89,11 +89,13 @@ public class PlayerBodyPartRigidBody extends VxRigidBody {
         VRPose pose = PlayerDataStore.vrPoses.get(get(DATA_PLAYER_ID));
         if (pose == null) return;
 
-        VRBodyPartData bodyPartData = pose.getBodyPartData(get(DATA_BODY_PART).toVRBodyPart());
+        PlayerBodyPart bodyPart = get(DATA_BODY_PART);
+
+        VRBodyPartData bodyPartData = pose.getBodyPartData(bodyPart.toVRBodyPart());
         if (bodyPartData == null) return;
 
         VxJoltBridge.INSTANCE.getJoltBody(world, this).moveKinematic(
-                VxConversions.toJolt(bodyPartData.getPos()),
+                VxConversions.toJolt(bodyPartData.getPos().add(bodyPart.getTrackingOffset())),
                 VxConversions.toJolt(new Quaternionf(bodyPartData.getRotation())),
                 FIXED_TIME_STEP
         );

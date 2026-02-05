@@ -1,12 +1,17 @@
 package net.timtaran.interactivemc.body.player;
 
+import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.Vec3;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.level.block.Blocks;
+import net.timtaran.interactivemc.physics.builtin.box.BoxRigidBody;
 import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
 import net.timtaran.interactivemc.physics.physics.body.client.body.renderer.VxRigidBodyRenderer;
 import org.joml.Quaternionf;
@@ -15,47 +20,79 @@ import org.joml.Quaternionf;
 public class PlayerBodyPartRenderer extends VxRigidBodyRenderer<PlayerBodyPartRigidBody> {
     @Override
     public void render(PlayerBodyPartRigidBody body, PoseStack poseStack, MultiBufferSource bufferSource, float partialTicks, int packedLight, VxRenderState renderState) {
-        PlayerBodyPart partType = body.get(PlayerBodyPartRigidBody.DATA_BODY_PART);
+        Vec3 halfExtents = body.get(BoxRigidBody.DATA_HALF_EXTENTS);
+        float hx = halfExtents.getX();
+        float hy = halfExtents.getY();
+        float hz = halfExtents.getZ();
+
+        float fullWidth = hx * 2.0f;
+        float fullHeight = hy * 2.0f;
+        float fullDepth = hz * 2.0f;
 
         poseStack.pushPose();
 
-        // 1. Apply Physics Transform (Rotation from Jolt Physics)
-        var transform = renderState.transform;
-        poseStack.mulPose(new Quaternionf(
-                transform.getRotation().getX(),
-                transform.getRotation().getY(),
-                transform.getRotation().getZ(),
-                transform.getRotation().getW()
-        ));
+        Quat renderRotation = renderState.transform.getRotation();
+        poseStack.mulPose(new Quaternionf(renderRotation.getX(), renderRotation.getY(), renderRotation.getZ(), renderRotation.getW()));
 
-        // 2. Scale visual model to match physics bounds
-        // We calculate the scale factor required to stretch the model part to fill the rigid body's dimensions.
-        float physicsHalfX = body.get(PlayerBodyPartRigidBody.DATA_HALF_EXTENTS).getX();
-        float physicsHalfY = body.get(PlayerBodyPartRigidBody.DATA_HALF_EXTENTS).getY();
-        float physicsHalfZ = body.get(PlayerBodyPartRigidBody.DATA_HALF_EXTENTS).getZ();
+        poseStack.translate(-hx, -hy, -hz);
+        poseStack.scale(fullWidth, fullHeight, fullDepth);
 
-        //noinspection DuplicatedCode
-        float scaleX = physicsHalfX * 2f;
-        float scaleY = physicsHalfY * 2f;
-        float scaleZ = physicsHalfZ * 2f;
-
-        poseStack.translate(-0.5f, -0.5f, -0.5f);
-        poseStack.scale(scaleX, scaleY, scaleZ);
-        poseStack.translate(0.5f, 0.5f, 0.5f);
-
-        // 4. Center Alignment
-        // Align the specific body part so its pivot matches the rigid body's center.
-        // applyPartOffset(poseStack, partType);
-
-        // 5. Render a simple model.
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(
-                Blocks.WHITE_TERRACOTTA.defaultBlockState(),
-                poseStack,
-                bufferSource,
-                packedLight,
-                OverlayTexture.NO_OVERLAY
-        );
+        renderUnitCubeWireframe(poseStack, bufferSource, packedLight);
 
         poseStack.popPose();
+    }
+
+    // Some AI slop down
+    // Call this from your client-side render method
+    public static void renderUnitCubeWireframe(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        PoseStack.Pose pose = poseStack.last();
+        VertexConsumer builder = bufferSource.getBuffer(RenderType.lines());
+
+        float min = 0f;
+        float max = 1f;
+
+        // 12 edges: each entry is {x1,y1,z1, x2,y2,z2}
+        float[][] edges = {
+                // bottom face
+                {min, min, min,  max, min, min},
+                {max, min, min,  max, min, max},
+                {max, min, max,  min, min, max},
+                {min, min, max,  min, min, min},
+
+                // top face
+                {min, max, min,  max, max, min},
+                {max, max, min,  max, max, max},
+                {max, max, max,  min, max, max},
+                {min, max, max,  min, max, min},
+
+                // verticals
+                {min, min, min,  min, max, min},
+                {max, min, min,  max, max, min},
+                {max, min, max,  max, max, max},
+                {min, min, max,  min, max, max}
+        };
+
+        // white color (float overload exists via default method)
+        float r = 1f, g = 1f, b = 1f, a = 1f;
+
+        for (float[] e : edges) {
+            emitVertex(pose, builder, e[0], e[1], e[2], r, g, b, a, packedLight);
+            emitVertex(pose, builder, e[3], e[4], e[5], r, g, b, a, packedLight);
+        }
+    }
+
+    // Emit a single vertex using the set* API on the VertexConsumer (works with your decompiled interface)
+    private static void emitVertex(PoseStack.Pose pose,
+                                   VertexConsumer builder,
+                                   float x, float y, float z,
+                                   float r, float g, float b, float a,
+                                   int packedLight) {
+        // transform position and emit; chain the setters (they modify the last vertex)
+        builder.addVertex(pose, x, y, z)
+                .setColor(r, g, b, a)                           // set color (float overload)
+                .setUv(0f, 0f)                                  // UV not used for lines but set anyway
+                .setOverlay(OverlayTexture.NO_OVERLAY)          // overlay
+                .setLight(packedLight)                          // packed light
+                .setNormal(0f, 1f, 0f);                         // normal (ignored for lines)
     }
 }

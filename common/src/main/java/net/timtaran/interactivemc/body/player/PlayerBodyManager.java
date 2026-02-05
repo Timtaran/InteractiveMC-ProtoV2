@@ -35,7 +35,7 @@ public class PlayerBodyManager {
         Vec3 halfExtents = Op.star(0.5f, size);
 
         VxTransform transform = new VxTransform(
-                Op.plus(VxConversions.toJolt(player.position()), partType.getLocalPivot().toRVec3()),
+                VxConversions.toJolt(player.position().add(partType.getLocalPivot())),
                 new Quat()
         );
 

@@ -6,12 +6,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.world.level.block.Blocks;
-import net.timtaran.interactivemc.physics.builtin.box.BoxRigidBody;
 import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
 import net.timtaran.interactivemc.physics.physics.body.client.body.renderer.VxRigidBodyRenderer;
 import org.joml.Quaternionf;
@@ -20,7 +17,7 @@ import org.joml.Quaternionf;
 public class PlayerBodyPartRenderer extends VxRigidBodyRenderer<PlayerBodyPartRigidBody> {
     @Override
     public void render(PlayerBodyPartRigidBody body, PoseStack poseStack, MultiBufferSource bufferSource, float partialTicks, int packedLight, VxRenderState renderState) {
-        Vec3 halfExtents = body.get(BoxRigidBody.DATA_HALF_EXTENTS);
+        Vec3 halfExtents = body.get(PlayerBodyPartRigidBody.DATA_HALF_EXTENTS);
         float hx = halfExtents.getX();
         float hy = halfExtents.getY();
         float hz = halfExtents.getZ();

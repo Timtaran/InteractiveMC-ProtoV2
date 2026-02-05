@@ -14,14 +14,12 @@ import net.timtaran.interactivemc.physics.math.VxConversions;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.physics.VxPhysicsLayers;
 import net.timtaran.interactivemc.physics.physics.body.VxJoltBridge;
-import net.timtaran.interactivemc.physics.physics.body.VxRemovalReason;
 import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxDataSerializers;
 import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxSynchronizedData;
 import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxServerAccessor;
 import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
 import net.timtaran.interactivemc.physics.physics.body.type.VxRigidBody;
 import net.timtaran.interactivemc.physics.physics.body.type.factory.VxRigidBodyFactory;
-import net.timtaran.interactivemc.physics.physics.ragdoll.body.VxBodyPartRigidBody;
 import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
 import org.joml.Quaternionf;
 import org.vivecraft.api.data.VRBodyPartData;
@@ -82,22 +80,24 @@ public class PlayerBodyPartRigidBody extends VxRigidBody {
     }
 
     public void onPhysicsTick(VxPhysicsWorld world) {
+        final BodyInterface bodyInterface = world.getPhysicsSystem().getBodyInterfaceNoLock();
+        if (!bodyInterface.isActive(getBodyId())) // Physics updater calls onPhysicsTick if body is active or was active last frame
+            bodyInterface.activateBody(getBodyId());
+
         super.onPhysicsTick(world);
+
         VRPose pose = PlayerDataStore.vrPoses.get(get(DATA_PLAYER_ID));
-        if (pose == null)
-            return;
+        if (pose == null) return;
 
         VRBodyPartData bodyPartData = pose.getBodyPartData(get(DATA_BODY_PART).toVRBodyPart());
-        if (bodyPartData == null)
-            return;
+        if (bodyPartData == null) return;
 
         VxJoltBridge.INSTANCE.getJoltBody(world, this).moveKinematic(
                 VxConversions.toJolt(bodyPartData.getPos()),
                 VxConversions.toJolt(new Quaternionf(bodyPartData.getRotation())),
                 FIXED_TIME_STEP
-                );
+        );
     }
-
 
     @Override
     public void writePersistenceData(VxByteBuf buf) {

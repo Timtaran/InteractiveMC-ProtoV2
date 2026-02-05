@@ -7,10 +7,11 @@ package net.timtaran.interactivemc.init;
 import com.mojang.logging.LogUtils;
 import dev.architectury.event.events.common.PlayerEvent;
 import net.minecraft.server.level.ServerPlayer;
-import net.timtaran.interactivemc.body.RegisteredBodies;
+import net.timtaran.interactivemc.body.BodyRegistry;
 import net.timtaran.interactivemc.body.player.PlayerBodyManager;
 import net.timtaran.interactivemc.init.registries.KeyMappings;
 import net.timtaran.interactivemc.init.registries.ViveTrackers;
+import net.timtaran.interactivemc.network.PacketRegistry;
 import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
 import org.slf4j.Logger;
 
@@ -36,7 +37,8 @@ public class InteractiveMC {
             PlayerBodyManager.get(VxPhysicsWorld.get(player.level().dimension())).spawnPlayer(player);
         } );
 
-        RegisteredBodies.register();
+        BodyRegistry.register();
+        PacketRegistry.registerPackets();
     }
 
     /**
@@ -47,6 +49,6 @@ public class InteractiveMC {
         LOGGER.info("Initializing InteractiveMC Client");
         KeyMappings.init();
         ViveTrackers.init();
-        RegisteredBodies.registerClient();
+        BodyRegistry.registerClient();
     }
 }

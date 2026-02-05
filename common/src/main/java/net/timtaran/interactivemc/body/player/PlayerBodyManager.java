@@ -5,7 +5,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.operator.Op;
 import net.minecraft.world.entity.player.Player;
-import net.timtaran.interactivemc.body.RegisteredBodies;
+import net.timtaran.interactivemc.body.BodyRegistry;
 import net.timtaran.interactivemc.physics.math.VxConversions;
 import net.timtaran.interactivemc.physics.math.VxTransform;
 import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
@@ -40,7 +40,7 @@ public class PlayerBodyManager {
         );
 
         return bodyManager.createRigidBody(
-                RegisteredBodies.PLAYER_BODY_PART,
+                BodyRegistry.PLAYER_BODY_PART,
                 transform,
                 EActivation.Activate,
                 body -> {

@@ -41,11 +41,7 @@ public enum PlayerBodyPart {
      * @return A vector representing the local pivot point.
      */
     public Vec3 getLocalPivot() {
-        return switch (this) {
-            case HEAD -> new Vec3(0f, 0f, 0f);
-            case MAIN_HAND -> new Vec3(0.5f, 0.5f, 0.5f);
-            case OFF_HAND -> new Vec3(-0.5f, 0.5f, 0.5f);
-        };
+        return new Vec3(0f, 0f, 0f);
 
     }
 

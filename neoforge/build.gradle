@@ -9,7 +9,7 @@ loom {
         }
         client {
             runDir "run-client"
-            programArgs '--username', 'dev'
+            programArgs '--username', 'neoforge_dev'
         }
     }
 

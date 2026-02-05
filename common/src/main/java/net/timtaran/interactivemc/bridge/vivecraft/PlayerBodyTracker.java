@@ -30,12 +30,13 @@ public class PlayerBodyTracker implements Tracker {
 
     @Override
     public boolean isActive(LocalPlayer localPlayer) {
-        return true;
+        return localPlayer != null;
     }
 
     @Override
     public void activeProcess(LocalPlayer localPlayer) {
         if (System.nanoTime() - lastSync > NETWORK_SYNC_PERIOD) {
+            // todo replace with vivecraft utils (maybe)
             VRPose renderPose = VRClientAPI.instance().getWorldRenderPose();
             VxPacketHandler.sendToServer(new C2SFrameVRPosePacket(renderPose));
 

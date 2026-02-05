@@ -14,7 +14,7 @@ loom {
         }
         client {
             runDir "run-client"
-            programArgs '--username', 'dev'
+            programArgs '--username', 'fabric_dev'
         }
     }
 

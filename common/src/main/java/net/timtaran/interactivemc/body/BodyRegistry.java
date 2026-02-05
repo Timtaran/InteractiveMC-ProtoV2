@@ -8,7 +8,7 @@ import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyRegistry;
 import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
 import net.timtaran.interactivemc.util.InteractiveMCIdentifier;
 
-public class RegisteredBodies {
+public class BodyRegistry {
     public static final VxBodyType<PlayerBodyPartRigidBody> PLAYER_BODY_PART = VxBodyType.Builder
             .<PlayerBodyPartRigidBody>create(PlayerBodyPartRigidBody::new)
             .noSummon()

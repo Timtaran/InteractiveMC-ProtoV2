@@ -42,9 +42,14 @@ public final class VxPhysicsLayers {
     public static final short TERRAIN = 2;
 
     /**
+     * Bodies that are non-collidable with any other bodies.
+     */
+    public static final short NON_COLLIDING = 3;
+
+    /**
      * Total number of object layers
      */
-    public static final short NUM_OBJECT_LAYERS = 3;
+    public static final short NUM_OBJECT_LAYERS = 4;
 
     /* ===================== Broad Phase Layers ===================== */
 
@@ -90,8 +95,14 @@ public final class VxPhysicsLayers {
         olpf.enableCollision(MOVING, MOVING);
         olpf.enableCollision(MOVING, TERRAIN);
 
+        // Non-collidable objects never collide with anything
+        olpf.disableCollision(NON_COLLIDING, NON_MOVING);
+        olpf.disableCollision(NON_COLLIDING, MOVING);
+        olpf.disableCollision(NON_COLLIDING, TERRAIN);
+
         // Terrain only collides with moving objects
         olpf.disableCollision(TERRAIN, TERRAIN);
+        olpf.disableCollision(TERRAIN, NON_COLLIDING);
         olpf.disableCollision(TERRAIN, NON_MOVING);
 
         objectLayerPairFilter = olpf;
@@ -107,6 +118,7 @@ public final class VxPhysicsLayers {
 
         bpli.mapObjectToBroadPhaseLayer(NON_MOVING, BP_NON_MOVING);
         bpli.mapObjectToBroadPhaseLayer(TERRAIN, BP_NON_MOVING);
+        bpli.mapObjectToBroadPhaseLayer(NON_COLLIDING, BP_NON_MOVING);
         bpli.mapObjectToBroadPhaseLayer(MOVING, BP_MOVING);
 
         broadPhaseLayerInterface = bpli;

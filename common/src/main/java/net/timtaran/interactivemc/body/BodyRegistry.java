@@ -2,6 +2,8 @@ package net.timtaran.interactivemc.body;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.timtaran.interactivemc.body.player.PlayerBodyPartGhostRenderer;
+import net.timtaran.interactivemc.body.player.PlayerBodyPartGhostRigidBody;
 import net.timtaran.interactivemc.body.player.PlayerBodyPartRenderer;
 import net.timtaran.interactivemc.body.player.PlayerBodyPartRigidBody;
 import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyRegistry;
@@ -14,8 +16,14 @@ public class BodyRegistry {
             .noSummon()
             .build(InteractiveMCIdentifier.get("player_body_part"));
 
+    public static final VxBodyType<PlayerBodyPartGhostRigidBody> PLAYER_BODY_PART_GHOST = VxBodyType.Builder
+            .<PlayerBodyPartGhostRigidBody>create(PlayerBodyPartGhostRigidBody::new)
+            .noSummon()
+            .build(InteractiveMCIdentifier.get("player_ghost_body_part"));
+
     public static void register() {
         VxBodyRegistry.getInstance().register(PLAYER_BODY_PART);
+        VxBodyRegistry.getInstance().register(PLAYER_BODY_PART_GHOST);
     }
 
     @Environment(EnvType.CLIENT)
@@ -24,8 +32,10 @@ public class BodyRegistry {
 
         // Client-side factory registration
         registry.registerClientFactory(PLAYER_BODY_PART.getTypeId(), (type, id) -> new PlayerBodyPartRigidBody((VxBodyType<PlayerBodyPartRigidBody>) type, id));
+        registry.registerClientFactory(PLAYER_BODY_PART_GHOST.getTypeId(), (type, id) -> new PlayerBodyPartGhostRigidBody((VxBodyType<PlayerBodyPartGhostRigidBody>) type, id));
 
         // Client-side renderer registration
         registry.registerClientRenderer(PLAYER_BODY_PART.getTypeId(), new PlayerBodyPartRenderer());
+        registry.registerClientRenderer(PLAYER_BODY_PART_GHOST.getTypeId(), new PlayerBodyPartGhostRenderer());
     }
 }

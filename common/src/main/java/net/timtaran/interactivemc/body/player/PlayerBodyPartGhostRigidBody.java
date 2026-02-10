@@ -1,16 +1,16 @@
-/*
- * This file is part of InteractiveMC.
- * Licensed under LGPL 3.0.
- */
 package net.timtaran.interactivemc.body.player;
+
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.timtaran.interactivemc.data.PlayerDataStore;
 import net.timtaran.interactivemc.network.sync.DataSerializers;
+import net.timtaran.interactivemc.physics.math.VxConversions;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.physics.VxPhysicsLayers;
+import net.timtaran.interactivemc.physics.physics.body.VxJoltBridge;
 import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxDataSerializers;
 import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxSynchronizedData;
 import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxServerAccessor;
@@ -18,27 +18,30 @@ import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
 import net.timtaran.interactivemc.physics.physics.body.type.VxRigidBody;
 import net.timtaran.interactivemc.physics.physics.body.type.factory.VxRigidBodyFactory;
 import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
+import org.vivecraft.api.data.VRBodyPartData;
+import org.vivecraft.api.data.VRPose;
 
 import java.util.UUID;
 
 /**
- * Represents a single rigid body part of a ragdoll, such as a head, torso, or limb.
- * It stores data about its type, dimensions, and the skin texture it should use for rendering.
+ * Kinematic ghost rigid body without any physics which will be used to be linked with dynamic rigid body via constraint.
  *
- * @author xI-Mx-Ix
+ * @author timtaran 
  */
-public class PlayerBodyPartRigidBody extends VxRigidBody {
+public class PlayerBodyPartGhostRigidBody extends VxRigidBody {
     private static final int SIMULATION_HZ = 60;
     private static final float FIXED_TIME_STEP = 1.0f / SIMULATION_HZ;
 
-    public static final VxServerAccessor<Vec3> DATA_HALF_EXTENTS = VxServerAccessor.create(PlayerBodyPartRigidBody.class, VxDataSerializers.VEC3);
-    public static final VxServerAccessor<PlayerBodyPart> DATA_BODY_PART = VxServerAccessor.create(PlayerBodyPartRigidBody.class, DataSerializers.BODY_PART);
-    public static final VxServerAccessor<UUID> DATA_PLAYER_ID = VxServerAccessor.create(PlayerBodyPartRigidBody.class, VxDataSerializers.UUID);
+    public static final VxServerAccessor<Vec3> DATA_HALF_EXTENTS = VxServerAccessor.create(PlayerBodyPartGhostRigidBody.class, VxDataSerializers.VEC3);
+    public static final VxServerAccessor<PlayerBodyPart> DATA_BODY_PART = VxServerAccessor.create(PlayerBodyPartGhostRigidBody.class, DataSerializers.BODY_PART);
+    public static final VxServerAccessor<UUID> DATA_PLAYER_ID = VxServerAccessor.create(PlayerBodyPartGhostRigidBody.class, VxDataSerializers.UUID);
 
     /**
      * Server-side constructor.
      */
-    public PlayerBodyPartRigidBody(VxBodyType<PlayerBodyPartRigidBody> type, VxPhysicsWorld world, UUID id) {
+    public PlayerBodyPartGhostRigidBody(VxBodyType<PlayerBodyPartGhostRigidBody> type, VxPhysicsWorld world, UUID id) {
         super(type, world, id);
         setPersistent(false);
     }
@@ -47,7 +50,7 @@ public class PlayerBodyPartRigidBody extends VxRigidBody {
      * Client-side constructor.
      */
     @Environment(EnvType.CLIENT)
-    public PlayerBodyPartRigidBody(VxBodyType<PlayerBodyPartRigidBody> type, UUID id) {
+    public PlayerBodyPartGhostRigidBody(VxBodyType<PlayerBodyPartGhostRigidBody> type, UUID id) {
         super(type, id);
     }
 
@@ -63,18 +66,47 @@ public class PlayerBodyPartRigidBody extends VxRigidBody {
         PlayerBodyPart partType = get(DATA_BODY_PART);
         Vec3 fullSize = partType.getSize();
 
-        System.out.println("jolt body create");
+        System.out.println("jolt body create1");
 
         try (ShapeSettings shapeSettings = new BoxShapeSettings(new Vec3(fullSize.getX() / 2, fullSize.getY() / 2, fullSize.getZ() / 2)); BodyCreationSettings bcs = new BodyCreationSettings()) {
-            System.out.println("bcs");
-            bcs.setMotionType(EMotionType.Dynamic);
-            bcs.setObjectLayer(VxPhysicsLayers.MOVING);
+            System.out.println("bcs1");
+            bcs.setMotionType(EMotionType.Kinematic);
+            bcs.setObjectLayer(VxPhysicsLayers.NON_COLLIDING);
             return factory.create(shapeSettings, bcs);
         }
     }
 
     public void onPhysicsTick(VxPhysicsWorld world) {
+        final BodyInterface bodyInterface = world.getPhysicsSystem().getBodyInterface();
+        if (!bodyInterface.isActive(getBodyId())) // Physics updater calls onPhysicsTick if body is active or was active last frame
+            bodyInterface.activateBody(getBodyId());
+
         super.onPhysicsTick(world);
+
+        VRPose pose = PlayerDataStore.vrPoses.get(get(DATA_PLAYER_ID));
+        if (pose == null) return;
+
+        PlayerBodyPart bodyPart = get(DATA_BODY_PART);
+
+        VRBodyPartData bodyPartData = pose.getBodyPartData(bodyPart.toVRBodyPart());
+        if (bodyPartData == null) return;
+
+        Quaternionf targetRot = new Quaternionf(bodyPartData.getRotation());
+
+        Vector3f controllerPos = new Vector3f(bodyPartData.getPos().toVector3f());
+        Vector3f offset = new Vector3f(bodyPart.getTrackingOffset().toVector3f());
+
+        targetRot.transform(offset);
+
+        Vector3f targetPos = controllerPos.add(offset);
+
+        // VxJoltBridge.INSTANCE.getJoltBody(world, this).setPositionAndRotationInternal();
+
+        VxJoltBridge.INSTANCE.getJoltBody(world, this).moveKinematic(
+                VxConversions.toJolt(targetPos).toRVec3(),
+                VxConversions.toJolt(targetRot),
+                FIXED_TIME_STEP
+        );
     }
 
     @Override

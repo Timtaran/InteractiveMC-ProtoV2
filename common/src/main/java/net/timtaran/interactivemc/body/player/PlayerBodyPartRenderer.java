@@ -34,14 +34,14 @@ public class PlayerBodyPartRenderer extends VxRigidBodyRenderer<PlayerBodyPartRi
         poseStack.translate(-hx, -hy, -hz);
         poseStack.scale(fullWidth, fullHeight, fullDepth);
 
-        renderUnitCubeWireframe(poseStack, bufferSource, packedLight);
+        renderUnitCubeWireframe(poseStack, bufferSource, packedLight, 1.0f, 1.0f, 0.0f, 1.0f);
 
         poseStack.popPose();
     }
 
     // Some AI slop down
     // Call this from your client-side render method
-    public static void renderUnitCubeWireframe(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public static void renderUnitCubeWireframe(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, float r, float g, float b, float a) {
         PoseStack.Pose pose = poseStack.last();
         VertexConsumer builder = bufferSource.getBuffer(RenderType.lines());
 
@@ -69,9 +69,6 @@ public class PlayerBodyPartRenderer extends VxRigidBodyRenderer<PlayerBodyPartRi
                 {min, min, max,  min, max, max}
         };
 
-        // white color (float overload exists via default method)
-        float r = 1f, g = 1f, b = 1f, a = 1f;
-
         for (float[] e : edges) {
             emitVertex(pose, builder, e[0], e[1], e[2], r, g, b, a, packedLight);
             emitVertex(pose, builder, e[3], e[4], e[5], r, g, b, a, packedLight);
@@ -87,9 +84,9 @@ public class PlayerBodyPartRenderer extends VxRigidBodyRenderer<PlayerBodyPartRi
         // transform position and emit; chain the setters (they modify the last vertex)
         builder.addVertex(pose, x, y, z)
                 .setColor(r, g, b, a)                           // set color (float overload)
-                .setUv(0f, 0f)                                  // UV not used for lines but set anyway
+                .setUv(0f, 0f)                            // UV not used for lines but set anyway
                 .setOverlay(OverlayTexture.NO_OVERLAY)          // overlay
                 .setLight(packedLight)                          // packed light
-                .setNormal(0f, 1f, 0f);                         // normal (ignored for lines)
+                .setNormal(0f, 1f, 0f); // normal (ignored for lines)
     }
 }

@@ -20,9 +20,6 @@ import org.vivecraft.api.data.VRPose;
  */
 @Environment(EnvType.CLIENT)
 public class PlayerBodyTracker implements Tracker {
-    private static final long NETWORK_SYNC_PERIOD = 50 / 1000000;
-    private static long lastSync = 0;
-
     @Override
     public ProcessType processType() {
         return ProcessType.PER_FRAME;
@@ -35,12 +32,8 @@ public class PlayerBodyTracker implements Tracker {
 
     @Override
     public void activeProcess(LocalPlayer localPlayer) {
-        if (System.nanoTime() - lastSync > NETWORK_SYNC_PERIOD) {
-            // todo replace with vivecraft utils (maybe)
-            VRPose renderPose = VRClientAPI.instance().getWorldRenderPose();
-            VxPacketHandler.sendToServer(new C2SFrameVRPosePacket(renderPose));
-
-            lastSync = System.nanoTime();
-        }
+        // todo optimize?
+        VRPose renderPose = VRClientAPI.instance().getWorldRenderPose();
+        VxPacketHandler.sendToServer(new C2SFrameVRPosePacket(renderPose));
     }
 }

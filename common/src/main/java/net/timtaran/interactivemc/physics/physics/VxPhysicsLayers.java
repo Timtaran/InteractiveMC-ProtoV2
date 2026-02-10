@@ -99,6 +99,7 @@ public final class VxPhysicsLayers {
         olpf.disableCollision(NON_COLLIDING, NON_MOVING);
         olpf.disableCollision(NON_COLLIDING, MOVING);
         olpf.disableCollision(NON_COLLIDING, TERRAIN);
+        olpf.disableCollision(NON_COLLIDING, NON_COLLIDING);
 
         // Terrain only collides with moving objects
         olpf.disableCollision(TERRAIN, TERRAIN);
@@ -118,7 +119,6 @@ public final class VxPhysicsLayers {
 
         bpli.mapObjectToBroadPhaseLayer(NON_MOVING, BP_NON_MOVING);
         bpli.mapObjectToBroadPhaseLayer(TERRAIN, BP_NON_MOVING);
-        bpli.mapObjectToBroadPhaseLayer(NON_COLLIDING, BP_NON_MOVING);
         bpli.mapObjectToBroadPhaseLayer(MOVING, BP_MOVING);
 
         broadPhaseLayerInterface = bpli;

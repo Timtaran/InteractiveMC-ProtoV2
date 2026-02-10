@@ -1,5 +1,8 @@
+/*
+ * This file is part of InteractiveMC.
+ * Licensed under LGPL 3.0.
+ */
 package net.timtaran.interactivemc.body.player;
-
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
@@ -61,7 +64,6 @@ public class PlayerBodyPartGhostRigidBody extends VxRigidBody {
         builder.define(DATA_PLAYER_ID, UUID.randomUUID());
     }
 
-    @Override
     public int createJoltBody(VxRigidBodyFactory factory) {
         PlayerBodyPart partType = get(DATA_BODY_PART);
         Vec3 fullSize = partType.getSize();
@@ -72,15 +74,13 @@ public class PlayerBodyPartGhostRigidBody extends VxRigidBody {
             System.out.println("bcs1");
             bcs.setMotionType(EMotionType.Kinematic);
             bcs.setObjectLayer(VxPhysicsLayers.NON_COLLIDING);
+            bcs.setAllowSleeping(false);
             return factory.create(shapeSettings, bcs);
         }
     }
 
+    @Override
     public void onPhysicsTick(VxPhysicsWorld world) {
-        final BodyInterface bodyInterface = world.getPhysicsSystem().getBodyInterface();
-        if (!bodyInterface.isActive(getBodyId())) // Physics updater calls onPhysicsTick if body is active or was active last frame
-            bodyInterface.activateBody(getBodyId());
-
         super.onPhysicsTick(world);
 
         VRPose pose = PlayerDataStore.vrPoses.get(get(DATA_PLAYER_ID));
@@ -99,8 +99,6 @@ public class PlayerBodyPartGhostRigidBody extends VxRigidBody {
         targetRot.transform(offset);
 
         Vector3f targetPos = controllerPos.add(offset);
-
-        // VxJoltBridge.INSTANCE.getJoltBody(world, this).setPositionAndRotationInternal();
 
         VxJoltBridge.INSTANCE.getJoltBody(world, this).moveKinematic(
                 VxConversions.toJolt(targetPos).toRVec3(),

@@ -8,6 +8,8 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.timtaran.interactivemc.body.Grabber;
+import net.timtaran.interactivemc.body.GroupFilters;
 import net.timtaran.interactivemc.network.sync.DataSerializers;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.physics.VxPhysicsLayers;
@@ -27,10 +29,7 @@ import java.util.UUID;
  *
  * @author xI-Mx-Ix
  */
-public class PlayerBodyPartRigidBody extends VxRigidBody {
-    private static final int SIMULATION_HZ = 60;
-    private static final float FIXED_TIME_STEP = 1.0f / SIMULATION_HZ;
-
+public class PlayerBodyPartRigidBody extends VxRigidBody implements Grabber {
     public static final VxServerAccessor<Vec3> DATA_HALF_EXTENTS = VxServerAccessor.create(PlayerBodyPartRigidBody.class, VxDataSerializers.VEC3);
     public static final VxServerAccessor<PlayerBodyPart> DATA_BODY_PART = VxServerAccessor.create(PlayerBodyPartRigidBody.class, DataSerializers.BODY_PART);
     public static final VxServerAccessor<UUID> DATA_PLAYER_ID = VxServerAccessor.create(PlayerBodyPartRigidBody.class, VxDataSerializers.UUID);
@@ -69,6 +68,7 @@ public class PlayerBodyPartRigidBody extends VxRigidBody {
             System.out.println("bcs");
             bcs.setMotionType(EMotionType.Dynamic);
             bcs.setObjectLayer(VxPhysicsLayers.MOVING);
+            bcs.setCollisionGroup(new CollisionGroup(GroupFilters.PLAYER_BODY_FILTER, 0, getSubGroupId()));
             return factory.create(shapeSettings, bcs);
         }
     }
@@ -91,5 +91,15 @@ public class PlayerBodyPartRigidBody extends VxRigidBody {
         setServerData(DATA_HALF_EXTENTS, VxDataSerializers.VEC3.read(buf));
         setServerData(DATA_BODY_PART, DataSerializers.BODY_PART.read(buf));
         setServerData(DATA_PLAYER_ID, VxDataSerializers.UUID.read(buf));
+    }
+
+    @Override
+    public int getGroupId() {
+        return GroupFilters.PLAYER_BODY_GROUP;
+    }
+
+    @Override
+    public int getSubGroupId() {
+        return get(DATA_BODY_PART).getSubGroupId();
     }
 }

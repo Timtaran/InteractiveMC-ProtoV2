@@ -34,8 +34,7 @@ import java.util.UUID;
  * @author timtaran 
  */
 public class PlayerBodyPartGhostRigidBody extends VxRigidBody {
-    private static final int SIMULATION_HZ = 60;
-    private static final float FIXED_TIME_STEP = 1.0f / SIMULATION_HZ;
+    private static final float FIXED_TIME_STEP = VxPhysicsWorld.FIXED_TIME_STEP;
 
     public static final VxServerAccessor<Vec3> DATA_HALF_EXTENTS = VxServerAccessor.create(PlayerBodyPartGhostRigidBody.class, VxDataSerializers.VEC3);
     public static final VxServerAccessor<PlayerBodyPart> DATA_BODY_PART = VxServerAccessor.create(PlayerBodyPartGhostRigidBody.class, DataSerializers.BODY_PART);

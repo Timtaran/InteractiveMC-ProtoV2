@@ -8,12 +8,13 @@ import com.github.stephengold.joltjni.Vec3;
 import org.vivecraft.api.data.VRBodyPart;
 
 public enum PlayerBodyPart {
-    HEAD(new Vec3(0.5f, 0.5f, 0.5f)),
+    HEAD(2, new Vec3(0.5f, 0.5f, 0.5f)),
 
-    MAIN_HAND(new Vec3(0.25f, 0.25f, 0.75f)),
-    OFF_HAND(new Vec3(0.25f, 0.25f, 0.75f));
+    MAIN_HAND(0, new Vec3(0.25f, 0.25f, 0.75f)),
+    OFF_HAND(1, new Vec3(0.25f, 0.25f, 0.75f));
     // todo add elbow
 
+    private final int subGroupId;
     private final Vec3 size;
 
     /**
@@ -21,8 +22,18 @@ public enum PlayerBodyPart {
      *
      * @param size The full size (width, height, depth) of the physics shape for this part.
      */
-    PlayerBodyPart(Vec3 size) {
+    PlayerBodyPart(int subGroupId, Vec3 size) {
+        this.subGroupId = subGroupId;
         this.size = size;
+    }
+
+    /**
+     * Gets the subgroup ID of this body part.
+     *
+     * @return The subgroup ID.
+     */
+    public int getSubGroupId() {
+        return subGroupId;
     }
 
     /**

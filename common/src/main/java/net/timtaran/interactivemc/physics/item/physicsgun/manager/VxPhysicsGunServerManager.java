@@ -14,8 +14,8 @@ import net.timtaran.interactivemc.physics.item.physicsgun.VxGrabbedBodyInfo;
 import net.timtaran.interactivemc.physics.item.physicsgun.packet.VxPhysicsGunSyncPacket;
 import net.timtaran.interactivemc.physics.network.VxNetworking;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
-import net.timtaran.interactivemc.physics.core.raycast.VxHitResult;
-import net.timtaran.interactivemc.physics.core.raycast.VxRaycaster;
+import net.timtaran.interactivemc.physics.core.util.raycast.VxHitResult;
+import net.timtaran.interactivemc.physics.core.util.raycast.VxRaycaster;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 import java.util.Map;

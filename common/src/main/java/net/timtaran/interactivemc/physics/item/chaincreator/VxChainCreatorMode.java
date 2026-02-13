@@ -20,9 +20,9 @@ import net.timtaran.interactivemc.physics.item.tool.config.VxToolConfig;
 import net.timtaran.interactivemc.physics.math.VxTransform;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.constraint.manager.VxConstraintManager;
-import net.timtaran.interactivemc.physics.core.raycast.VxClipContext;
-import net.timtaran.interactivemc.physics.core.raycast.VxHitResult;
-import net.timtaran.interactivemc.physics.core.raycast.VxRaycaster;
+import net.timtaran.interactivemc.physics.core.util.raycast.VxClipContext;
+import net.timtaran.interactivemc.physics.core.util.raycast.VxHitResult;
+import net.timtaran.interactivemc.physics.core.util.raycast.VxRaycaster;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 import java.util.Map;

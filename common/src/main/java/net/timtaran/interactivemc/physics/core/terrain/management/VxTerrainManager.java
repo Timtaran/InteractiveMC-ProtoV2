@@ -18,6 +18,7 @@ import net.timtaran.interactivemc.physics.core.terrain.generation.VxTerrainGener
 import net.timtaran.interactivemc.physics.core.terrain.job.VxTerrainJobSystem;
 import net.timtaran.interactivemc.physics.core.terrain.storage.VxChunkDataStore;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 
 /**
  * Manages the lifecycle of terrain chunks, including loading, unloading, activation,

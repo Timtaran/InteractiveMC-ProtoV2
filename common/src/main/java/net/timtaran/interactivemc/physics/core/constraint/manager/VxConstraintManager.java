@@ -15,6 +15,7 @@ import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.constraint.VxConstraint;
 import net.timtaran.interactivemc.physics.core.persistence.impl.constraint.VxConstraintStorage;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.charset.StandardCharsets;

@@ -19,6 +19,7 @@ import net.timtaran.interactivemc.physics.core.terrain.management.VxTerrainTrack
 import net.timtaran.interactivemc.physics.core.terrain.storage.VxChunkDataStore;
 import net.timtaran.interactivemc.physics.core.terrain.util.VxUpdateContext;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 
 import java.util.HashSet;
 import java.util.Set;

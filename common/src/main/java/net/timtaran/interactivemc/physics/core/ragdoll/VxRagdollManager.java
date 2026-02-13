@@ -13,6 +13,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
+import net.timtaran.interactivemc.physics.builtin.VxRegisteredBodies;
 import net.timtaran.interactivemc.physics.math.VxTransform;
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.core.constraint.manager.VxConstraintManager;

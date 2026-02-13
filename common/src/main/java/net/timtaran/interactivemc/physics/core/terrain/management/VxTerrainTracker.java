@@ -17,6 +17,7 @@ import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.terrain.VxSectionPos;
 import net.timtaran.interactivemc.physics.core.terrain.storage.VxChunkDataStore;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -17,6 +17,7 @@ import net.timtaran.interactivemc.physics.core.physics.VxPhysicsBootstrap;
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.VxBuoyancyManager;
 import net.timtaran.interactivemc.physics.core.ragdoll.VxRagdollManager;
 import net.timtaran.interactivemc.physics.core.terrain.VxTerrainSystem;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 import net.timtaran.interactivemc.physics.util.VxFrameTimer;
 import net.timtaran.interactivemc.physics.util.VxPauseUtil;
 import org.jetbrains.annotations.NotNull;

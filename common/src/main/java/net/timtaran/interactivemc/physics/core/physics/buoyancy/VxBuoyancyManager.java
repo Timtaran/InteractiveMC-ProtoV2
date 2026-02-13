@@ -5,6 +5,7 @@
 
 package net.timtaran.interactivemc.physics.core.physics.buoyancy;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.phase.VxBuoyancyBroadPhase;
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.phase.VxBuoyancyNarrowPhase;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;

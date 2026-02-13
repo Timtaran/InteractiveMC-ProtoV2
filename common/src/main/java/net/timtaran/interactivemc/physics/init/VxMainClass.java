@@ -25,7 +25,7 @@ import org.apache.logging.log4j.Logger;
  * @author xI-Mx-Ix
  */
 public class VxMainClass {
-    public static final String MODID = "velthoric";
+    public static final String MODID = "interactivemc";
     public static final Logger LOGGER = LogManager.getLogger("Velthoric");
 
     /**

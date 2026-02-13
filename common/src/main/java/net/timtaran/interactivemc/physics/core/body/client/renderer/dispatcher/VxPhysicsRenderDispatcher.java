@@ -23,6 +23,7 @@ import net.minecraft.world.phys.Vec3;
 
 import net.timtaran.interactivemc.physics.core.body.client.renderer.VxBodyRenderer;
 import net.timtaran.interactivemc.physics.event.api.VxRenderEvent;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 import net.timtaran.interactivemc.physics.mixin.impl.culling.LevelRendererAccessor;
 import net.timtaran.interactivemc.physics.mixin.impl.debug.EntityRenderDispatcherAccessor;
 import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyManager;

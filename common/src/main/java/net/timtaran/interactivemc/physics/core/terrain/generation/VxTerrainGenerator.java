@@ -12,6 +12,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.timtaran.interactivemc.physics.core.terrain.cache.VxTerrainShapeCache;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

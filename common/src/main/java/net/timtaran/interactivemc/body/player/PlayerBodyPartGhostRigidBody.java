@@ -13,6 +13,7 @@ import net.timtaran.interactivemc.network.sync.DataSerializers;
 import net.timtaran.interactivemc.physics.core.network.synchronization.VxDataSerializers;
 import net.timtaran.interactivemc.physics.core.network.synchronization.VxSynchronizedData;
 import net.timtaran.interactivemc.physics.core.network.synchronization.accessor.VxServerAccessor;
+import net.timtaran.interactivemc.physics.core.physics.VxJoltBridge;
 import net.timtaran.interactivemc.physics.core.physics.VxPhysicsLayers;
 import net.timtaran.interactivemc.physics.math.VxConversions;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
@@ -34,6 +35,7 @@ import java.util.UUID;
  */
 public class PlayerBodyPartGhostRigidBody extends VxRigidBody {
     private static final float FIXED_TIME_STEP = VxPhysicsWorld.FIXED_TIME_STEP;
+    private static short selectiveGhostLayer = -1;
 
     public static final VxServerAccessor<Vec3> DATA_HALF_EXTENTS = VxServerAccessor.create(PlayerBodyPartGhostRigidBody.class, VxDataSerializers.VEC3);
     public static final VxServerAccessor<PlayerBodyPart> DATA_BODY_PART = VxServerAccessor.create(PlayerBodyPartGhostRigidBody.class, DataSerializers.BODY_PART);
@@ -63,6 +65,19 @@ public class PlayerBodyPartGhostRigidBody extends VxRigidBody {
     }
 
     public int createJoltBody(VxRigidBodyFactory factory) {
+        if (selectiveGhostLayer == -1) {
+            selectiveGhostLayer = VxPhysicsLayers.claimLayer();
+
+            // Map it to the moving broad-phase layer as the spawned box is dynamic.
+            VxPhysicsLayers.setBroadPhaseMapping(selectiveGhostLayer, VxPhysicsLayers.BP_MOVING);
+
+            // Configure selective collisions
+            VxPhysicsLayers.setCollision(selectiveGhostLayer, VxPhysicsLayers.NON_MOVING, false);
+            VxPhysicsLayers.setCollision(selectiveGhostLayer, VxPhysicsLayers.MOVING, false);
+            VxPhysicsLayers.setCollision(selectiveGhostLayer, VxPhysicsLayers.TERRAIN, false);
+            VxPhysicsLayers.setCollision(selectiveGhostLayer, selectiveGhostLayer, false);
+        }
+
         PlayerBodyPart partType = get(DATA_BODY_PART);
         Vec3 fullSize = partType.getSize();
 
@@ -71,7 +86,7 @@ public class PlayerBodyPartGhostRigidBody extends VxRigidBody {
         try (ShapeSettings shapeSettings = new BoxShapeSettings(new Vec3(fullSize.getX() / 2, fullSize.getY() / 2, fullSize.getZ() / 2)); BodyCreationSettings bcs = new BodyCreationSettings()) {
             System.out.println("bcs1");
             bcs.setMotionType(EMotionType.Kinematic);
-            bcs.setObjectLayer(VxPhysicsLayers.NON_COLLIDING);
+            bcs.setObjectLayer(selectiveGhostLayer);
             bcs.setAllowSleeping(false);
             return factory.create(shapeSettings, bcs);
         }

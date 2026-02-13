@@ -9,8 +9,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.timtaran.interactivemc.physics.command.argument.VxBodyArgument;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.body.VxRemovalReason;
+import net.timtaran.interactivemc.physics.core.body.type.VxBody;
+import net.timtaran.interactivemc.physics.core.body.VxRemovalReason;
 
 import java.util.List;
 

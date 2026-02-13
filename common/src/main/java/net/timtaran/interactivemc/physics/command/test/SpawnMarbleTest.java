@@ -19,8 +19,8 @@ import net.minecraft.world.phys.Vec3;
 import net.timtaran.interactivemc.physics.builtin.VxRegisteredBodies;
 import net.timtaran.interactivemc.physics.builtin.marble.MarbleRigidBody;
 import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 public class SpawnMarbleTest implements IVxTestCommand {
 
@@ -59,7 +59,7 @@ public class SpawnMarbleTest implements IVxTestCommand {
             return 0;
         }
 
-        VxBodyManager manager = physicsWorld.getBodyManager();
+        VxServerBodyManager manager = physicsWorld.getBodyManager();
         VxTransform transform = new VxTransform(new RVec3(pos.x(), pos.y(), pos.z()), Quat.sIdentity());
 
         MarbleRigidBody spawnedMarble = manager.createRigidBody(

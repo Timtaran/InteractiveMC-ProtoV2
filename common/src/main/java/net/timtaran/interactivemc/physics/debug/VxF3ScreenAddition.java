@@ -9,12 +9,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.timtaran.interactivemc.physics.event.api.VxF3ScreenAdditionEvent;
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.body.type.VxRigidBody;
-import net.timtaran.interactivemc.physics.physics.body.type.VxSoftBody;
-import net.timtaran.interactivemc.physics.physics.world.VxClientPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyManager;
+import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyDataStore;
+import net.timtaran.interactivemc.physics.core.body.type.VxBody;
+import net.timtaran.interactivemc.physics.core.body.type.VxRigidBody;
+import net.timtaran.interactivemc.physics.core.body.type.VxSoftBody;
 
 import java.util.List;
 import java.util.UUID;
@@ -49,7 +48,7 @@ public class VxF3ScreenAddition {
 
 
     private static void addClientInfo(List<String> left) {
-        VxClientBodyManager clientManager = VxClientPhysicsWorld.getInstance().getBodyManager();
+        VxClientBodyManager clientManager = VxClientBodyManager.getInstance();
         VxClientBodyDataStore store = clientManager.getStore();
 
         long clientRigidCount = 0;

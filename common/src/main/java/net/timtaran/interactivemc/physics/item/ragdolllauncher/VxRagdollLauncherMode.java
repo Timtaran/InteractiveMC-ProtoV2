@@ -9,8 +9,8 @@ import com.github.stephengold.joltjni.Vec3;
 import net.minecraft.server.level.ServerPlayer;
 import net.timtaran.interactivemc.physics.item.tool.VxToolMode;
 import net.timtaran.interactivemc.physics.item.tool.config.VxToolConfig;
-import net.timtaran.interactivemc.physics.physics.ragdoll.VxRagdollManager;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.ragdoll.VxRagdollManager;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 /**
  * The logic implementation for the Ragdoll Launcher tool.

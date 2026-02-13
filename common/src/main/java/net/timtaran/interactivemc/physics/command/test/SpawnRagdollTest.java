@@ -16,8 +16,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
-import net.timtaran.interactivemc.physics.physics.ragdoll.VxRagdollManager;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.ragdoll.VxRagdollManager;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 /**
  * A test command to spawn a humanoid ragdoll for a specified living entity.

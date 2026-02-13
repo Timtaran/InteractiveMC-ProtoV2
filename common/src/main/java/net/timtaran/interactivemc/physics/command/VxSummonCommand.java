@@ -19,10 +19,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.Vec3;
 import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyRegistry;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.body.registry.VxBodyType;
+import net.timtaran.interactivemc.physics.core.body.registry.VxBodyRegistry;
+import net.timtaran.interactivemc.physics.core.body.type.VxBody;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 import java.util.UUID;
 

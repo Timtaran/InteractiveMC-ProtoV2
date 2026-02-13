@@ -18,12 +18,11 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.timtaran.interactivemc.physics.event.api.VxRenderEvent;
 import net.timtaran.interactivemc.physics.item.physicsgun.manager.VxPhysicsGunClientManager;
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyInterpolator;
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.body.type.VxRigidBody;
-import net.timtaran.interactivemc.physics.physics.world.VxClientPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyDataStore;
+import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyInterpolator;
+import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyManager;
+import net.timtaran.interactivemc.physics.core.body.type.VxBody;
+import net.timtaran.interactivemc.physics.core.body.type.VxRigidBody;
 import org.joml.Matrix4f;
 
 import java.util.Map;
@@ -64,7 +63,7 @@ public class VxPhysicsGunBeamRenderer {
         float partialTicks = event.getPartialTick();
 
         VxPhysicsGunClientManager clientManager = VxPhysicsGunClientManager.getInstance();
-        VxClientBodyManager bodyManager = VxClientPhysicsWorld.getInstance().getBodyManager();
+        VxClientBodyManager bodyManager = VxClientBodyManager.getInstance();
         VxClientBodyDataStore store = bodyManager.getStore();
         VxClientBodyInterpolator interpolator = bodyManager.getInterpolator();
 

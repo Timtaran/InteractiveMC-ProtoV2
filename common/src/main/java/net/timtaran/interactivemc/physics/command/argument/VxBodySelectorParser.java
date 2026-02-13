@@ -17,8 +17,8 @@ import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyRegistry;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
+import net.timtaran.interactivemc.physics.core.body.registry.VxBodyRegistry;
+import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;

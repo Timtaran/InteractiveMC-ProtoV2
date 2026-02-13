@@ -7,14 +7,14 @@ package net.timtaran.interactivemc.physics.item.tool.event;
 import dev.architectury.event.EventResult;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Item;
-import net.timtaran.interactivemc.physics.init.registry.KeyMappings;
 import net.timtaran.interactivemc.physics.event.api.VxKeyEvent;
 import net.timtaran.interactivemc.physics.event.api.VxMouseEvent;
+import net.timtaran.interactivemc.physics.init.registry.KeyMappings;
 import net.timtaran.interactivemc.physics.item.tool.VxToolMode;
 import net.timtaran.interactivemc.physics.item.tool.gui.VxToolConfigScreen;
 import net.timtaran.interactivemc.physics.item.tool.packet.VxToolActionPacket;
 import net.timtaran.interactivemc.physics.item.tool.registry.VxToolRegistry;
-import net.timtaran.interactivemc.physics.network.VxPacketHandler;
+import net.timtaran.interactivemc.physics.network.VxNetworking;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -102,7 +102,7 @@ public class VxToolClientEvents {
 
         // If an action was determined, send it to the server and consume the event
         if (action != VxToolMode.ActionState.IDLE || event.getAction() == GLFW.GLFW_RELEASE) {
-            VxPacketHandler.sendToServer(new VxToolActionPacket(action));
+            VxNetworking.sendToServer(new VxToolActionPacket(action));
             return EventResult.interruptFalse();
         }
 

@@ -9,8 +9,8 @@ import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.body.type.VxBody;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

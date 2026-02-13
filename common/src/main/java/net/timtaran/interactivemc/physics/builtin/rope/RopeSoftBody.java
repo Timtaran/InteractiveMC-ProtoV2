@@ -11,15 +11,15 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.Vertex;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxServerAccessor;
-import net.timtaran.interactivemc.physics.physics.VxPhysicsLayers;
+import net.timtaran.interactivemc.physics.core.network.synchronization.accessor.VxServerAccessor;
+import net.timtaran.interactivemc.physics.core.physics.VxPhysicsLayers;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxDataSerializers;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxSynchronizedData;
-import net.timtaran.interactivemc.physics.physics.body.type.VxSoftBody;
-import net.timtaran.interactivemc.physics.physics.body.type.factory.VxSoftBodyFactory;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.body.registry.VxBodyType;
+import net.timtaran.interactivemc.physics.core.network.synchronization.VxDataSerializers;
+import net.timtaran.interactivemc.physics.core.network.synchronization.VxSynchronizedData;
+import net.timtaran.interactivemc.physics.core.body.type.VxSoftBody;
+import net.timtaran.interactivemc.physics.core.body.type.factory.VxSoftBodyFactory;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 import java.util.UUID;
 

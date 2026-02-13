@@ -18,9 +18,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.Vec3;
 import net.timtaran.interactivemc.physics.builtin.VxRegisteredBodies;
 import net.timtaran.interactivemc.physics.builtin.box.BoxRigidBody;
+import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 public final class SpawnBoxTest implements IVxTestCommand {
     @Override
@@ -76,7 +76,7 @@ public final class SpawnBoxTest implements IVxTestCommand {
             source.sendFailure(Component.literal("Physics system for this dimension is not initialized."));
             return 0;
         }
-        VxBodyManager manager = physicsWorld.getBodyManager();
+        VxServerBodyManager manager = physicsWorld.getBodyManager();
         VxTransform transform = new VxTransform(new RVec3(spawnPosMc.x, spawnPosMc.y, spawnPosMc.z), Quat.sIdentity());
 
         BoxRigidBody spawnedBody = manager.createRigidBody(

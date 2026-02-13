@@ -10,7 +10,7 @@ import net.timtaran.interactivemc.physics.event.api.VxKeyEvent;
 import net.timtaran.interactivemc.physics.init.registry.ItemRegistry;
 import net.timtaran.interactivemc.physics.item.physicsgun.manager.VxPhysicsGunClientManager;
 import net.timtaran.interactivemc.physics.item.physicsgun.packet.VxPhysicsGunActionPacket;
-import net.timtaran.interactivemc.physics.network.VxPacketHandler;
+import net.timtaran.interactivemc.physics.network.VxNetworking;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -51,12 +51,12 @@ public class VxPhysicsGunClientEvents {
             if (event.getAction() == GLFW.GLFW_PRESS) {
                 if (!clientManager.isRotationMode()) {
                     clientManager.setRotationMode(true);
-                    VxPacketHandler.sendToServer(new VxPhysicsGunActionPacket(VxPhysicsGunActionPacket.ActionType.START_ROTATION_MODE));
+                    VxNetworking.sendToServer(new VxPhysicsGunActionPacket(VxPhysicsGunActionPacket.ActionType.START_ROTATION_MODE));
                 }
             } else if (event.getAction() == GLFW.GLFW_RELEASE) {
                 if (clientManager.isRotationMode()) {
                     clientManager.setRotationMode(false);
-                    VxPacketHandler.sendToServer(new VxPhysicsGunActionPacket(VxPhysicsGunActionPacket.ActionType.STOP_ROTATION_MODE));
+                    VxNetworking.sendToServer(new VxPhysicsGunActionPacket(VxPhysicsGunActionPacket.ActionType.STOP_ROTATION_MODE));
                 }
             }
             return EventResult.interruptFalse();

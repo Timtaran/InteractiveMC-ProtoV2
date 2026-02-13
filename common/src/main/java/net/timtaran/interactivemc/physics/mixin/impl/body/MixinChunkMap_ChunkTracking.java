@@ -8,9 +8,9 @@ import net.minecraft.server.level.ChunkMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.network.internal.VxNetworkDispatcher;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
+import net.timtaran.interactivemc.physics.core.network.internal.VxNetworkDispatcher;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,7 +40,7 @@ public abstract class MixinChunkMap_ChunkTracking {
     private VxNetworkDispatcher velthoric$getDispatcher() {
         VxPhysicsWorld world = VxPhysicsWorld.get(this.level.dimension());
         if (world != null) {
-            VxBodyManager manager = world.getBodyManager();
+            VxServerBodyManager manager = world.getBodyManager();
             if (manager != null) {
                 return manager.getNetworkDispatcher();
             }
@@ -78,7 +78,7 @@ public abstract class MixinChunkMap_ChunkTracking {
         if (player.level() instanceof ServerLevel serverLevel) {
             VxPhysicsWorld world = VxPhysicsWorld.get(serverLevel.dimension());
             if (world != null) {
-                VxBodyManager manager = world.getBodyManager();
+                VxServerBodyManager manager = world.getBodyManager();
                 if (manager != null) {
                     VxNetworkDispatcher dispatcher = manager.getNetworkDispatcher();
                     if (dispatcher != null) {

@@ -14,8 +14,8 @@ import net.timtaran.interactivemc.physics.builtin.box.BoxRigidBody;
 import net.timtaran.interactivemc.physics.item.tool.VxToolMode;
 import net.timtaran.interactivemc.physics.item.tool.config.VxToolConfig;
 import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -97,7 +97,7 @@ public class VxBoxLauncherMode extends VxToolMode {
         Vec3 launchVelocity = new Vec3((float) lookVec.x, (float) lookVec.y, (float) lookVec.z);
         launchVelocity.scaleInPlace(speed);
 
-        VxBodyManager manager = physicsWorld.getBodyManager();
+        VxServerBodyManager manager = physicsWorld.getBodyManager();
 
         // Create the rigid body
         BoxRigidBody spawnedBody = manager.createRigidBody(

@@ -22,9 +22,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.timtaran.interactivemc.physics.builtin.VxRegisteredBodies;
 import net.timtaran.interactivemc.physics.builtin.box.BoxRigidBody;
 import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.constraint.manager.VxConstraintManager;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.constraint.manager.VxConstraintManager;
+import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 public final class SpawnBoxNet implements IVxTestCommand {
 
@@ -69,7 +69,7 @@ public final class SpawnBoxNet implements IVxTestCommand {
         }
 
         physicsWorld.execute(() -> {
-            VxBodyManager bodyManager = physicsWorld.getBodyManager();
+            VxServerBodyManager bodyManager = physicsWorld.getBodyManager();
             VxConstraintManager constraintManager = physicsWorld.getConstraintManager();
 
             float boxHalfExtent = boxSize / 2.0f;

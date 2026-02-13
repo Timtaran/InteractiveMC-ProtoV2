@@ -20,11 +20,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.timtaran.interactivemc.physics.builtin.VxRegisteredBodies;
 import net.timtaran.interactivemc.physics.builtin.block.BlockRigidBody;
+import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.init.VxMainClass;
 import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.util.VxVoxelShapeUtil;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.util.VxVoxelShapeUtil;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 /**
  * An item that converts a standard block into a physics-based rigid body upon use.
@@ -64,7 +64,7 @@ public class VxPhysicsCreatorItem extends Item {
                 return InteractionResult.FAIL;
             }
 
-            VxBodyManager bodyManager = physicsWorld.getBodyManager();
+            VxServerBodyManager bodyManager = physicsWorld.getBodyManager();
 
             // Pre-check to ensure a valid physics shape can be generated from the block.
             try (var ignored = VxVoxelShapeUtil.toMutableCompoundShape(

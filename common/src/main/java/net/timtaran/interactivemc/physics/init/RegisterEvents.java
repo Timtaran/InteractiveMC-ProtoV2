@@ -6,15 +6,15 @@ package net.timtaran.interactivemc.physics.init;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyManager;
+import net.timtaran.interactivemc.physics.core.body.client.renderer.dispatcher.VxPhysicsRenderDispatcher;
 import net.timtaran.interactivemc.physics.debug.VxF3ScreenAddition;
 import net.timtaran.interactivemc.physics.item.physicsgun.beam.VxPhysicsGunBeamRenderer;
 import net.timtaran.interactivemc.physics.item.physicsgun.event.VxPhysicsGunClientEvents;
 import net.timtaran.interactivemc.physics.item.physicsgun.event.VxPhysicsGunEvents;
 import net.timtaran.interactivemc.physics.item.tool.event.VxToolClientEvents;
 import net.timtaran.interactivemc.physics.item.tool.event.VxToolEvents;
-import net.timtaran.interactivemc.physics.physics.lifecycle.VxClientLifecycleHandler;
-import net.timtaran.interactivemc.physics.physics.lifecycle.VxServerLifecycleHandler;
-import net.timtaran.interactivemc.physics.physics.body.client.renderer.VxPhysicsRenderer;
+import net.timtaran.interactivemc.physics.core.lifecycle.VxServerLifecycleHandler;
 
 /**
  * @author xI-Mx-Ix
@@ -29,9 +29,9 @@ public class RegisterEvents {
 
     @Environment(EnvType.CLIENT)
     public static void registerClient() {
-        VxClientLifecycleHandler.registerEvents();
+        VxClientBodyManager.registerEvents();
         VxF3ScreenAddition.registerEvents();
-        VxPhysicsRenderer.registerEvents();
+        VxPhysicsRenderDispatcher.registerEvents();
         VxPhysicsGunBeamRenderer.registerEvents();
         VxPhysicsGunClientEvents.registerEvents();
         VxToolClientEvents.registerEvents();

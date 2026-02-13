@@ -15,8 +15,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.physics.body.client.body.renderer.VxSoftBodyRenderer;
+import net.timtaran.interactivemc.physics.core.body.client.VxRenderState;
+import net.timtaran.interactivemc.physics.core.body.client.renderer.VxSoftBodyRenderer;
 
 /**
  * Renderer for the {@link RopeSoftBody}.

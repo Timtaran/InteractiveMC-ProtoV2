@@ -15,10 +15,10 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.timtaran.interactivemc.physics.item.tool.VxToolMode;
 import net.timtaran.interactivemc.physics.item.tool.config.VxToolConfig;
-import net.timtaran.interactivemc.physics.physics.raycasting.VxClipContext;
-import net.timtaran.interactivemc.physics.physics.raycasting.VxHitResult;
-import net.timtaran.interactivemc.physics.physics.raycasting.VxRaycaster;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.raycast.VxClipContext;
+import net.timtaran.interactivemc.physics.core.raycast.VxHitResult;
+import net.timtaran.interactivemc.physics.core.raycast.VxRaycaster;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 import java.util.Optional;
 

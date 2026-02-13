@@ -7,7 +7,7 @@ package net.timtaran.interactivemc.physics.item.physicsgun.manager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.timtaran.interactivemc.physics.item.physicsgun.packet.VxPhysicsGunActionPacket;
-import net.timtaran.interactivemc.physics.network.VxPacketHandler;
+import net.timtaran.interactivemc.physics.network.VxNetworking;
 
 import java.util.Map;
 import java.util.Set;
@@ -39,11 +39,11 @@ public class VxPhysicsGunClientManager {
     }
 
     public void startGrabAttempt() {
-        VxPacketHandler.sendToServer(new VxPhysicsGunActionPacket(VxPhysicsGunActionPacket.ActionType.START_GRAB_ATTEMPT));
+        VxNetworking.sendToServer(new VxPhysicsGunActionPacket(VxPhysicsGunActionPacket.ActionType.START_GRAB_ATTEMPT));
     }
 
     public void stopGrabAttempt() {
-        VxPacketHandler.sendToServer(new VxPhysicsGunActionPacket(VxPhysicsGunActionPacket.ActionType.STOP_GRAB_ATTEMPT));
+        VxNetworking.sendToServer(new VxPhysicsGunActionPacket(VxPhysicsGunActionPacket.ActionType.STOP_GRAB_ATTEMPT));
         this.setRotationMode(false);
     }
 

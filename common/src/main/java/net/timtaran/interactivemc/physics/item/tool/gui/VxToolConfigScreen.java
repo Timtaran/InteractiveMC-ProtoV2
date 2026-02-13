@@ -15,7 +15,7 @@ import net.timtaran.interactivemc.physics.item.tool.VxToolMode;
 import net.timtaran.interactivemc.physics.item.tool.config.VxToolConfig;
 import net.timtaran.interactivemc.physics.item.tool.config.VxToolProperty;
 import net.timtaran.interactivemc.physics.item.tool.packet.VxToolConfigPacket;
-import net.timtaran.interactivemc.physics.network.VxPacketHandler;
+import net.timtaran.interactivemc.physics.network.VxNetworking;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -116,6 +116,6 @@ public class VxToolConfigScreen extends Screen {
     @Override
     public void removed() {
         // Transmit the accumulated edits to the server when the screen closes
-        VxPacketHandler.sendToServer(new VxToolConfigPacket(Item.getId(item), edits));
+        VxNetworking.sendToServer(new VxToolConfigPacket(Item.getId(item), edits));
     }
 }

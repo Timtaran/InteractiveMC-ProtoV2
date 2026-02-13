@@ -13,17 +13,17 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.ClipContext;
 import net.timtaran.interactivemc.physics.builtin.VxRegisteredBodies;
+import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.item.chaincreator.body.VxChainPartRigidBody;
 import net.timtaran.interactivemc.physics.item.tool.VxToolMode;
 import net.timtaran.interactivemc.physics.item.tool.config.VxToolConfig;
 import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.constraint.manager.VxConstraintManager;
-import net.timtaran.interactivemc.physics.physics.raycasting.VxClipContext;
-import net.timtaran.interactivemc.physics.physics.raycasting.VxHitResult;
-import net.timtaran.interactivemc.physics.physics.raycasting.VxRaycaster;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.body.type.VxBody;
+import net.timtaran.interactivemc.physics.core.constraint.manager.VxConstraintManager;
+import net.timtaran.interactivemc.physics.core.raycast.VxClipContext;
+import net.timtaran.interactivemc.physics.core.raycast.VxHitResult;
+import net.timtaran.interactivemc.physics.core.raycast.VxRaycaster;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 import java.util.Map;
 import java.util.Optional;
@@ -128,7 +128,7 @@ public class VxChainCreatorMode extends VxToolMode {
      * - Directions/Axes use Vec3 (Single Precision)
      */
     private void createChain(VxPhysicsWorld world, VxHitResult startHit, VxHitResult endHit, float radius, float desiredSegmentLength) {
-        VxBodyManager bodyManager = world.getBodyManager();
+        VxServerBodyManager bodyManager = world.getBodyManager();
         VxConstraintManager constraintManager = world.getConstraintManager();
         BodyInterface bodyInterface = world.getPhysicsSystem().getBodyInterface();
 
@@ -288,7 +288,7 @@ public class VxChainCreatorMode extends VxToolMode {
         }
     }
 
-    private AttachmentInfo getAttachmentInfo(VxBodyManager bodyManager, VxHitResult hit) {
+    private AttachmentInfo getAttachmentInfo(VxServerBodyManager bodyManager, VxHitResult hit) {
         RVec3 worldPosition = new RVec3(hit.getLocation().x, hit.getLocation().y, hit.getLocation().z);
 
         if (hit.isPhysicsHit()) {

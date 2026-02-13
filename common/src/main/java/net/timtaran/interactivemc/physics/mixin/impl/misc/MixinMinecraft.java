@@ -7,9 +7,9 @@ package net.timtaran.interactivemc.physics.mixin.impl.misc;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.server.IntegratedServer;
+import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyManager;
+import net.timtaran.interactivemc.physics.core.body.client.time.VxClientClock;
 import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.body.client.time.VxClientClock;
-import net.timtaran.interactivemc.physics.physics.world.VxClientPhysicsWorld;
 import net.timtaran.interactivemc.physics.util.VxPauseUtil;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,7 +43,7 @@ public abstract class MixinMinecraft {
     @Inject(method = "runTick", at = @At("HEAD"))
     private void velthoric$onRunTick(boolean renderLevel, CallbackInfo ci) {
         Minecraft mc = (Minecraft) (Object) this;
-        VxClientClock clientClock = VxClientPhysicsWorld.getInstance().getClock();
+        VxClientClock clientClock = VxClientBodyManager.getInstance().getClock();
 
         boolean isGamePausable = this.singleplayerServer != null && !this.singleplayerServer.isPublished();
 
@@ -84,7 +84,7 @@ public abstract class MixinMinecraft {
         if (velthoric$wasPaused) {
             velthoric$wasPaused = false;
             VxPauseUtil.setPaused(false);
-            VxClientPhysicsWorld.getInstance().getClock().resume(); // Ensure clock is not left in a paused state
+            VxClientBodyManager.getInstance().getClock().resume(); // Ensure clock is not left in a paused state
         }
     }
 }

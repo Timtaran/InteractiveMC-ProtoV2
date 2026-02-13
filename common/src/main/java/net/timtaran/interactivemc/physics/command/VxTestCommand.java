@@ -34,6 +34,7 @@ public final class VxTestCommand {
         registerTest(new SpawnMarbleTest());
         registerTest(new SpawnBoxNet());
         registerTest(new SpawnRagdollTest());
+        registerTest(new SpawnGhostBoxTest());
     }
 
     /**

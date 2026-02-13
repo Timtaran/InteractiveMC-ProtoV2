@@ -21,8 +21,8 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.physics.body.client.body.renderer.VxRigidBodyRenderer;
+import net.timtaran.interactivemc.physics.core.body.client.VxRenderState;
+import net.timtaran.interactivemc.physics.core.body.client.renderer.VxRigidBodyRenderer;
 import org.joml.Quaternionf;
 
 /**

@@ -12,11 +12,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.timtaran.interactivemc.physics.item.physicsgun.VxGrabbedBodyInfo;
 import net.timtaran.interactivemc.physics.item.physicsgun.packet.VxPhysicsGunSyncPacket;
-import net.timtaran.interactivemc.physics.network.VxPacketHandler;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.raycasting.VxHitResult;
-import net.timtaran.interactivemc.physics.physics.raycasting.VxRaycaster;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.network.VxNetworking;
+import net.timtaran.interactivemc.physics.core.body.type.VxBody;
+import net.timtaran.interactivemc.physics.core.raycast.VxHitResult;
+import net.timtaran.interactivemc.physics.core.raycast.VxRaycaster;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 import java.util.Map;
 import java.util.Set;
@@ -353,7 +353,7 @@ public class VxPhysicsGunServerManager {
                             return new VxPhysicsGunClientManager.ClientGrabData(info.physicsId(), localHitPoint);
                         }
                 ));
-        VxPacketHandler.sendToAll(new VxPhysicsGunSyncPacket(clientGrabData, playersTryingToGrab));
+        VxNetworking.sendToAll(new VxPhysicsGunSyncPacket(clientGrabData, playersTryingToGrab));
     }
 
     public void syncStateForNewPlayer(ServerPlayer player) {
@@ -370,6 +370,6 @@ public class VxPhysicsGunServerManager {
                             return new VxPhysicsGunClientManager.ClientGrabData(info.physicsId(), localHitPoint);
                         }
                 ));
-        VxPacketHandler.sendToPlayer(new VxPhysicsGunSyncPacket(clientGrabData, playersTryingToGrab), player);
+        VxNetworking.sendToPlayer(player, new VxPhysicsGunSyncPacket(clientGrabData, playersTryingToGrab));
     }
 }

@@ -12,7 +12,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.SharedSuggestionProvider;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
+import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 
 import java.util.Arrays;
 import java.util.Collection;

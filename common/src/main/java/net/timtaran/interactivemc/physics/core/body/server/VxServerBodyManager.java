@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.body.server;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxBodyManager.java
-package net.timtaran.interactivemc.physics.physics.body.manager;
-========
+
 package net.timtaran.interactivemc.physics.core.body.server;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxServerBodyManager.java
 
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EActivation;
@@ -17,22 +14,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxBodyManager.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.body.VxJoltBridge;
-import net.timtaran.interactivemc.physics.physics.body.VxRemovalReason;
-import net.timtaran.interactivemc.physics.physics.body.network.internal.VxNetworkDispatcher;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.manager.VxServerSyncManager;
-import net.timtaran.interactivemc.physics.physics.body.persistence.VxBodyStorage;
-import net.timtaran.interactivemc.physics.physics.body.persistence.VxSerializedBodyData;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyRegistry;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.body.type.VxRigidBody;
-import net.timtaran.interactivemc.physics.physics.body.type.VxSoftBody;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.body.VxRemovalReason;
 import net.timtaran.interactivemc.physics.core.body.VxAbstractBodyManager;
 import net.timtaran.interactivemc.physics.core.body.registry.VxBodyRegistry;
@@ -41,15 +23,14 @@ import net.timtaran.interactivemc.physics.core.body.tracking.VxSpatialManager;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.body.type.VxRigidBody;
 import net.timtaran.interactivemc.physics.core.body.type.VxSoftBody;
-import net.timtaran.interactivemc.physics.core.mounting.manager.VxMountingManager;
 import net.timtaran.interactivemc.physics.core.network.internal.VxNetworkDispatcher;
 import net.timtaran.interactivemc.physics.core.network.synchronization.manager.VxServerSyncManager;
 import net.timtaran.interactivemc.physics.core.persistence.impl.body.VxBodyStorage;
 import net.timtaran.interactivemc.physics.core.persistence.impl.body.VxSerializedBodyData;
 import net.timtaran.interactivemc.physics.core.physics.VxJoltBridge;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 import net.timtaran.interactivemc.physics.math.VxTransform;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxServerBodyManager.java
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -108,11 +89,6 @@ public class VxServerBodyManager extends VxAbstractBodyManager {
     private final VxSpatialManager spatialManager;
 
     /**
-     * Manages entity mounting and attachments relative to physics bodies.
-     */
-    private final VxMountingManager mountingManager;
-
-    /**
      * Optimized lookup map connecting Jolt's native integer BodyIDs to the Java wrapper {@link VxBody}.
      * This is crucial for handling callbacks (e.g., collisions) from the native physics engine.
      */
@@ -142,7 +118,6 @@ public class VxServerBodyManager extends VxAbstractBodyManager {
         this.networkDispatcher = new VxNetworkDispatcher(world.getLevel(), this);
         this.serverSyncManager = new VxServerSyncManager(this);
         this.spatialManager = new VxSpatialManager();
-        this.mountingManager = new VxMountingManager(this.world);
     }
 
     /**
@@ -199,7 +174,6 @@ public class VxServerBodyManager extends VxAbstractBodyManager {
     public void onGameTick(ServerLevel level) {
         networkDispatcher.onGameTick();
         physicsExtractor.onGameTick(level);
-        mountingManager.onGameTick();
     }
 
     //================================================================================
@@ -305,18 +279,10 @@ public class VxServerBodyManager extends VxAbstractBodyManager {
         Vec3 angularVelocity = new Vec3(dataStore.angVelX[index], dataStore.angVelY[index], dataStore.angVelZ[index]);
         EMotionType motionType = dataStore.motionType[index];
 
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxBodyManager.java
-========
-        mountingManager.onBodyAdded(body);
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxServerBodyManager.java
         networkDispatcher.onBodyAdded(body);
 
         if (body instanceof VxRigidBody rigidBody) {
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxBodyManager.java
             VxJoltBridge.INSTANCE.createAndAddJoltRigidBody(rigidBody, this, linearVelocity, angularVelocity, activation, null);
-========
-            VxJoltBridge.INSTANCE.createAndAddJoltRigidBody(rigidBody, this, linearVelocity, angularVelocity, activation, motionType);
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxServerBodyManager.java
         } else if (body instanceof VxSoftBody softBody) {
             VxJoltBridge.INSTANCE.createAndAddJoltSoftBody(softBody, this, linearVelocity, angularVelocity, activation);
         }
@@ -364,10 +330,7 @@ public class VxServerBodyManager extends VxAbstractBodyManager {
         boolean shouldActivate = linearVelocity.lengthSq() > 0.0001f || angularVelocity.lengthSq() > 0.0001f;
         EActivation activation = shouldActivate ? EActivation.Activate : EActivation.DontActivate;
 
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxBodyManager.java
-========
-        mountingManager.onBodyAdded(body);
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxServerBodyManager.java
+
         networkDispatcher.onBodyAdded(body);
 
         if (body instanceof VxRigidBody rigidBody) {
@@ -428,10 +391,7 @@ public class VxServerBodyManager extends VxAbstractBodyManager {
         managedBodies.remove(body.getPhysicsId());
 
         // 2. Notify subsystems
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxBodyManager.java
-========
-        mountingManager.onBodyRemoved(body);
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxServerBodyManager.java
+
         networkDispatcher.onBodyRemoved(body);
 
         // 3. Update spatial tracking
@@ -714,12 +674,5 @@ public class VxServerBodyManager extends VxAbstractBodyManager {
      */
     public VxServerSyncManager getServerSyncManager() {
         return serverSyncManager;
-    }
-
-    /**
-     * @return The mounting manager handling entity attachments to physics bodies.
-     */
-    public VxMountingManager getMountingManager() {
-        return mountingManager;
     }
 }

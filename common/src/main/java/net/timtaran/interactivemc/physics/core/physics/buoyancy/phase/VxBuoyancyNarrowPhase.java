@@ -1,22 +1,15 @@
-package net.timtaran.interactivemc.physics.core.physics.buoyancy.phase;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/buoyancy/phase/VxBuoyancyNarrowPhase.java
-package net.timtaran.interactivemc.physics.physics.buoyancy.phase;
+
+package net.timtaran.interactivemc.physics.core.physics.buoyancy.phase;
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
-import net.timtaran.interactivemc.physics.physics.buoyancy.VxBuoyancyDataStore;
-import net.timtaran.interactivemc.physics.physics.buoyancy.VxFluidType;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
-package net.timtaran.interactivemc.physics.core.physics.buoyancy.phase;
-
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.VxBuoyancyDataStore;
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.VxFluidType;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/buoyancy/phase/VxBuoyancyNarrowPhase.java
 
 /**
  * Handles the narrow-phase of buoyancy physics on the dedicated physics thread.

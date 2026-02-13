@@ -6,8 +6,8 @@ import net.timtaran.interactivemc.body.player.PlayerBodyPartGhostRenderer;
 import net.timtaran.interactivemc.body.player.PlayerBodyPartGhostRigidBody;
 import net.timtaran.interactivemc.body.player.PlayerBodyPartRenderer;
 import net.timtaran.interactivemc.body.player.PlayerBodyPartRigidBody;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyRegistry;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
+import net.timtaran.interactivemc.physics.core.body.registry.VxBodyRegistry;
+import net.timtaran.interactivemc.physics.core.body.registry.VxBodyType;
 import net.timtaran.interactivemc.util.InteractiveMCIdentifier;
 
 public class BodyRegistry {

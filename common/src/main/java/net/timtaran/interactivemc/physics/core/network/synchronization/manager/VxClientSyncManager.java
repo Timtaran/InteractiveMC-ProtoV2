@@ -1,32 +1,20 @@
-package net.timtaran.interactivemc.physics.core.network.synchronization.manager;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/manager/VxClientSyncManager.java
-package net.timtaran.interactivemc.physics.physics.body.network.synchronization.manager;
-========
+
 package net.timtaran.interactivemc.physics.core.network.synchronization.manager;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/manager/VxClientSyncManager.java
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/manager/VxClientSyncManager.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.network.VxPacketHandler;
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.packet.C2SSynchronizedDataBatchPacket;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
 
-========
 import net.timtaran.interactivemc.physics.init.VxMainClass;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.network.VxNetworking;
 import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyManager;
 import net.timtaran.interactivemc.physics.core.network.synchronization.packet.C2SSynchronizedDataBatchPacket;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/manager/VxClientSyncManager.java
 
 import java.util.Iterator;
 import java.util.Map;

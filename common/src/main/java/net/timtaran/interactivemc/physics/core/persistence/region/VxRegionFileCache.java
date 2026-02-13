@@ -1,18 +1,13 @@
-package net.timtaran.interactivemc.physics.core.persistence.region;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/persistence/region/VxRegionFileCache.java
-package net.timtaran.interactivemc.physics.physics.persistence.region;
 
-import net.minecraft.world.level.ChunkPos;
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.persistence.RegionPos;
-========
 package net.timtaran.interactivemc.physics.core.persistence.region;
 
+import net.minecraft.world.level.ChunkPos;
 import net.timtaran.interactivemc.physics.core.persistence.RegionPos;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/persistence/region/VxRegionFileCache.java
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 
 import java.io.IOException;
 import java.nio.file.Files;

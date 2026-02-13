@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.ragdoll;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/ragdoll/VxBodyPart.java
-package net.timtaran.interactivemc.physics.physics.ragdoll;
-========
+
 package net.timtaran.interactivemc.physics.core.ragdoll;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/ragdoll/VxBodyPart.java
 
 import com.github.stephengold.joltjni.Vec3;
 

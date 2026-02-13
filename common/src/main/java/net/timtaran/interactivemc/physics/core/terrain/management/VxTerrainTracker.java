@@ -1,34 +1,22 @@
-package net.timtaran.interactivemc.physics.core.terrain.management;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/management/VxTerrainTracker.java
-package net.timtaran.interactivemc.physics.physics.terrain.management;
-========
+
 package net.timtaran.interactivemc.physics.core.terrain.management;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/management/VxTerrainTracker.java
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ServerLevel;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/management/VxTerrainTracker.java
-import net.timtaran.interactivemc.physics.config.VxModConfig;
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxServerBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.terrain.VxSectionPos;
-import net.timtaran.interactivemc.physics.physics.terrain.storage.VxChunkDataStore;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.config.VxModConfig;
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyDataStore;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.terrain.VxSectionPos;
 import net.timtaran.interactivemc.physics.core.terrain.storage.VxChunkDataStore;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/management/VxTerrainTracker.java
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,18 +1,12 @@
-package net.timtaran.interactivemc.physics.core.network.synchronization.accessor;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/accessor/VxServerAccessor.java
-package net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor;
 
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxDataSerializer;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxSyncMode;
-========
 package net.timtaran.interactivemc.physics.core.network.synchronization.accessor;
 
 import net.timtaran.interactivemc.physics.core.network.synchronization.VxDataSerializer;
 import net.timtaran.interactivemc.physics.core.network.synchronization.VxSyncMode;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/accessor/VxServerAccessor.java
 
 /**
  * A data accessor specifically for data where the SERVER has authority.

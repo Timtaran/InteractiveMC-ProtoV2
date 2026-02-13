@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.network.internal;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/internal/VxNetworkDispatcher.java
-package net.timtaran.interactivemc.physics.physics.body.network.internal;
-========
+
 package net.timtaran.interactivemc.physics.core.network.internal;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/internal/VxNetworkDispatcher.java
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -21,28 +18,17 @@ import net.minecraft.server.level.ChunkMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/internal/VxNetworkDispatcher.java
-import net.timtaran.interactivemc.physics.config.VxModConfig;
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.network.VxPacketHandler;
-import net.timtaran.interactivemc.physics.network.VxPacketUtils;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxServerBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.network.internal.packet.S2CRemoveBodyBatchPacket;
-import net.timtaran.interactivemc.physics.physics.body.network.internal.packet.S2CSpawnBodyBatchPacket;
-import net.timtaran.interactivemc.physics.physics.body.network.internal.packet.S2CUpdateBodyStateBatchPacket;
-import net.timtaran.interactivemc.physics.physics.body.network.internal.packet.S2CUpdateVerticesBatchPacket;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.body.util.VxChunkUtil;
-========
+
 import net.timtaran.interactivemc.physics.config.VxModConfig;
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
+import net.timtaran.interactivemc.physics.core.network.internal.packet.S2CRemoveBodyBatchPacket;
+import net.timtaran.interactivemc.physics.core.network.internal.packet.S2CSpawnBodyBatchPacket;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 import net.timtaran.interactivemc.physics.network.IVxNetPacket;
 import net.timtaran.interactivemc.physics.network.VxNetworking;
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyDataStore;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.util.VxChunkUtil;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/internal/VxNetworkDispatcher.java
 
 import java.nio.ByteBuffer;
 import java.util.*;

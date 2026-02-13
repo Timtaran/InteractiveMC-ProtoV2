@@ -2,20 +2,14 @@
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/util/VxExplosionUtil.java
-package net.timtaran.interactivemc.physics.physics.body.util;
-========
+
 package net.timtaran.interactivemc.physics.util;
->>>>>>>> velthoric/master:common/src/main/java/net/timtaran/interactivemc/physics/util/VxExplosionUtil.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseQuery;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/util/VxExplosionUtil.java
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/timtaran/interactivemc/physics/util/VxExplosionUtil.java
 
 /**
  * A utility class for applying explosion forces to physics bodies.

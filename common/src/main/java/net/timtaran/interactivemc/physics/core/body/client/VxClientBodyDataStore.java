@@ -1,23 +1,16 @@
-package net.timtaran.interactivemc.physics.core.body.client;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/VxClientBodyDataStore.java
-package net.timtaran.interactivemc.physics.physics.body.client;
-========
+
 package net.timtaran.interactivemc.physics.core.body.client;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/VxClientBodyDataStore.java
 
 import com.github.stephengold.joltjni.RVec3;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/VxClientBodyDataStore.java
-import net.timtaran.interactivemc.physics.physics.body.VxBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-========
+
 import net.timtaran.interactivemc.physics.core.body.VxBodyDataStore;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/VxClientBodyDataStore.java
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.ByteBuffer;

@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.body.client.renderer.dispatcher;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/renderer/VxPhysicsRenderer.java
-package net.timtaran.interactivemc.physics.physics.body.client.renderer;
-========
+
 package net.timtaran.interactivemc.physics.core.body.client.renderer.dispatcher;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/renderer/dispatcher/VxPhysicsRenderDispatcher.java
 
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
@@ -23,19 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/renderer/VxPhysicsRenderer.java
-import net.timtaran.interactivemc.physics.event.api.VxRenderEvent;
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.mixin.impl.culling.LevelRendererAccessor;
-import net.timtaran.interactivemc.physics.mixin.impl.debug.EntityRenderDispatcherAccessor;
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.physics.body.client.body.renderer.VxBodyRenderer;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyRegistry;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.body.type.VxSoftBody;
-import net.timtaran.interactivemc.physics.physics.world.VxClientPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.body.client.renderer.VxBodyRenderer;
 import net.timtaran.interactivemc.physics.event.api.VxRenderEvent;
 import net.timtaran.interactivemc.physics.mixin.impl.culling.LevelRendererAccessor;
@@ -45,7 +30,6 @@ import net.timtaran.interactivemc.physics.core.body.client.VxRenderState;
 import net.timtaran.interactivemc.physics.core.body.registry.VxBodyRegistry;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.body.type.VxSoftBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/renderer/dispatcher/VxPhysicsRenderDispatcher.java
 
 /**
  * The main client-side renderer/dispatcher for physics bodies.

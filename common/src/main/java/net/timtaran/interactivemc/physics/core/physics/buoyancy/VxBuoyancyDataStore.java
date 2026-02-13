@@ -1,16 +1,11 @@
-package net.timtaran.interactivemc.physics.core.physics.buoyancy;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/buoyancy/VxBuoyancyDataStore.java
-package net.timtaran.interactivemc.physics.physics.buoyancy;
 
-import net.timtaran.interactivemc.physics.physics.AbstractDataStore;
-========
 package net.timtaran.interactivemc.physics.core.physics.buoyancy;
 
 import net.timtaran.interactivemc.physics.core.AbstractDataStore;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/buoyancy/VxBuoyancyDataStore.java
 
 /**
  * A data-oriented store for the state of all bodies currently affected by buoyancy.

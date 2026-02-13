@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.body.client;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/VxClientBodyManager.java
-package net.timtaran.interactivemc.physics.physics.body.client;
-========
+
 package net.timtaran.interactivemc.physics.core.body.client;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/VxClientBodyManager.java
 
 import com.github.stephengold.joltjni.RVec3;
 import dev.architectury.event.events.client.ClientTickEvent;
@@ -14,33 +11,19 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/VxClientBodyManager.java
-import net.timtaran.interactivemc.physics.config.VxModConfig;
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.body.client.time.VxClientClock;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.manager.VxClientSyncManager;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyRegistry;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.world.VxClientPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.config.VxModConfig;
 import net.timtaran.interactivemc.physics.core.body.client.time.VxClientClock;
 import net.timtaran.interactivemc.physics.core.body.VxAbstractBodyManager;
 import net.timtaran.interactivemc.physics.core.body.registry.VxBodyRegistry;
 import net.timtaran.interactivemc.physics.core.body.registry.VxBodyType;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
-import net.timtaran.interactivemc.physics.core.mounting.VxMountable;
-import net.timtaran.interactivemc.physics.core.mounting.manager.VxClientMountingManager;
-import net.timtaran.interactivemc.physics.core.mounting.seat.VxSeat;
 import net.timtaran.interactivemc.physics.core.network.synchronization.manager.VxClientSyncManager;
 import net.timtaran.interactivemc.physics.event.api.VxClientLevelEvent;
 import net.timtaran.interactivemc.physics.event.api.VxClientPlayerNetworkEvent;
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 import net.timtaran.interactivemc.physics.math.VxTransform;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/VxClientBodyManager.java
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -113,18 +96,12 @@ public class VxClientBodyManager extends VxAbstractBodyManager {
     private final List<Long> clockOffsetSamples = new ArrayList<>();
 
     /**
-     * The manager responsible for mountable seats on the client.
-     */
-    private final VxClientMountingManager mountingManager;
-
-    /**
      * Constructs the client body manager and initializes the synchronization manager
      * and mounting manager.
      */
     private VxClientBodyManager() {
         this.syncManager = new VxClientSyncManager(this);
         this.interpolationDelayNanos = VxModConfig.CLIENT.interpolationDelayNanos.get();
-        this.mountingManager = new VxClientMountingManager();
     }
 
     /**
@@ -239,20 +216,6 @@ public class VxClientBodyManager extends VxAbstractBodyManager {
             return;
         }
 
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/VxClientBodyManager.java
-========
-        // If the body is mountable, register its seats on the client via the MountingManager.
-        if (body instanceof VxMountable mountable) {
-            VxSeat.Builder seatBuilder = new VxSeat.Builder();
-            mountable.defineSeats(seatBuilder);
-            List<VxSeat> seats = seatBuilder.build();
-
-            for (VxSeat seat : seats) {
-                mountingManager.addSeat(id, seat);
-            }
-        }
-
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/VxClientBodyManager.java
         // Register in SoA DataStore
         int index = store.addBody(body, networkId);
         body.setDataStoreIndex(store, index);
@@ -357,11 +320,6 @@ public class VxClientBodyManager extends VxAbstractBodyManager {
                 }
 
                 managedBodies.remove(id);
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/VxClientBodyManager.java
-========
-                // Remove seats via the instance-based manager
-                mountingManager.removeSeatsForBody(id);
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/VxClientBodyManager.java
             }
         }
         store.removeBodyByNetworkId(networkId);
@@ -460,15 +418,6 @@ public class VxClientBodyManager extends VxAbstractBodyManager {
      */
     public VxClientBodyInterpolator getInterpolator() {
         return interpolator;
-    }
-
-    /**
-     * Returns the manager responsible for mountable seats on the client.
-     *
-     * @return The mounting manager instance.
-     */
-    public VxClientMountingManager getMountingManager() {
-        return mountingManager;
     }
 
     /**

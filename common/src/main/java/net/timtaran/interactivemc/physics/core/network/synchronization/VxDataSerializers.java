@@ -1,25 +1,17 @@
-package net.timtaran.interactivemc.physics.core.network.synchronization;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/VxDataSerializers.java
-package net.timtaran.interactivemc.physics.physics.body.network.synchronization;
 
-========
 package net.timtaran.interactivemc.physics.core.network.synchronization;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/VxDataSerializers.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/VxDataSerializers.java
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.ragdoll.VxBodyPart;
-========
+
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.core.ragdoll.VxBodyPart;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/VxDataSerializers.java
 
 import java.util.ArrayList;
 import java.util.List;

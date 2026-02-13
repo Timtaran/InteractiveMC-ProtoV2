@@ -1,22 +1,14 @@
-package net.timtaran.interactivemc.physics.core.terrain.storage;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/storage/VxChunkDataStore.java
-package net.timtaran.interactivemc.physics.physics.terrain.storage;
 
-import com.github.stephengold.joltjni.ShapeRefC;
-import net.timtaran.interactivemc.physics.physics.AbstractDataStore;
-import net.timtaran.interactivemc.physics.physics.terrain.VxSectionPos;
-import net.timtaran.interactivemc.physics.physics.terrain.management.VxTerrainManager;
-========
 package net.timtaran.interactivemc.physics.core.terrain.storage;
 
 import com.github.stephengold.joltjni.ShapeRefC;
 import net.timtaran.interactivemc.physics.core.AbstractDataStore;
 import net.timtaran.interactivemc.physics.core.terrain.VxSectionPos;
 import net.timtaran.interactivemc.physics.core.terrain.management.VxTerrainManager;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/storage/VxChunkDataStore.java
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;

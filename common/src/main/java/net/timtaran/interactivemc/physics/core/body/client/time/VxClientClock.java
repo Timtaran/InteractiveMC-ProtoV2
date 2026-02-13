@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.body.client.time;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/time/VxClientClock.java
-package net.timtaran.interactivemc.physics.physics.body.client.time;
-========
+
 package net.timtaran.interactivemc.physics.core.body.client.time;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/time/VxClientClock.java
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

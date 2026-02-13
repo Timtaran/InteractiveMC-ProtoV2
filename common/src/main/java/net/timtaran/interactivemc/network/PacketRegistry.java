@@ -4,9 +4,8 @@
  */
 package net.timtaran.interactivemc.network;
 
-import dev.architectury.networking.NetworkManager;
 import net.timtaran.interactivemc.network.sync.packet.C2SFrameVRPosePacket;
-import net.timtaran.interactivemc.physics.network.VxPacketHandler;
+import net.timtaran.interactivemc.physics.network.VxPacketRegistry;
 
 /**
  * Registers packets same way as {@link net.timtaran.interactivemc.physics.network.VxPacketRegistry}.
@@ -18,13 +17,9 @@ public class PacketRegistry {
         // --- Client to Server Packets (C2S) ---
         // These packets are sent by the client and handled on the server.
 
-        VxPacketHandler.registerPacket(
+        VxPacketRegistry.registerC2S(
                 C2SFrameVRPosePacket.class,
-                "frame_pose",
-                C2SFrameVRPosePacket::encode,
-                C2SFrameVRPosePacket::decode,
-                C2SFrameVRPosePacket::handle,
-                NetworkManager.Side.C2S
+                C2SFrameVRPosePacket::decode
         );
 
         // --- Server to Client Packets (S2C) ---

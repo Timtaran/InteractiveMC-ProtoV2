@@ -10,7 +10,7 @@ import net.timtaran.interactivemc.body.BodyRegistry;
 import net.timtaran.interactivemc.body.player.PlayerBodyManager;
 import net.timtaran.interactivemc.init.registries.ViveRegistry;
 import net.timtaran.interactivemc.network.PacketRegistry;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 import org.slf4j.Logger;
 
 /**

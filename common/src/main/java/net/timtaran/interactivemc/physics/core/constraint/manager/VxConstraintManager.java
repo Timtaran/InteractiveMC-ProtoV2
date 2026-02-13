@@ -1,31 +1,20 @@
-package net.timtaran.interactivemc.physics.core.constraint.manager;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/constraint/manager/VxConstraintManager.java
-package net.timtaran.interactivemc.physics.physics.constraint.manager;
-========
+
 package net.timtaran.interactivemc.physics.core.constraint.manager;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/constraint/manager/VxConstraintManager.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.std.StringStream;
 import net.minecraft.world.level.ChunkPos;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/constraint/manager/VxConstraintManager.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.constraint.VxConstraint;
-import net.timtaran.interactivemc.physics.physics.constraint.persistence.VxConstraintStorage;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.constraint.VxConstraint;
 import net.timtaran.interactivemc.physics.core.persistence.impl.constraint.VxConstraintStorage;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/constraint/manager/VxConstraintManager.java
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.charset.StandardCharsets;

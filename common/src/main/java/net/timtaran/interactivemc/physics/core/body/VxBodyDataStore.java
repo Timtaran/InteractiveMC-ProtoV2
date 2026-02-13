@@ -1,24 +1,17 @@
-package net.timtaran.interactivemc.physics.core.body;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/VxBodyDataStore.java
-package net.timtaran.interactivemc.physics.physics.body;
-========
+
 package net.timtaran.interactivemc.physics.core.body;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/VxBodyDataStore.java
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/VxBodyDataStore.java
-import net.timtaran.interactivemc.physics.physics.AbstractDataStore;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-========
+
 import net.timtaran.interactivemc.physics.core.AbstractDataStore;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/VxBodyDataStore.java
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;

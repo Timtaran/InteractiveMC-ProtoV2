@@ -1,31 +1,20 @@
-package net.timtaran.interactivemc.physics.core.body.type;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/type/VxRigidBody.java
-package net.timtaran.interactivemc.physics.physics.body.type;
-========
+
 package net.timtaran.interactivemc.physics.core.body.type;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/type/VxRigidBody.java
 
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/type/VxRigidBody.java
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
-import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.physics.body.type.factory.VxRigidBodyFactory;
-import net.timtaran.interactivemc.physics.physics.world.VxClientPhysicsWorld;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyManager;
 import net.timtaran.interactivemc.physics.core.body.registry.VxBodyType;
 import net.timtaran.interactivemc.physics.core.body.client.VxRenderState;
 import net.timtaran.interactivemc.physics.core.body.type.factory.VxRigidBodyFactory;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/type/VxRigidBody.java
 
 import java.util.UUID;
 

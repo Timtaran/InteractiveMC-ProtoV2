@@ -2,11 +2,8 @@
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/util/VxChunkUtil.java
-package net.timtaran.interactivemc.physics.physics.body.util;
-========
+
 package net.timtaran.interactivemc.physics.util;
->>>>>>>> velthoric/master:common/src/main/java/net/timtaran/interactivemc/physics/util/VxChunkUtil.java
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;

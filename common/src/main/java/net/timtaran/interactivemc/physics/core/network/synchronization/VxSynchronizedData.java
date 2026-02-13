@@ -1,30 +1,19 @@
-package net.timtaran.interactivemc.physics.core.network.synchronization;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/VxSynchronizedData.java
-package net.timtaran.interactivemc.physics.physics.body.network.synchronization;
-========
+
 package net.timtaran.interactivemc.physics.core.network.synchronization;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/VxSynchronizedData.java
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.server.level.ServerPlayer;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/VxSynchronizedData.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxClientAccessor;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxDataAccessor;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxServerAccessor;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-========
+
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.core.network.synchronization.accessor.VxClientAccessor;
 import net.timtaran.interactivemc.physics.core.network.synchronization.accessor.VxDataAccessor;
 import net.timtaran.interactivemc.physics.core.network.synchronization.accessor.VxServerAccessor;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/VxSynchronizedData.java
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

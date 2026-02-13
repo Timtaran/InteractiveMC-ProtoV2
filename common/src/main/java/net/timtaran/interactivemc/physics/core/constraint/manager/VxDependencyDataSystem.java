@@ -1,20 +1,13 @@
-package net.timtaran.interactivemc.physics.core.constraint.manager;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/constraint/manager/VxDependencyDataSystem.java
-package net.timtaran.interactivemc.physics.physics.constraint.manager;
 
-import net.timtaran.interactivemc.physics.physics.constraint.VxConstraint;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-========
 package net.timtaran.interactivemc.physics.core.constraint.manager;
 
 import net.timtaran.interactivemc.physics.core.constraint.VxConstraint;
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/constraint/manager/VxDependencyDataSystem.java
 
 import java.util.Map;
 import java.util.Set;

@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.persistence;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/persistence/VxChunkBasedStorage.java
-package net.timtaran.interactivemc.physics.physics.persistence;
-========
+
 package net.timtaran.interactivemc.physics.core.persistence;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/persistence/VxChunkBasedStorage.java
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
@@ -15,16 +12,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.LevelResource;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/persistence/VxChunkBasedStorage.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.persistence.region.VxRegionFile;
-import net.timtaran.interactivemc.physics.physics.persistence.region.VxRegionFileCache;
-========
+
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.core.persistence.region.VxRegionFile;
 import net.timtaran.interactivemc.physics.core.persistence.region.VxRegionFileCache;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/persistence/VxChunkBasedStorage.java
 
 import java.io.IOException;
 import java.nio.file.Path;

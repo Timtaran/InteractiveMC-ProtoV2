@@ -1,20 +1,14 @@
-package net.timtaran.interactivemc.physics.core.body.client.renderer;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/body/renderer/VxBodyRenderer.java
-package net.timtaran.interactivemc.physics.physics.body.client.body.renderer;
+
+package net.timtaran.interactivemc.physics.core.body.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-========
-package net.timtaran.interactivemc.physics.core.body.client.renderer;
-
 import net.timtaran.interactivemc.physics.core.body.client.VxRenderState;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/renderer/VxBodyRenderer.java
 
 /**
  * An abstract base class for rendering a specific type of {@link VxBody}.

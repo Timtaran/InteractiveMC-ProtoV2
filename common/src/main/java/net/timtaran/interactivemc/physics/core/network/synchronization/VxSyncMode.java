@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.network.synchronization;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/VxSyncMode.java
-package net.timtaran.interactivemc.physics.physics.body.network.synchronization;
-========
+
 package net.timtaran.interactivemc.physics.core.network.synchronization;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/VxSyncMode.java
 
 /**
  * Defines the authority level for a synchronized data entry.

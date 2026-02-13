@@ -7,6 +7,8 @@ package net.timtaran.interactivemc.network.sync.packet;
 import dev.architectury.networking.NetworkManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.timtaran.interactivemc.data.PlayerDataStore;
+import net.timtaran.interactivemc.physics.network.IVxNetPacket;
+import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import org.jetbrains.annotations.Nullable;
 import org.vivecraft.api.data.FBTMode;
 import org.vivecraft.api.data.VRBodyPart;
@@ -18,14 +20,13 @@ import org.vivecraft.common.network.CommonNetworkHelper;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 /**
  * A packet that contains VR pose.
  *
  * @author timtaran
  */
-public class C2SFrameVRPosePacket {
+public class C2SFrameVRPosePacket implements IVxNetPacket {
     private final VRPose pose;
 
     /**
@@ -67,17 +68,17 @@ public class C2SFrameVRPosePacket {
     /**
      * Encodes the packet's data into a network buffer.
      *
-     * @param msg The packet instance to encode.
      * @param buf The buffer to write to.
      */
-    public static void encode(C2SFrameVRPosePacket msg, FriendlyByteBuf buf) {
-        buf.writeBoolean(msg.pose.isSeated());
-        buf.writeBoolean(msg.pose.isLeftHanded());
+    @Override
+    public void encode(VxByteBuf buf) {
+        buf.writeBoolean(pose.isSeated());
+        buf.writeBoolean(pose.isLeftHanded());
 
-        buf.writeEnum(msg.pose.getFBTMode());
+        buf.writeEnum(pose.getFBTMode());
 
         for (VRBodyPart part : VRBodyPart.values()) {
-            writeBodyPartData(buf, msg.pose.getBodyPartData(part));
+            writeBodyPartData(buf, pose.getBodyPartData(part));
         }
     }
 
@@ -122,10 +123,10 @@ public class C2SFrameVRPosePacket {
      * Handles the packet on the server side.
      * Validates and applies updates using the anti-cheat logic in VxSynchronizedData.
      *
-     * @param msg             The received packet.
-     * @param contextSupplier A supplier for the network packet context.
+     * @param context Network packet context.
      */
-    public static void handle(C2SFrameVRPosePacket msg, Supplier<NetworkManager.PacketContext> contextSupplier) {
-        PlayerDataStore.vrPoses.put(contextSupplier.get().getPlayer().getUUID(), msg.pose);
+    @Override
+    public void handle(NetworkManager.PacketContext context) {
+        PlayerDataStore.vrPoses.put(context.getPlayer().getUUID(), pose);
     }
 }

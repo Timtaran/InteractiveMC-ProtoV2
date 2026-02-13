@@ -1,22 +1,16 @@
-package net.timtaran.interactivemc.physics.core;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/AbstractDataStore.java
-package net.timtaran.interactivemc.physics.physics;
-========
+
 package net.timtaran.interactivemc.physics.core;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/AbstractDataStore.java
 
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/AbstractDataStore.java
-import net.timtaran.interactivemc.physics.physics.buoyancy.VxFluidType;
-========
+
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.VxFluidType;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/AbstractDataStore.java
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;

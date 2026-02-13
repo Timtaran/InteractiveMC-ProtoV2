@@ -2,11 +2,8 @@
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/util/VxVoxelShapeUtil.java
-package net.timtaran.interactivemc.physics.physics.body.util;
-========
+
 package net.timtaran.interactivemc.physics.util;
->>>>>>>> velthoric/master:common/src/main/java/net/timtaran/interactivemc/physics/util/VxVoxelShapeUtil.java
 
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.MutableCompoundShapeSettings;

@@ -7,8 +7,8 @@ package net.timtaran.interactivemc.network.sync;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.timtaran.interactivemc.body.player.PlayerBodyPart;
+import net.timtaran.interactivemc.physics.core.network.synchronization.VxDataSerializer;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxDataSerializer;
 
 /**
  * Registry for data serializers used in network synchronization.

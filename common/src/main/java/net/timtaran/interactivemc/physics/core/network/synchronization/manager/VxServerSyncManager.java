@@ -1,28 +1,16 @@
-package net.timtaran.interactivemc.physics.core.network.synchronization.manager;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/manager/VxServerSyncManager.java
-package net.timtaran.interactivemc.physics.physics.body.network.synchronization.manager;
-========
+
 package net.timtaran.interactivemc.physics.core.network.synchronization.manager;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/manager/VxServerSyncManager.java
 
 import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.server.level.ServerPlayer;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/manager/VxServerSyncManager.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.network.VxPacketHandler;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxServerBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.network.internal.VxNetworkDispatcher;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.packet.S2CSynchronizedDataBatchPacket;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-========
+
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.init.VxMainClass;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
@@ -31,7 +19,6 @@ import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyDataStore
 import net.timtaran.interactivemc.physics.core.network.internal.VxNetworkDispatcher;
 import net.timtaran.interactivemc.physics.core.network.synchronization.packet.S2CSynchronizedDataBatchPacket;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/manager/VxServerSyncManager.java
 
 import java.util.Map;
 import java.util.Set;

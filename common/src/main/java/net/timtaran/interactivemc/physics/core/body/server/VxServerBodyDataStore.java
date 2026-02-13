@@ -1,24 +1,17 @@
-package net.timtaran.interactivemc.physics.core.body.server;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxServerBodyDataStore.java
-package net.timtaran.interactivemc.physics.physics.body.manager;
-========
+
 package net.timtaran.interactivemc.physics.core.body.server;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxServerBodyDataStore.java
 
 import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxServerBodyDataStore.java
-import net.timtaran.interactivemc.physics.physics.body.VxBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-========
+
 import net.timtaran.interactivemc.physics.core.body.VxBodyDataStore;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxServerBodyDataStore.java
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;

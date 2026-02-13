@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.ragdoll.body;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/ragdoll/body/VxRagdollBodyPartRenderer.java
-package net.timtaran.interactivemc.physics.physics.ragdoll.body;
-========
+
 package net.timtaran.interactivemc.physics.core.ragdoll.body;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/ragdoll/body/VxRagdollBodyPartRenderer.java
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,15 +19,10 @@ import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/ragdoll/body/VxRagdollBodyPartRenderer.java
-import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.physics.body.client.body.renderer.VxRigidBodyRenderer;
-import net.timtaran.interactivemc.physics.physics.ragdoll.VxBodyPart;
-========
+
 import net.timtaran.interactivemc.physics.core.body.client.VxRenderState;
 import net.timtaran.interactivemc.physics.core.body.client.renderer.VxRigidBodyRenderer;
 import net.timtaran.interactivemc.physics.core.ragdoll.VxBodyPart;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/ragdoll/body/VxRagdollBodyPartRenderer.java
 import org.joml.Quaternionf;
 
 import java.util.UUID;

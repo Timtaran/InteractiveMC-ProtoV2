@@ -1,29 +1,16 @@
-package net.timtaran.interactivemc.physics.core.physics.world;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/world/VxPhysicsWorld.java
-package net.timtaran.interactivemc.physics.physics.world;
-========
+
 package net.timtaran.interactivemc.physics.core.physics.world;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/world/VxPhysicsWorld.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/world/VxPhysicsWorld.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.VxPhysicsBootstrap;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.buoyancy.VxBuoyancyManager;
-import net.timtaran.interactivemc.physics.physics.constraint.manager.VxConstraintManager;
-import net.timtaran.interactivemc.physics.physics.ragdoll.VxRagdollManager;
-import net.timtaran.interactivemc.physics.physics.terrain.VxTerrainSystem;
-import net.timtaran.interactivemc.physics.util.VxFrameTimer;
-import net.timtaran.interactivemc.physics.util.VxPauseUtil;
-========
+
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.core.constraint.manager.VxConstraintManager;
 import net.timtaran.interactivemc.physics.core.physics.VxPhysicsBootstrap;
@@ -32,7 +19,6 @@ import net.timtaran.interactivemc.physics.core.ragdoll.VxRagdollManager;
 import net.timtaran.interactivemc.physics.core.terrain.VxTerrainSystem;
 import net.timtaran.interactivemc.physics.util.VxFrameTimer;
 import net.timtaran.interactivemc.physics.util.VxPauseUtil;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/world/VxPhysicsWorld.java
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

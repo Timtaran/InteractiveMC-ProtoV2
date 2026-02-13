@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.body;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/VxRemovalReason.java
-package net.timtaran.interactivemc.physics.physics.body;
-========
+
 package net.timtaran.interactivemc.physics.core.body;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/VxRemovalReason.java
 
 /**
  * Enum representing the reason for removing a physics body.

@@ -1,22 +1,15 @@
-package net.timtaran.interactivemc.physics.core.lifecycle;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/lifecycle/VxServerLifecycleHandler.java
-package net.timtaran.interactivemc.physics.physics.lifecycle;
+
+package net.timtaran.interactivemc.physics.core.lifecycle;
 
 import dev.architectury.event.events.common.TickEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.timtaran.interactivemc.physics.event.api.VxLevelEvent;
 import net.timtaran.interactivemc.physics.event.api.VxServerLifecycleEvent;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
-package net.timtaran.interactivemc.physics.core.lifecycle;
-
-import net.timtaran.interactivemc.physics.event.api.VxLevelEvent;
-import net.timtaran.interactivemc.physics.event.api.VxServerLifecycleEvent;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/lifecycle/VxServerLifecycleHandler.java
 
 /**
  * Handles server and world lifecycle events to manage the physics simulation.

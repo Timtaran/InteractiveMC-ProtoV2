@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.constraint;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/constraint/VxConstraint.java
-package net.timtaran.interactivemc.physics.physics.constraint;
-========
+
 package net.timtaran.interactivemc.physics.core.constraint;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/constraint/VxConstraint.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;

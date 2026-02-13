@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.network.synchronization.packet;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/packet/C2SSynchronizedDataBatchPacket.java
-package net.timtaran.interactivemc.physics.physics.body.network.synchronization.packet;
-========
+
 package net.timtaran.interactivemc.physics.core.network.synchronization.packet;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/packet/C2SSynchronizedDataBatchPacket.java
 
 import com.github.luben.zstd.Zstd;
 import dev.architectury.networking.NetworkManager;
@@ -14,17 +11,11 @@ import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/network/synchronization/packet/C2SSynchronizedDataBatchPacket.java
-import net.timtaran.interactivemc.physics.network.VxPacketUtils;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.manager.VxServerSyncManager;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
 
-========
 import net.timtaran.interactivemc.physics.network.IVxNetPacket;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.core.network.synchronization.manager.VxServerSyncManager;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/network/synchronization/packet/C2SSynchronizedDataBatchPacket.java
 
 import java.util.Map;
 

@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.raycast;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/raycasting/VxRaycaster.java
-package net.timtaran.interactivemc.physics.physics.raycasting;
-========
+
 package net.timtaran.interactivemc.physics.core.raycast;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/raycast/VxRaycaster.java
 
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
@@ -16,11 +13,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/raycasting/VxRaycaster.java
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/raycast/VxRaycaster.java
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -1,23 +1,17 @@
-package net.timtaran.interactivemc.physics.core.terrain.generation;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/generation/VxChunkSnapshot.java
-package net.timtaran.interactivemc.physics.physics.terrain.generation;
-========
+
 package net.timtaran.interactivemc.physics.core.terrain.generation;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/generation/VxChunkSnapshot.java
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/generation/VxChunkSnapshot.java
-import net.timtaran.interactivemc.physics.physics.terrain.VxSectionPos;
-========
+
 import net.timtaran.interactivemc.physics.core.terrain.VxSectionPos;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/generation/VxChunkSnapshot.java
 
 import java.util.Arrays;
 

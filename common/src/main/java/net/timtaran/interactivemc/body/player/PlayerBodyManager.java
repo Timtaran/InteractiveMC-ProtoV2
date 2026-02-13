@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.timtaran.interactivemc.body.BodyRegistry;
 import net.timtaran.interactivemc.physics.math.VxConversions;
 import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
+import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
 import java.util.HashMap;
 

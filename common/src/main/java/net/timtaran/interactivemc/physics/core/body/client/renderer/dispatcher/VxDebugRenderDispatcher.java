@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.body.client.renderer.dispatcher;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/renderer/VxDebugRenderer.java
-package net.timtaran.interactivemc.physics.physics.body.client.renderer;
-========
+
 package net.timtaran.interactivemc.physics.core.body.client.renderer.dispatcher;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/renderer/dispatcher/VxDebugRenderDispatcher.java
 
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
@@ -14,19 +11,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.phys.Vec3;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/renderer/VxDebugRenderer.java
-import net.timtaran.interactivemc.physics.math.VxOBB;
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-========
+
 import net.timtaran.interactivemc.physics.math.VxOBB;
 import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyManager;
 import net.timtaran.interactivemc.physics.core.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.core.body.type.VxBody;
-import net.timtaran.interactivemc.physics.core.vehicle.VxVehicle;
-import net.timtaran.interactivemc.physics.core.vehicle.part.VxPart;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/renderer/dispatcher/VxDebugRenderDispatcher.java
 
 /**
  * A dedicated renderer for drawing debug information related to physics bodies,

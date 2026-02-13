@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.body.type.factory;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/type/factory/VxSoftBodyFactory.java
-package net.timtaran.interactivemc.physics.physics.body.type.factory;
-========
+
 package net.timtaran.interactivemc.physics.core.body.type.factory;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/type/factory/VxSoftBodyFactory.java
 
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.SoftBodyCreationSettings;

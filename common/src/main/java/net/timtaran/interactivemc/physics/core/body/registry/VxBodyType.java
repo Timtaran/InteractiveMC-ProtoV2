@@ -1,20 +1,14 @@
-package net.timtaran.interactivemc.physics.core.body.registry;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/registry/VxBodyType.java
-package net.timtaran.interactivemc.physics.physics.body.registry;
 
-import net.minecraft.resources.ResourceLocation;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
 package net.timtaran.interactivemc.physics.core.body.registry;
 
+import net.minecraft.resources.ResourceLocation;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
 
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/registry/VxBodyType.java
 import java.util.UUID;
 
 /**

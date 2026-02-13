@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.terrain.util;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/util/VxUpdateContext.java
-package net.timtaran.interactivemc.physics.physics.terrain.util;
-========
+
 package net.timtaran.interactivemc.physics.core.terrain.util;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/util/VxUpdateContext.java
 
 import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BroadPhaseLayerFilter;

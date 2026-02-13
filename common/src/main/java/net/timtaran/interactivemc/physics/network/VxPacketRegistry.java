@@ -5,7 +5,6 @@
 package net.timtaran.interactivemc.physics.network;
 
 import dev.architectury.networking.NetworkManager;
-import net.timtaran.interactivemc.physics.core.mounting.input.C2SMountInputPacket;
 import net.timtaran.interactivemc.physics.item.physicsgun.packet.VxPhysicsGunActionPacket;
 import net.timtaran.interactivemc.physics.item.physicsgun.packet.VxPhysicsGunSyncPacket;
 import net.timtaran.interactivemc.physics.item.tool.packet.VxToolActionPacket;
@@ -16,7 +15,6 @@ import net.timtaran.interactivemc.physics.core.network.internal.packet.S2CUpdate
 import net.timtaran.interactivemc.physics.core.network.internal.packet.S2CUpdateVerticesBatchPacket;
 import net.timtaran.interactivemc.physics.core.network.synchronization.packet.C2SSynchronizedDataBatchPacket;
 import net.timtaran.interactivemc.physics.core.network.synchronization.packet.S2CSynchronizedDataBatchPacket;
-import net.timtaran.interactivemc.physics.core.vehicle.part.packet.C2SPartInteractPacket;
 
 import java.util.function.Function;
 
@@ -54,8 +52,6 @@ public class VxPacketRegistry {
         // IDs are managed independently for the C2S namespace.
         // ---------------------------------------------------------
 
-        registerC2S(C2SPartInteractPacket.class, C2SPartInteractPacket::decode);
-        registerC2S(C2SMountInputPacket.class, C2SMountInputPacket::decode);
         registerC2S(VxPhysicsGunActionPacket.class, VxPhysicsGunActionPacket::decode);
         registerC2S(VxToolActionPacket.class, VxToolActionPacket::decode);
         registerC2S(VxToolConfigPacket.class, VxToolConfigPacket::decode);
@@ -77,14 +73,14 @@ public class VxPacketRegistry {
     /**
      * Internal helper to register a Client-to-Server packet with an automated ID.
      */
-    private static <T extends IVxNetPacket> void registerC2S(Class<T> clazz, Function<VxByteBuf, T> decoder) {
+    public static <T extends IVxNetPacket> void registerC2S(Class<T> clazz, Function<VxByteBuf, T> decoder) {
         VxNetworking.register(NetworkManager.Side.C2S, c2sId++, clazz, decoder);
     }
 
     /**
      * Internal helper to register a Server-to-Client packet with an automated ID.
      */
-    private static <T extends IVxNetPacket> void registerS2C(Class<T> clazz, Function<VxByteBuf, T> decoder) {
+    public static <T extends IVxNetPacket> void registerS2C(Class<T> clazz, Function<VxByteBuf, T> decoder) {
         VxNetworking.register(NetworkManager.Side.S2C, s2cId++, clazz, decoder);
     }
 }

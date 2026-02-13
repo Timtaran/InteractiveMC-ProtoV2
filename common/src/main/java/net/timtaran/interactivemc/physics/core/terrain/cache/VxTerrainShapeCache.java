@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.terrain.cache;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/cache/VxTerrainShapeCache.java
-package net.timtaran.interactivemc.physics.physics.terrain.cache;
-========
+
 package net.timtaran.interactivemc.physics.core.terrain.cache;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/cache/VxTerrainShapeCache.java
 
 import com.github.stephengold.joltjni.ShapeRefC;
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;

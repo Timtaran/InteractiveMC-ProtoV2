@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.physics.buoyancy.phase;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/buoyancy/phase/VxBuoyancyBroadPhase.java
-package net.timtaran.interactivemc.physics.physics.buoyancy.phase;
-========
+
 package net.timtaran.interactivemc.physics.core.physics.buoyancy.phase;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/buoyancy/phase/VxBuoyancyBroadPhase.java
 
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import net.minecraft.core.BlockPos;
@@ -16,19 +13,12 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.FlowingFluid;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/buoyancy/phase/VxBuoyancyBroadPhase.java
-import net.timtaran.interactivemc.physics.physics.body.manager.VxServerBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.buoyancy.VxBuoyancyDataStore;
-import net.timtaran.interactivemc.physics.physics.buoyancy.VxFluidType;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyDataStore;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.VxBuoyancyDataStore;
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.VxFluidType;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/buoyancy/phase/VxBuoyancyBroadPhase.java
 import org.joml.Vector3f;
 
 import java.util.UUID;

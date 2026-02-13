@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.physics;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/VxPhysicsBootstrap.java
-package net.timtaran.interactivemc.physics.physics;
-========
+
 package net.timtaran.interactivemc.physics.core.physics;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/VxPhysicsBootstrap.java
 
 import com.github.stephengold.joltjni.*;
 import org.slf4j.Logger;

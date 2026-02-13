@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.body.type;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/type/VxBody.java
-package net.timtaran.interactivemc.physics.physics.body.type;
-========
+
 package net.timtaran.interactivemc.physics.core.body.type;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/type/VxBody.java
 
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
@@ -17,22 +14,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.AABB;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/type/VxBody.java
-import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.body.VxBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.VxRemovalReason;
-import net.timtaran.interactivemc.physics.physics.body.client.VxClientBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxServerBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxSynchronizedData;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxClientAccessor;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxDataAccessor;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxServerAccessor;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
-import net.timtaran.interactivemc.physics.physics.world.VxClientPhysicsWorld;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.body.client.VxClientBodyManager;
 import net.timtaran.interactivemc.physics.math.VxTransform;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
@@ -47,7 +29,6 @@ import net.timtaran.interactivemc.physics.core.network.synchronization.accessor.
 import net.timtaran.interactivemc.physics.core.network.synchronization.accessor.VxServerAccessor;
 import net.timtaran.interactivemc.physics.core.body.registry.VxBodyType;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/type/VxBody.java
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

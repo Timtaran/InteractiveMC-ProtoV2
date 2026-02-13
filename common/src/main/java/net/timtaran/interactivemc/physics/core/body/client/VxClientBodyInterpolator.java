@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.body.client;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/client/VxClientBodyInterpolator.java
-package net.timtaran.interactivemc.physics.physics.body.client;
-========
+
 package net.timtaran.interactivemc.physics.core.body.client;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/client/VxClientBodyInterpolator.java
 
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;

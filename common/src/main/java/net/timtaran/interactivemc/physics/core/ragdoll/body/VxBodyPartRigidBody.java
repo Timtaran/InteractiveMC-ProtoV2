@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.ragdoll.body;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/ragdoll/body/VxBodyPartRigidBody.java
-package net.timtaran.interactivemc.physics.physics.ragdoll.body;
-========
+
 package net.timtaran.interactivemc.physics.core.ragdoll.body;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/ragdoll/body/VxBodyPartRigidBody.java
 
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShapeSettings;
@@ -16,18 +13,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/ragdoll/body/VxBodyPartRigidBody.java
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.accessor.VxServerAccessor;
-import net.timtaran.interactivemc.physics.physics.VxPhysicsLayers;
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.body.registry.VxBodyType;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxDataSerializers;
-import net.timtaran.interactivemc.physics.physics.body.network.synchronization.VxSynchronizedData;
-import net.timtaran.interactivemc.physics.physics.body.type.VxRigidBody;
-import net.timtaran.interactivemc.physics.physics.body.type.factory.VxRigidBodyFactory;
-import net.timtaran.interactivemc.physics.physics.ragdoll.VxBodyPart;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.network.synchronization.accessor.VxServerAccessor;
 import net.timtaran.interactivemc.physics.core.physics.VxPhysicsLayers;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
@@ -38,7 +24,6 @@ import net.timtaran.interactivemc.physics.core.body.type.VxRigidBody;
 import net.timtaran.interactivemc.physics.core.body.type.factory.VxRigidBodyFactory;
 import net.timtaran.interactivemc.physics.core.ragdoll.VxBodyPart;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/ragdoll/body/VxBodyPartRigidBody.java
 
 import java.util.UUID;
 

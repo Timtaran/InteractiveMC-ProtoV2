@@ -1,26 +1,18 @@
-package net.timtaran.interactivemc.physics.core.body.registry;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/registry/VxBodyRegistry.java
-package net.timtaran.interactivemc.physics.physics.body.registry;
-========
+
 package net.timtaran.interactivemc.physics.core.body.registry;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/registry/VxBodyRegistry.java
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/registry/VxBodyRegistry.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.body.client.body.renderer.VxBodyRenderer;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.body.client.renderer.VxBodyRenderer;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/registry/VxBodyRegistry.java
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;

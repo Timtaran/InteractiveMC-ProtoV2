@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.persistence.impl.body;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/persistence/VxSerializedBodyData.java
-package net.timtaran.interactivemc.physics.physics.body.persistence;
-========
+
 package net.timtaran.interactivemc.physics.core.persistence.impl.body;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/persistence/impl/body/VxSerializedBodyData.java
 
 import net.minecraft.resources.ResourceLocation;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;

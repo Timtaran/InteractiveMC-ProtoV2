@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.raycast;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/raycasting/VxHitResult.java
-package net.timtaran.interactivemc.physics.physics.raycasting;
-========
+
 package net.timtaran.interactivemc.physics.core.raycast;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/raycast/VxHitResult.java
 
 import com.github.stephengold.joltjni.Vec3;
 import net.minecraft.world.phys.BlockHitResult;

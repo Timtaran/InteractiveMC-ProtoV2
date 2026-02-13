@@ -1,24 +1,17 @@
-package net.timtaran.interactivemc.physics.core.terrain.generation;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/generation/VxTerrainGenerator.java
-package net.timtaran.interactivemc.physics.physics.terrain.generation;
-========
+
 package net.timtaran.interactivemc.physics.core.terrain.generation;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/generation/VxTerrainGenerator.java
 
 import com.github.stephengold.joltjni.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/generation/VxTerrainGenerator.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.terrain.cache.VxTerrainShapeCache;
-========
+
 import net.timtaran.interactivemc.physics.core.terrain.cache.VxTerrainShapeCache;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/generation/VxTerrainGenerator.java
 
 import java.util.LinkedHashMap;
 import java.util.Map;

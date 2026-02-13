@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.persistence.region;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/persistence/region/VxRegionFile.java
-package net.timtaran.interactivemc.physics.physics.persistence.region;
-========
+
 package net.timtaran.interactivemc.physics.core.persistence.region;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/persistence/region/VxRegionFile.java
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

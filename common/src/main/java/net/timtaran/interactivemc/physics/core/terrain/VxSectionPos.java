@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.terrain;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/VxSectionPos.java
-package net.timtaran.interactivemc.physics.physics.terrain;
-========
+
 package net.timtaran.interactivemc.physics.core.terrain;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/VxSectionPos.java
 
 import com.github.stephengold.joltjni.RVec3;
 import net.minecraft.core.BlockPos;

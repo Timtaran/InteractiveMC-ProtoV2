@@ -1,29 +1,16 @@
-package net.timtaran.interactivemc.physics.core.terrain;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/VxTerrainSystem.java
-package net.timtaran.interactivemc.physics.physics.terrain;
-========
+
 package net.timtaran.interactivemc.physics.core.terrain;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/VxTerrainSystem.java
 
 import com.github.stephengold.joltjni.BodyInterface;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/VxTerrainSystem.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.terrain.cache.VxTerrainShapeCache;
-import net.timtaran.interactivemc.physics.physics.terrain.generation.VxTerrainGenerator;
-import net.timtaran.interactivemc.physics.physics.terrain.job.VxTerrainJobSystem;
-import net.timtaran.interactivemc.physics.physics.terrain.management.VxTerrainManager;
-import net.timtaran.interactivemc.physics.physics.terrain.management.VxTerrainTracker;
-import net.timtaran.interactivemc.physics.physics.terrain.storage.VxChunkDataStore;
-import net.timtaran.interactivemc.physics.physics.terrain.util.VxUpdateContext;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.terrain.cache.VxTerrainShapeCache;
 import net.timtaran.interactivemc.physics.core.terrain.generation.VxTerrainGenerator;
 import net.timtaran.interactivemc.physics.core.terrain.job.VxTerrainJobSystem;
@@ -32,7 +19,6 @@ import net.timtaran.interactivemc.physics.core.terrain.management.VxTerrainTrack
 import net.timtaran.interactivemc.physics.core.terrain.storage.VxChunkDataStore;
 import net.timtaran.interactivemc.physics.core.terrain.util.VxUpdateContext;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/VxTerrainSystem.java
 
 import java.util.HashSet;
 import java.util.Set;

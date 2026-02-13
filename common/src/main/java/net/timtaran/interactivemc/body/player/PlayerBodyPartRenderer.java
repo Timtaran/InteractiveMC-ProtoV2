@@ -13,8 +13,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.timtaran.interactivemc.physics.physics.body.client.VxRenderState;
-import net.timtaran.interactivemc.physics.physics.body.client.body.renderer.VxRigidBodyRenderer;
+import net.timtaran.interactivemc.physics.core.body.client.VxRenderState;
+import net.timtaran.interactivemc.physics.core.body.client.renderer.VxRigidBodyRenderer;
 import org.joml.Quaternionf;
 
 @Environment(EnvType.CLIENT)

@@ -1,28 +1,16 @@
-package net.timtaran.interactivemc.physics.core.terrain.management;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/management/VxTerrainManager.java
-package net.timtaran.interactivemc.physics.physics.terrain.management;
-========
+
 package net.timtaran.interactivemc.physics.core.terrain.management;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/management/VxTerrainManager.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.chunk.LevelChunk;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/management/VxTerrainManager.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.VxPhysicsLayers;
-import net.timtaran.interactivemc.physics.physics.terrain.VxSectionPos;
-import net.timtaran.interactivemc.physics.physics.terrain.generation.VxChunkSnapshot;
-import net.timtaran.interactivemc.physics.physics.terrain.generation.VxTerrainGenerator;
-import net.timtaran.interactivemc.physics.physics.terrain.job.VxTerrainJobSystem;
-import net.timtaran.interactivemc.physics.physics.terrain.storage.VxChunkDataStore;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.physics.VxPhysicsLayers;
 import net.timtaran.interactivemc.physics.core.terrain.VxSectionPos;
 import net.timtaran.interactivemc.physics.core.terrain.generation.VxChunkSnapshot;
@@ -30,7 +18,6 @@ import net.timtaran.interactivemc.physics.core.terrain.generation.VxTerrainGener
 import net.timtaran.interactivemc.physics.core.terrain.job.VxTerrainJobSystem;
 import net.timtaran.interactivemc.physics.core.terrain.storage.VxChunkDataStore;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/management/VxTerrainManager.java
 
 /**
  * Manages the lifecycle of terrain chunks, including loading, unloading, activation,

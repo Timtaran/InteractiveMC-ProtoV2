@@ -13,10 +13,6 @@ import net.timtaran.interactivemc.physics.builtin.box.BoxRenderer;
 import net.timtaran.interactivemc.physics.builtin.box.BoxRigidBody;
 import net.timtaran.interactivemc.physics.builtin.cloth.ClothRenderer;
 import net.timtaran.interactivemc.physics.builtin.cloth.ClothSoftBody;
-import net.timtaran.interactivemc.physics.builtin.drivable.car.CarImpl;
-import net.timtaran.interactivemc.physics.builtin.drivable.car.CarRenderer;
-import net.timtaran.interactivemc.physics.builtin.drivable.motorcycle.MotorcycleImpl;
-import net.timtaran.interactivemc.physics.builtin.drivable.motorcycle.MotorcycleRenderer;
 import net.timtaran.interactivemc.physics.builtin.marble.MarbleRenderer;
 import net.timtaran.interactivemc.physics.builtin.marble.MarbleRigidBody;
 import net.timtaran.interactivemc.physics.builtin.rope.RopeRenderer;
@@ -64,14 +60,6 @@ public class VxRegisteredBodies {
             .<RopeSoftBody>create(RopeSoftBody::new)
             .build(ResourceLocation.tryBuild("velthoric", "rope"));
 
-    public static final VxBodyType<CarImpl> CAR = VxBodyType.Builder
-            .<CarImpl>create(CarImpl::new)
-            .build(ResourceLocation.tryBuild("velthoric", "car"));
-
-    public static final VxBodyType<MotorcycleImpl> MOTORCYCLE = VxBodyType.Builder
-            .<MotorcycleImpl>create(MotorcycleImpl::new)
-            .build(ResourceLocation.tryBuild("velthoric", "motorcycle"));
-
     public static final VxBodyType<VxChainPartRigidBody> CHAIN_PART = VxBodyType.Builder
             .<VxChainPartRigidBody>create(VxChainPartRigidBody::new)
             .noSummon()
@@ -94,8 +82,6 @@ public class VxRegisteredBodies {
         registry.register(MARBLE);
         registry.register(CLOTH);
         registry.register(ROPE);
-        registry.register(CAR);
-        registry.register(MOTORCYCLE);
         registry.register(CHAIN_PART);
         registry.register(BODY_PART);
     }
@@ -113,8 +99,6 @@ public class VxRegisteredBodies {
         registry.registerClientFactory(MARBLE.getTypeId(), (type, id) -> new MarbleRigidBody((VxBodyType<MarbleRigidBody>) type, id));
         registry.registerClientFactory(CLOTH.getTypeId(), (type, id) -> new ClothSoftBody((VxBodyType<ClothSoftBody>) type, id));
         registry.registerClientFactory(ROPE.getTypeId(), (type, id) -> new RopeSoftBody((VxBodyType<RopeSoftBody>) type, id));
-        registry.registerClientFactory(CAR.getTypeId(), (type, id) -> new CarImpl((VxBodyType<CarImpl>) type, id));
-        registry.registerClientFactory(MOTORCYCLE.getTypeId(), (type, id) -> new MotorcycleImpl((VxBodyType<MotorcycleImpl>) type, id));
         registry.registerClientFactory(CHAIN_PART.getTypeId(), (type, id) -> new VxChainPartRigidBody((VxBodyType<VxChainPartRigidBody>) type, id));
         registry.registerClientFactory(BODY_PART.getTypeId(), (type, id) -> new VxBodyPartRigidBody((VxBodyType<VxBodyPartRigidBody>) type, id));
     }
@@ -132,8 +116,6 @@ public class VxRegisteredBodies {
         registry.registerClientRenderer(MARBLE.getTypeId(), new MarbleRenderer());
         registry.registerClientRenderer(CLOTH.getTypeId(), new ClothRenderer());
         registry.registerClientRenderer(ROPE.getTypeId(), new RopeRenderer());
-        registry.registerClientRenderer(CAR.getTypeId(), new CarRenderer());
-        registry.registerClientRenderer(MOTORCYCLE.getTypeId(), new MotorcycleRenderer());
         registry.registerClientRenderer(CHAIN_PART.getTypeId(), new VxChainPartRenderer());
         registry.registerClientRenderer(BODY_PART.getTypeId(), new VxRagdollBodyPartRenderer());
     }

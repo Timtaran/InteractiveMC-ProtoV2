@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.ragdoll;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/ragdoll/VxRagdollManager.java
-package net.timtaran.interactivemc.physics.physics.ragdoll;
-========
+
 package net.timtaran.interactivemc.physics.core.ragdoll;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/ragdoll/VxRagdollManager.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EActivation;
@@ -15,20 +12,12 @@ import com.github.stephengold.joltjni.enumerate.ESwingType;
 import com.github.stephengold.joltjni.operator.Op;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/ragdoll/VxRagdollManager.java
-import net.timtaran.interactivemc.physics.builtin.VxRegisteredBodies;
-import net.timtaran.interactivemc.physics.math.VxTransform;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.constraint.manager.VxConstraintManager;
-import net.timtaran.interactivemc.physics.physics.ragdoll.body.VxBodyPartRigidBody;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.math.VxTransform;
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.core.constraint.manager.VxConstraintManager;
 import net.timtaran.interactivemc.physics.core.ragdoll.body.VxBodyPartRigidBody;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/ragdoll/VxRagdollManager.java
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;

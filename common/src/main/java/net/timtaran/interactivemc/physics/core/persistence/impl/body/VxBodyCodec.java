@@ -1,24 +1,16 @@
-package net.timtaran.interactivemc.physics.core.persistence.impl.body;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/persistence/VxBodyCodec.java
-package net.timtaran.interactivemc.physics.physics.body.persistence;
-========
+
 package net.timtaran.interactivemc.physics.core.persistence.impl.body;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/persistence/impl/body/VxBodyCodec.java
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import net.minecraft.resources.ResourceLocation;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/persistence/VxBodyCodec.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-========
+
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/persistence/impl/body/VxBodyCodec.java
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;

@@ -1,23 +1,16 @@
-package net.timtaran.interactivemc.physics.core.raycast;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/raycasting/VxPhysicsRaycaster.java
-package net.timtaran.interactivemc.physics.physics.raycasting;
-========
+
 package net.timtaran.interactivemc.physics.core.raycast;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/raycast/VxPhysicsRaycaster.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.ConstNarrowPhaseQuery;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/raycasting/VxPhysicsRaycaster.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.init.VxMainClass;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/raycast/VxPhysicsRaycaster.java
 
 import java.util.Optional;
 

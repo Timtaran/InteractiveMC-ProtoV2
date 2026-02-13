@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.raycast;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/raycasting/VxClipContext.java
-package net.timtaran.interactivemc.physics.physics.raycasting;
-========
+
 package net.timtaran.interactivemc.physics.core.raycast;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/raycast/VxClipContext.java
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ClipContext;

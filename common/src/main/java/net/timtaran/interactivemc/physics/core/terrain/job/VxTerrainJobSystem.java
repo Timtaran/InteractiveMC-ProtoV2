@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.terrain.job;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/terrain/job/VxTerrainJobSystem.java
-package net.timtaran.interactivemc.physics.physics.terrain.job;
-========
+
 package net.timtaran.interactivemc.physics.core.terrain.job;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/terrain/job/VxTerrainJobSystem.java
 
 import net.timtaran.interactivemc.physics.init.VxMainClass;
 

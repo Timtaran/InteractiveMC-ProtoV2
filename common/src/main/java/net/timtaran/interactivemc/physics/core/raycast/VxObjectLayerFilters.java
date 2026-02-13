@@ -1,17 +1,12 @@
-package net.timtaran.interactivemc.physics.core.raycast;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/raycasting/VxObjectLayerFilters.java
-package net.timtaran.interactivemc.physics.physics.raycasting;
 
-import com.github.stephengold.joltjni.ObjectLayerFilter;
-import net.timtaran.interactivemc.physics.physics.VxPhysicsLayers;
-========
 package net.timtaran.interactivemc.physics.core.raycast;
 
+import com.github.stephengold.joltjni.ObjectLayerFilter;
 import net.timtaran.interactivemc.physics.core.physics.VxPhysicsLayers;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/raycast/VxObjectLayerFilters.java
 
 /**
  * Provides pre-configured object layer filters for physics queries.

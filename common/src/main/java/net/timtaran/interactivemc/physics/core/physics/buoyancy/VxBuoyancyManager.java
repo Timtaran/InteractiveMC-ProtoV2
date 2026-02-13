@@ -1,21 +1,13 @@
-package net.timtaran.interactivemc.physics.core.physics.buoyancy;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/buoyancy/VxBuoyancyManager.java
-package net.timtaran.interactivemc.physics.physics.buoyancy;
 
-import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
-import net.timtaran.interactivemc.physics.physics.buoyancy.phase.VxBuoyancyBroadPhase;
-import net.timtaran.interactivemc.physics.physics.buoyancy.phase.VxBuoyancyNarrowPhase;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
 package net.timtaran.interactivemc.physics.core.physics.buoyancy;
 
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.phase.VxBuoyancyBroadPhase;
 import net.timtaran.interactivemc.physics.core.physics.buoyancy.phase.VxBuoyancyNarrowPhase;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/buoyancy/VxBuoyancyManager.java
 
 import java.util.concurrent.atomic.AtomicReference;
 

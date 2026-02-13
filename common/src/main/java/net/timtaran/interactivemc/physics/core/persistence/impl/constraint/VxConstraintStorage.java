@@ -1,21 +1,14 @@
-package net.timtaran.interactivemc.physics.core.persistence.impl.constraint;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/constraint/persistence/VxConstraintStorage.java
-package net.timtaran.interactivemc.physics.physics.constraint.persistence;
+
+package net.timtaran.interactivemc.physics.core.persistence.impl.constraint;
 
 import net.minecraft.server.level.ServerLevel;
 import net.timtaran.interactivemc.physics.network.VxByteBuf;
-import net.timtaran.interactivemc.physics.physics.constraint.VxConstraint;
-import net.timtaran.interactivemc.physics.physics.persistence.VxChunkBasedStorage;
-========
-package net.timtaran.interactivemc.physics.core.persistence.impl.constraint;
-
-import net.timtaran.interactivemc.physics.network.VxByteBuf;
 import net.timtaran.interactivemc.physics.core.constraint.VxConstraint;
 import net.timtaran.interactivemc.physics.core.persistence.VxChunkBasedStorage;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/persistence/impl/constraint/VxConstraintStorage.java
 
 import java.util.UUID;
 

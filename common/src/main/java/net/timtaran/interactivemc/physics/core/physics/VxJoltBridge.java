@@ -1,29 +1,16 @@
-package net.timtaran.interactivemc.physics.core.physics;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/VxJoltBridge.java
-package net.timtaran.interactivemc.physics.physics.body;
-========
+
 package net.timtaran.interactivemc.physics.core.physics;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/VxJoltBridge.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyMotionProperties;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/VxJoltBridge.java
-import net.timtaran.interactivemc.physics.init.VxMainClass;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxBodyManager;
-import net.timtaran.interactivemc.physics.physics.body.manager.VxServerBodyDataStore;
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.body.type.VxRigidBody;
-import net.timtaran.interactivemc.physics.physics.body.type.VxSoftBody;
-import net.timtaran.interactivemc.physics.physics.body.type.factory.VxRigidBodyFactory;
-import net.timtaran.interactivemc.physics.physics.body.type.factory.VxSoftBodyFactory;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyManager;
 import net.timtaran.interactivemc.physics.core.body.VxRemovalReason;
 import net.timtaran.interactivemc.physics.core.body.server.VxServerBodyDataStore;
@@ -33,7 +20,7 @@ import net.timtaran.interactivemc.physics.core.body.type.VxSoftBody;
 import net.timtaran.interactivemc.physics.core.body.type.factory.VxRigidBodyFactory;
 import net.timtaran.interactivemc.physics.core.body.type.factory.VxSoftBodyFactory;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/VxJoltBridge.java
+import net.timtaran.interactivemc.physics.init.VxMainClass;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.FloatBuffer;
@@ -130,11 +117,8 @@ public enum VxJoltBridge {
      * @param activation      The initial activation state.
      * @param motionType      The specific motion type (Static, Kinematic, or Dynamic).
      */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/VxJoltBridge.java
-    public void createAndAddJoltRigidBody(VxRigidBody body, VxBodyManager manager, @Nullable Vec3 linearVelocity, @Nullable Vec3 angularVelocity, EActivation activation, @Nullable EMotionType motionType) {
-========
-    public void createAndAddJoltRigidBody(VxRigidBody body, VxServerBodyManager manager, @Nullable Vec3 linearVelocity, @Nullable Vec3 angularVelocity, EActivation activation, EMotionType motionType) {
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/VxJoltBridge.java
+
+    public void createAndAddJoltRigidBody(VxRigidBody body, VxServerBodyManager manager, @Nullable Vec3 linearVelocity, @Nullable Vec3 angularVelocity, EActivation activation, @Nullable EMotionType motionType) {
         try {
             VxPhysicsWorld world = manager.getPhysicsWorld();
             VxServerBodyDataStore dataStore = manager.getDataStore();
@@ -152,16 +136,10 @@ public enum VxJoltBridge {
 
                         if (linearVelocity != null) bcs.setLinearVelocity(linearVelocity);
                         if (angularVelocity != null) bcs.setAngularVelocity(angularVelocity);
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/VxJoltBridge.java
-========
-
-                        // Set the exact motion type requested by the body configuration
-                        bcs.setMotionType(motionType);
 
                         // Ensure MotionProperties are created even for static bodies to allow
                         // future state transitions and prevent native access violations.
                         bcs.setAllowDynamicOrKinematic(true);
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/VxJoltBridge.java
 
                         return world.getPhysicsSystem().getBodyInterface().createAndAddBody(bcs, activation);
                     }
@@ -169,11 +147,8 @@ public enum VxJoltBridge {
             };
 
             int bodyId = body.createJoltBody(factory);
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/VxJoltBridge.java
             if (motionType != null)
                 getJoltBody(world, bodyId).setMotionType(motionType);
-========
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/physics/VxJoltBridge.java
 
             if (bodyId == Jolt.cInvalidBodyId) {
                 VxMainClass.LOGGER.error("Jolt failed to create/add rigid body for {}", body.getPhysicsId());

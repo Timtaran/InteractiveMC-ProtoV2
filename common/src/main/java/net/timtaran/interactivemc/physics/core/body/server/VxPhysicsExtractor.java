@@ -1,26 +1,19 @@
-package net.timtaran.interactivemc.physics.core.body.server;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxPhysicsUpdater.java
-package net.timtaran.interactivemc.physics.physics.body.manager;
-========
+
 package net.timtaran.interactivemc.physics.core.body.server;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxPhysicsExtractor.java
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.readonly.*;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.server.level.ServerLevel;
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/body/manager/VxPhysicsUpdater.java
-import net.timtaran.interactivemc.physics.physics.body.type.VxBody;
-import net.timtaran.interactivemc.physics.physics.world.VxPhysicsWorld;
-========
+
 import net.timtaran.interactivemc.physics.core.body.tracking.VxSpatialManager;
 import net.timtaran.interactivemc.physics.core.body.type.VxBody;
 import net.timtaran.interactivemc.physics.core.physics.world.VxPhysicsWorld;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/body/server/VxPhysicsExtractor.java
 
 import java.nio.FloatBuffer;
 

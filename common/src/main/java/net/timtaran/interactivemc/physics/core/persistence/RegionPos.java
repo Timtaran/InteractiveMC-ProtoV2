@@ -1,12 +1,9 @@
-package net.timtaran.interactivemc.physics.core.persistence;/*
+/*
  * This file is part of Velthoric.
  * Licensed under LGPL 3.0.
  */
-<<<<<<<< HEAD:common/src/main/java/net/timtaran/interactivemc/physics/physics/persistence/RegionPos.java
-package net.timtaran.interactivemc.physics.physics.persistence;
-========
+
 package net.timtaran.interactivemc.physics.core.persistence;
->>>>>>>> velthoric/master:common/src/main/java/net/xmx/velthoric/core/persistence/RegionPos.java
 
 /**
  * Represents the coordinate of a region file in the world.
